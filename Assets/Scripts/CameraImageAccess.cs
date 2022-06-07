@@ -1,11 +1,13 @@
 using UnityEngine;
 using Vuforia;
 using System.Net.Http;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using System.IO;
 using System.Net.Http.Headers;
-
+using UnityEngine.Networking;
 public class CameraImageAccess : MonoBehaviour
 {
     //#if UNITY_EDITOR
@@ -47,6 +49,7 @@ public class CameraImageAccess : MonoBehaviour
             if(texture is null)
                 texture = new Texture2D(image.BufferWidth, image.BufferHeight);
             image.CopyBufferToTexture(texture);
+            UploadImage2(texture.EncodeToPNG());
 
             Debug.Log(
                 "\nImage Format: " + image.PixelFormat +
@@ -60,25 +63,29 @@ public class CameraImageAccess : MonoBehaviour
     }
 
 
-    //private async Task<string> UploadImage(byte[] img)
-    //{
-    //    HttpClient client = new HttpClient();
-    //    client.BaseAddress = new Uri("http://192.168.43.229:9999/");
-    //    MultipartFormDataContent form = new MultipartFormDataContent();
-    //    HttpContent content = new StringContent("fileToUpload");
-    //    form.Add(content, "fileToUpload");
-    //    var stream = new MemoryStream(img);
-    //    content = new StreamContent(stream);
-    //    content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-    //    {
-    //        Name = "snapshot",
-    //        FileName = "image_data"
-    //    };
-    //    form.Add(content);
-    //    var response = await client.PostAsync("upload", form);
-    //    return response.Content.ReadAsStringAsync().Result;
-    //}
+    private async Task<string> UploadImage(byte[] img)
+    {
+        HttpClient client = new HttpClient();
+        client.BaseAddress = new Uri("https://192.168.43.229:9999/");
+        MultipartFormDataContent form = new MultipartFormDataContent();
+        HttpContent content = new StringContent("fileToUpload");
+        form.Add(content, "fileToUpload");
+        var stream = new MemoryStream(img);
+        content = new StreamContent(stream);
+        content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+        {
+            Name = "snapshot",
+            FileName = "image_data"
+        };
+        form.Add(content);
+        var response = await client.PostAsync("upload", form);
+        return response.Content.ReadAsStringAsync().Result;
+    }
 
+    private void UploadImage2(byte[] img)
+    {
+        StartCoroutine(makePostCallUnityWebRequestPostAsync());
+    }
 
     /// 
     /// Called when app is paused / resumed
@@ -134,5 +141,36 @@ public class CameraImageAccess : MonoBehaviour
         Debug.Log("Unregistering camera pixel format " + mPixelFormat.ToString());
         VuforiaBehaviour.Instance.CameraDevice.SetFrameFormat(mPixelFormat, false);
         mFormatRegistered = false;
+    }
+
+
+
+    IEnumerator makePostCallUnityWebRequestPostAsync()
+    {
+        var uwr = new UnityWebRequest("https://google.it", "GET");
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.certificateHandler = new BypassCertificate();
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("Error While Sending: " + uwr.error);
+        }
+        else
+        {
+            string json_pdf_text_pages = uwr.downloadHandler.text; //return string json-like
+            Debug.Log(json_pdf_text_pages);
+            //var json = JObject.Parse(json_pdf_text_pages);
+        }
+    }
+}
+
+public class BypassCertificate : CertificateHandler
+{
+    protected override bool ValidateCertificate(byte[] certificateData)
+    {
+        //Simply return true no matter what
+        return true;
     }
 }
