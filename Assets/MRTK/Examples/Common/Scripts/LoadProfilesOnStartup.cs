@@ -15,13 +15,17 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking
         [SerializeField]
         private MixedRealityToolkitConfigurationProfile configProfile = null;
 
-        private void Update()
+        private void Start()
         {
-            if ((configProfile != null) && (MixedRealityToolkit.Instance != null))
+            MixedRealityToolkit.Instance.ActiveProfile = null;
+        }
+
+        private void LateUpdate()
+        {
+            if ((configProfile != null) && (MixedRealityToolkit.Instance != null) && (MixedRealityToolkit.Instance.ActiveProfile == null))
             {
                 MixedRealityToolkit.Instance.ActiveProfile = configProfile;
                 Debug.Log($"Loading new MRTK configuration profile: {configProfile.name}");
-                configProfile = null;
             }
         }
     }

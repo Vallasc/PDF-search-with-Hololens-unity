@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine;
 
 namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking.Logging
@@ -148,7 +149,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking.Logging
             {
                 for (int i = array.Length - 1; i >= 0; i--)
                 {
-                    Destroy(array[i]);
+                    Destroy(array[i].gameObject);
                 }
             }
         }

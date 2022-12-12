@@ -105,7 +105,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
                 handler.AdditionalRotation = (TrackedType == TrackedObjectType.HandJoint) ? HandJointRotationFix : Vector3.zero;
 #endif
 
-                handler.TrackedHandedness = Handedness.Both;
+                handler.TrackedHandness = Handedness.Both;
                 if (CustomTrackedObject != null)
                 {
                     handler.TransformOverride = CustomTrackedObject.transform;

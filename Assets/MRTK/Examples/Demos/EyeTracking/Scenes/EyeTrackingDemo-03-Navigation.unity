@@ -315,9 +315,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9949653}
-  - component: {fileID: 9949654}
   m_Layer: 0
-  m_Name: MixedRealitySceneContent
+  m_Name: SceneContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,20 +342,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9949654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9949652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c65c9dd2f312b8d41b8849d58e1053fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alignmentType: 2
-  containerObject: {fileID: 0}
 --- !u!1001 &63132508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1604,13 +1589,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -15.30367, w: -14.342575}
   m_textInfo:
     textComponent: {fileID: 115070431}
-    characterCount: 91
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 16
-    wordCount: 16
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 3
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1926,13 +1911,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -15.30367, w: -3.88032}
   m_textInfo:
     textComponent: {fileID: 127616191}
-    characterCount: 89
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 15
-    wordCount: 16
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 3
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -2370,7 +2355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  executionOrder: 0
   constraintOnRotation: 5
   useLocalSpaceForConstraint: 0
 --- !u!114 &224634336
@@ -2387,7 +2371,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  executionOrder: 0
   scaleMinimum: 0.2
   scaleMaximum: 2
   relativeToInitialState: 1
@@ -2411,16 +2394,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: -1
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 0
   moveLerpTime: 0.000001
   rotateLerpTime: 0.000001
   scaleLerpTime: 0.000001
-  enableConstraints: 1
-  constraintsManager: {fileID: 0}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -2451,7 +2429,6 @@ MonoBehaviour:
   boundsCalculationMethod: 0
   activation: 3
   flattenAxis: 0
-  uniformScaleOnFlattenedAxis: 1
   boxPadding: {x: 0, y: 0, z: 0}
   boxDisplayConfiguration: {fileID: 1129875403}
   linksConfiguration: {fileID: 510879433}
@@ -2464,8 +2441,6 @@ MonoBehaviour:
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
   translateLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 0}
   rotateStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -2497,8 +2472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &231954695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,13 +2580,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -9.175957, w: 0}
   m_textInfo:
     textComponent: {fileID: 231954696}
-    characterCount: 48
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -5193,7 +5166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  executionOrder: 0
   constraintOnRotation: 5
   useLocalSpaceForConstraint: 0
 --- !u!114 &914966067
@@ -5216,16 +5188,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 0
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 0}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -5509,13 +5476,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -28.694397, w: -14.342575}
   m_textInfo:
     textComponent: {fileID: 971199808}
-    characterCount: 307
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 62
-    wordCount: 59
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 9
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -6092,13 +6059,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -15.426361, w: 0}
   m_textInfo:
     textComponent: {fileID: 1174330773}
-    characterCount: 30
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -6583,13 +6550,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -15.177133, w: 0}
   m_textInfo:
     textComponent: {fileID: 1273851901}
-    characterCount: 15
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -7519,13 +7486,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -15.426361, w: 0}
   m_textInfo:
     textComponent: {fileID: 1435622156}
-    characterCount: 24
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -8395,13 +8362,13 @@ MonoBehaviour:
   m_margin: {x: -1.2789195, y: 0, z: -14.308076, w: -25.542933}
   m_textInfo:
     textComponent: {fileID: 1485732672}
-    characterCount: 275
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 55
-    wordCount: 55
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 10
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -10281,14 +10248,14 @@ MonoBehaviour:
   m_margin: {x: 5, y: 5, z: 5, w: 5}
   m_textInfo:
     textComponent: {fileID: 1852894735}
-    characterCount: 2035
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 394
-    wordCount: 331
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 51
-    pageCount: 1
-    materialCount: 2
+    lineCount: 0
+    pageCount: 0
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

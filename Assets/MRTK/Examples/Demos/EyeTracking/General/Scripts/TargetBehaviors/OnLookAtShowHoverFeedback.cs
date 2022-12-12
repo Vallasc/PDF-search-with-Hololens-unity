@@ -358,7 +358,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking.Targeting
 
             ShowFeedback(normalizedInterest);
 
-            highlightOn = true;
+            highlightOn = (!highlightOn) ? true : highlightOn;
         }
 
         #endregion

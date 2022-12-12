@@ -171,7 +171,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking
             // Assign parent
             _target.transform.SetParent(transform);
 
-            _target.SetActive(true);
+            _target.gameObject.SetActive(true);
 
             // Add it to our list of instantiated targets
             instantiatedTargets.Add(_target);

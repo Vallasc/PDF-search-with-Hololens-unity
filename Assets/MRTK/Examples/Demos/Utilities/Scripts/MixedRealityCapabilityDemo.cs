@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.Toolkit.SpatialAwareness;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +43,8 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
 
         private void Start()
         {
-            if (CoreServices.InputSystem is IMixedRealityCapabilityCheck capabilityChecker)
+            IMixedRealityCapabilityCheck capabilityChecker = CoreServices.InputSystem as IMixedRealityCapabilityCheck;
+            if (capabilityChecker != null)
             {
                 bool isSupported = capabilityChecker.CheckCapability(MixedRealityCapability.ArticulatedHand);
                 articulatedHandResult.text = isSupported ? "Yes" : "No";

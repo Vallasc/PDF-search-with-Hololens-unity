@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using Microsoft.MixedReality.Toolkit.UI;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Microsoft.MixedReality.Toolkit.Examples.Demos
@@ -10,65 +12,127 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
     /// </summary>
     public class ProgressIndicatorDemo : MonoBehaviour
     {
-        [SerializeField, Header("Demo objects")]
-        private GameObject demoObjectAsyncMethod = null;
+        [SerializeField, Header("Indicators")]
+        private GameObject progressIndicatorLoadingBarGo = null;
         [SerializeField]
-        private GameObject demoObjectAnimation = null;
+        private GameObject progressIndicatorRotatingObjectGo = null;
         [SerializeField]
-        private GameObject demoObjectSceneLoad = null;
+        private GameObject progressIndicatorRotatingOrbsGo = null;
 
         [SerializeField, Header("Editor Keyboard Controls")]
-        private KeyCode toggleBarAsyncMethodKey = KeyCode.Alpha1;
+        private KeyCode toggleBarKey = KeyCode.Alpha1;
         [SerializeField]
-        private KeyCode toggleAnimationKey = KeyCode.Alpha2;
+        private KeyCode toggleRotatingKey = KeyCode.Alpha2;
         [SerializeField]
-        private KeyCode toggleSceneLoadKey = KeyCode.Alpha3;
+        private KeyCode toggleOrbsKey = KeyCode.Alpha3;
+
+        [SerializeField, Header("Settings")]
+        private string[] loadingMessages = new string[] {
+            "First Loading Message",
+            "Loading Message 1",
+            "Loading Message 2",
+            "Loading Message 3",
+            "Final Loading Message" };
+
+        [SerializeField, Range(1f, 10f)]
+        private float loadingTime = 5f;
+
+        private IProgressIndicator progressIndicatorLoadingBar;
+        private IProgressIndicator progressIndicatorRotatingObject;
+        private IProgressIndicator progressIndicatorRotatingOrbs;
 
         /// <summary>
         /// Target method for demo button
         /// </summary>
-        public void OnClickAsyncMethod()
+        public void OnClickBar()
         {
-            HandleButtonClick(demoObjectAsyncMethod.GetComponent<IProgressIndicatorDemoObject>());
+            HandleButtonClick(progressIndicatorLoadingBar);
         }
 
         /// <summary>
         /// Target method for demo button
         /// </summary>
-        public void OnClickAnimation()
+        public void OnClickRotating()
         {
-            HandleButtonClick(demoObjectAnimation.GetComponent<IProgressIndicatorDemoObject>());
+            HandleButtonClick(progressIndicatorRotatingObject);
         }
 
         /// <summary>
         /// Target method for demo button
         /// </summary>
-        public void OnClickSceneLoad()
+        public void OnClickOrbs()
         {
-            HandleButtonClick(demoObjectSceneLoad.GetComponent<IProgressIndicatorDemoObject>());
+            HandleButtonClick(progressIndicatorRotatingOrbs);
         }
 
-        private void HandleButtonClick(IProgressIndicatorDemoObject demoObject)
+        private async void HandleButtonClick(IProgressIndicator indicator)
         {
-            demoObject.StartProgressBehavior();
+            // If the indicator is opening or closing, wait for that to finish before trying to open / close it
+            // Otherwise the indicator will display an error and take no action
+            await indicator.AwaitTransitionAsync();
+
+            switch (indicator.State)
+            {
+                case ProgressIndicatorState.Closed:
+                    OpenProgressIndicator(indicator);
+                    break;
+
+                case ProgressIndicatorState.Open:
+                    await indicator.CloseAsync();
+                    break;
+            }
+        }
+
+        private void OnEnable()
+        {
+            progressIndicatorLoadingBar = progressIndicatorLoadingBarGo.GetComponent<IProgressIndicator>();
+            progressIndicatorRotatingObject = progressIndicatorRotatingObjectGo.GetComponent<IProgressIndicator>();
+            progressIndicatorRotatingOrbs = progressIndicatorRotatingOrbsGo.GetComponent<IProgressIndicator>();
         }
 
         private void Update()
         {
-            if (UnityEngine.Input.GetKeyDown(toggleBarAsyncMethodKey))
+            if (UnityEngine.Input.GetKeyDown(toggleBarKey))
             {
-                HandleButtonClick(demoObjectAsyncMethod.GetComponent<IProgressIndicatorDemoObject>());
+                HandleButtonClick(progressIndicatorLoadingBar);
             }
 
-            if (UnityEngine.Input.GetKeyDown(toggleAnimationKey))
+            if (UnityEngine.Input.GetKeyDown(toggleRotatingKey))
             {
-                HandleButtonClick(demoObjectAnimation.GetComponent<IProgressIndicatorDemoObject>());
+                HandleButtonClick(progressIndicatorRotatingObject);
             }
 
-            if (UnityEngine.Input.GetKeyDown(toggleSceneLoadKey))
+            if (UnityEngine.Input.GetKeyDown(toggleOrbsKey))
             {
-                HandleButtonClick(demoObjectSceneLoad.GetComponent<IProgressIndicatorDemoObject>());
+                HandleButtonClick(progressIndicatorRotatingOrbs);
             }
+        }
+
+        private async void OpenProgressIndicator(IProgressIndicator indicator)
+        {
+            await indicator.OpenAsync();
+
+            float timeStarted = Time.time;
+            while (Time.time < timeStarted + loadingTime)
+            {
+                float normalizedProgress = Mathf.Clamp01((Time.time - timeStarted) / loadingTime);
+                indicator.Progress = normalizedProgress;
+                indicator.Message = loadingMessages[Mathf.FloorToInt(normalizedProgress * loadingMessages.Length)];
+
+                await Task.Yield();
+
+                switch (indicator.State)
+                {
+                    case ProgressIndicatorState.Open:
+                        break;
+
+                    default:
+                        // The indicator was closed
+                        return;
+                }
+            }
+
+            await indicator.CloseAsync();
         }
     }
 }

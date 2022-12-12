@@ -5,6 +5,7 @@ using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.UI.BoundsControl;
 using Microsoft.MixedReality.Toolkit.UI.BoundsControlTypes;
+using Microsoft.MixedReality.Toolkit.Utilities;
 using System.Collections;
 using System.Text;
 using TMPro;
@@ -67,7 +68,6 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
                 boundsControl = cube.AddComponent<BoundsControl>();
                 boundsControl.HideElementsInInspector = false;
                 boundsControl.BoundsControlActivation = BoundsControlActivationType.ActivateOnStart;
-                var cm = cube.AddComponent<ConstraintManager>();
                 var om = cube.AddComponent<ObjectManipulator>();
                 yield return WaitForSpeechCommand();
 
@@ -190,7 +190,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
                     var cubechild = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cubechild.transform.localPosition = Random.insideUnitSphere + cubePosition + forwardOffset;
                     cubechild.transform.rotation = Quaternion.Euler(Random.insideUnitSphere * 360f);
-                    cubechild.transform.parent = (lastParent != null) ? lastParent : multiRoot.transform;
+                    cubechild.transform.parent = lastParent ?? multiRoot.transform;
                     float baseScale = lastParent == null ? 0.1f : 1f;
                     cubechild.transform.localScale = new Vector3(baseScale, baseScale, baseScale);
                     lastParent = cubechild.transform;
@@ -200,7 +200,6 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
                 boundsControl.BoundsControlActivation = BoundsControlActivationType.ActivateOnStart;
                 boundsControl.HideElementsInInspector = false;
                 boundsControl.LinksConfig.WireframeEdgeRadius = .05f;
-                multiRoot.AddComponent<ConstraintManager>();
                 multiRoot.AddComponent<ObjectManipulator>();
 
                 SetStatus("Randomize Child Scale for skewing");
@@ -225,6 +224,11 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
             }
 
             SetStatus("Done!");
+        }
+        private void DebugDrawObjectBounds(Bounds bounds)
+        {
+            DebugUtilities.DrawPoint(bounds.min, Color.magenta);
+            DebugUtilities.DrawPoint(bounds.max, Color.yellow);
         }
 
         private IEnumerator WaitForSpeechCommand()

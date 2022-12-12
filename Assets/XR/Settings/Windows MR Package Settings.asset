@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6857944264962103405
+--- !u!114 &-8810560145576181966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14,20 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UsePrimaryWindowForDisplay: 1
   HolographicRemoting: 0
---- !u!114 &-2927925309326942342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed912223f7b3af74d8e196b2a4e662b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DepthBufferFormat: 0
-  UseSharedDepthBuffer: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,14 +26,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e679265d16d650945812b915bb9d5cc3, type: 3}
   m_Name: Windows MR Package Settings
   m_EditorClassIdentifier: 
-  Keys: 0e00000001000000
+  Keys: 01000000
   Values:
-  - {fileID: -2927925309326942342}
-  - {fileID: 3536936295364265498}
+  - {fileID: 548088860816641348}
   BuildValues:
-  - {fileID: -6857944264962103405}
-  - {fileID: 6629551675472136980}
---- !u!114 &3536936295364265498
+  - {fileID: -8810560145576181966}
+--- !u!114 &548088860816641348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,17 +45,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DepthBufferFormat: 0
   UseSharedDepthBuffer: 0
---- !u!114 &6629551675472136980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6c5bd16b42a1542ad52d1d47746bdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UsePrimaryWindowForDisplay: 1
-  HolographicRemoting: 0

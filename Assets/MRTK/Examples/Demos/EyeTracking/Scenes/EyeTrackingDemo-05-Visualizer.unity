@@ -122,9 +122,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9949653}
-  - component: {fileID: 9949654}
   m_Layer: 0
-  m_Name: MixedRealitySceneContent
+  m_Name: SceneContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,20 +147,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9949654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9949652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c65c9dd2f312b8d41b8849d58e1053fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alignmentType: 2
-  containerObject: {fileID: 0}
 --- !u!1 &59515335
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFocusRequired: 0
   keywords:
-  - keyword: Record eye gaze
+  - keyword: Start recording
     response:
       m_PersistentCalls:
         m_Calls:
@@ -244,7 +229,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - keyword: End recording
+  - keyword: Stop recording
     response:
       m_PersistentCalls:
         m_Calls:
@@ -1056,12 +1041,6 @@ MonoBehaviour:
   onSelected:
     m_PersistentCalls:
       m_Calls: []
-  onTapDown:
-    m_PersistentCalls:
-      m_Calls: []
-  onTapUp:
-    m_PersistentCalls:
-      m_Calls: []
   eyeCursorSnapToTargetCenter: 0
 --- !u!1 &175923608
 GameObject:
@@ -1538,16 +1517,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
@@ -2414,9 +2383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTransform: {fileID: 914966062}
   handType: 3
   proximityType: 3
-  executionOrder: 0
   constraintOnRotation: 5
   useLocalSpaceForConstraint: 0
 --- !u!114 &914966067
@@ -2435,21 +2404,13 @@ MonoBehaviour:
   manipulationType: 3
   twoHandedManipulationType: 7
   allowFarManipulation: 1
-  useForcesForNearManipulation: 0
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
-  smoothingFar: 1
-  smoothingNear: 1
+  smoothingActive: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 0}
-  elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
       m_Calls:
@@ -2738,16 +2699,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
@@ -3425,12 +3376,6 @@ MonoBehaviour:
   onSelected:
     m_PersistentCalls:
       m_Calls: []
-  onTapDown:
-    m_PersistentCalls:
-      m_Calls: []
-  onTapUp:
-    m_PersistentCalls:
-      m_Calls: []
   eyeCursorSnapToTargetCenter: 0
 --- !u!65 &966777108
 BoxCollider:
@@ -3790,16 +3735,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
@@ -5267,7 +5202,7 @@ PrefabInstance:
     - target: {fileID: 4533479808247404460, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: m_text
-      value: End Recording
+      value: Stop Recording
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808247404460, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
@@ -5423,16 +5358,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
@@ -5711,16 +5636,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
@@ -6063,16 +5978,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
       propertyPath: WhileLookingAtTarget.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 92775347}
@@ -6399,16 +6304,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
@@ -6907,16 +6802,6 @@ PrefabInstance:
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
         type: 3}
       propertyPath: OnLookAway.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: whileLookingAtTarget.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,
-        type: 3}
-      propertyPath: onLookAway.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533479808906774277, guid: 231a4253eb1a74d4e87393459447cc95,

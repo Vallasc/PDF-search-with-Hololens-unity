@@ -87,14 +87,14 @@ MonoBehaviour:
       description: ZoomOut
       axisConstraint: 0
   - localizationKey: 
-    keyword: Record eye gaze
+    keyword: Start recording
     keyCode: 107
     action:
       id: 20
       description: StartRecordingData
       axisConstraint: 0
   - localizationKey: 
-    keyword: End recording
+    keyword: Stop recording
     keyCode: 108
     action:
       id: 21

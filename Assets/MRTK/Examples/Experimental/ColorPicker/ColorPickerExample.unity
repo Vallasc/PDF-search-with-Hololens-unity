@@ -233,6 +233,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1665354953}
   m_PrefabAsset: {fileID: 0}
+--- !u!115 &295734381
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: EventSystem
+  m_Namespace: UnityEngine.EventSystems
+--- !u!115 &299021455
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: EventSystem
+  m_Namespace: UnityEngine.EventSystems
 --- !u!1 &381596674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4684963341941003236, guid: e96124284fc8b4c478ce38f89e1e0ef3,
@@ -1220,9 +1248,11 @@ GameObject:
   - component: {fileID: 1607275048}
   - component: {fileID: 1607275047}
   - component: {fileID: 1607275046}
-  - component: {fileID: 1607275050}
-  - component: {fileID: 1607275049}
   - component: {fileID: 1607275051}
+  - component: {fileID: 1607275050}
+  - component: {fileID: 1607275052}
+  - component: {fileID: 1607275053}
+  - component: {fileID: 1607275049}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1345,7 +1375,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1607275045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &1607275052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607275045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 295734381}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &1607275053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607275045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 299021455}
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
@@ -1792,11 +1852,9 @@ PrefabInstance:
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662,
         type: 3}
       propertyPath: m_text
-      value: '<size=42><b>Color Picker Example</b></size>
-
-
-        This example scene demonstrates several different ways to interact with a
-        color picker that changes color values of various materials at runtime.'
+      value: "<size=42><b>Color Picker Example</b></size>\r\n\nThis example scene
+        demonstrates several different ways to interact with a color picker that changes
+        color values of various materials at runtime."
       objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662,
         type: 3}
@@ -2778,11 +2836,6 @@ PrefabInstance:
       propertyPath: onManipulationEnded.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 914966060}
-    - target: {fileID: 4684963341652805704, guid: e96124284fc8b4c478ce38f89e1e0ef3,
-        type: 3}
-      propertyPath: constraintsManager
-      value: 
-      objectReference: {fileID: 4684963342117267432}
     - target: {fileID: 4684963341941003236, guid: e96124284fc8b4c478ce38f89e1e0ef3,
         type: 3}
       propertyPath: m_Name
@@ -2860,23 +2913,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e96124284fc8b4c478ce38f89e1e0ef3, type: 3}
---- !u!1 &4684963342117267431 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3447788293762499001, guid: e96124284fc8b4c478ce38f89e1e0ef3,
-    type: 3}
-  m_PrefabInstance: {fileID: 4684963342117267430}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4684963342117267432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4684963342117267431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []

@@ -1,6 +1,7 @@
 ﻿using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities;
+using System.Reflection;
 using UnityEngine;
 
 
@@ -27,7 +28,8 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
         public void ResetExample()
         {
             var pointerControl = GetComponent<PointerBehaviorControls>();
-            if (CoreServices.InputSystem is IMixedRealityCapabilityCheck capabilityChecker)
+            IMixedRealityCapabilityCheck capabilityChecker = CoreServices.InputSystem as IMixedRealityCapabilityCheck;
+            if (capabilityChecker != null)
             {
                 if (capabilityChecker.CheckCapability(MixedRealityCapability.ArticulatedHand))
                 {

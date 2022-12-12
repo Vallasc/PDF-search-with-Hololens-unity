@@ -98,7 +98,10 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking
             useDwell = false;
         }
 
-        private bool UseDwell => useDwell ?? false;
+        private bool UseDwell
+        {
+            get { return (useDwell.HasValue ? useDwell.Value : false); }
+        }
 
         protected override void OnEyeFocusStart()
         {

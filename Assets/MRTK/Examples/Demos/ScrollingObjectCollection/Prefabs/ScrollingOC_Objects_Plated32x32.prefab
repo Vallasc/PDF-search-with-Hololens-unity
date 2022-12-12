@@ -586,7 +586,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484765547890031}
@@ -990,7 +990,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484765870434559}
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484765888360166}
@@ -1827,7 +1827,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484766036496309}
@@ -2233,9 +2233,6 @@ MonoBehaviour:
   orientType: 0
   layout: 0
   anchor: 0
-  anchorAlongAxis: 0
-  columnAlignment: 0
-  rowAlignment: 0
   radius: 2
   radialRange: 180
   distance: 0
@@ -2390,7 +2387,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484766166408598}
@@ -2793,7 +2790,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484766296408854}
@@ -3359,7 +3356,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484766506693766}
@@ -3685,7 +3682,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 702484766509715297}
@@ -4149,8 +4146,6 @@ MonoBehaviour:
   renderers: []
   clippingSide: -1
   useOnPreRender: 1
-  applyToSharedMaterial: 0
-  cacheSharedMaterialsFromRenderer: 0
 --- !u!65 &702484766695044275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4716,7 +4711,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 1
-  IsBoundsHandles: 0
 --- !u!114 &8253665853486484236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4968,7 +4962,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089171568704265}
@@ -5492,7 +5486,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089171688954528}
@@ -6054,7 +6048,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089171865962671}
@@ -6380,7 +6374,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089171946078247}
@@ -7077,7 +7071,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172073895503}
@@ -7853,7 +7847,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172229043263}
@@ -8562,7 +8556,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172399323996}
@@ -9031,7 +9025,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172520526403}
@@ -9654,7 +9648,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172665186382}
@@ -10011,7 +10005,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172718495601}
@@ -10337,7 +10331,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172851832181}
@@ -10884,7 +10878,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089172942055627}
@@ -11653,7 +11647,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089173093885158}
@@ -12122,7 +12116,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089173205731478}
@@ -12602,7 +12596,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089173419191441}
@@ -12960,7 +12954,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 1
   CanDeselect: 1
-  voiceCommand: 
+  VoiceCommand: 
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 3666089173449708945}
@@ -13531,6 +13525,7 @@ MonoBehaviour:
   maskEditMode: 0
   colliderEditMode: 0
   maskEnabled: 0
+  wasMaskEnabled: 1
   handDeltaScrollThreshold: 0.02
   releaseThresholdFront: 0.03
   releaseThresholdBack: 0.2
@@ -13592,8 +13587,6 @@ MonoBehaviour:
   scrollContainer: {fileID: 702484767150051257}
   clippingObject: {fileID: 702484766695044273}
   clipBox: {fileID: 702484766695044239}
-  disableClippedGameObjects: 1
-  disableClippedRenderers: 0
 --- !u!82 &6478456967883747177
 AudioSource:
   m_ObjectHideFlags: 0

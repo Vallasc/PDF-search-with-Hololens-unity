@@ -79,7 +79,7 @@ LightmapSettings:
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVRFilteringMode: 2
+    m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -169,7 +169,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1139344440}
   interactable: {fileID: 5319509}
   seeItSayItLabel: {fileID: 765733846}
-  seeItSayItLabelText: {fileID: 1777270016}
+  seeItSatItLabelText: {fileID: 1777270016}
   iconStyle: 0
   iconCharLabel: {fileID: 53458778}
   iconCharFont: {fileID: 0}
@@ -318,7 +318,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 765733846}
@@ -3863,7 +3863,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 328469116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -3880,7 +3880,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 328469116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -4440,7 +4440,6 @@ GameObject:
   - component: {fileID: 395782731}
   - component: {fileID: 395782732}
   - component: {fileID: 395782733}
-  - component: {fileID: 395782734}
   m_Layer: 0
   m_Name: Doodad
   m_TagString: Untagged
@@ -4508,16 +4507,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 395782734}
   elasticsManager: {fileID: 0}
   onManipulationStarted:
     m_PersistentCalls:
@@ -4531,20 +4525,6 @@ MonoBehaviour:
   onHoverExited:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &395782734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395782730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &397314588
 GameObject:
   m_ObjectHideFlags: 0
@@ -5130,7 +5110,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 789883945}
   interactable: {fileID: 437705573}
   seeItSayItLabel: {fileID: 750107581}
-  seeItSayItLabelText: {fileID: 1854962790}
+  seeItSatItLabelText: {fileID: 1854962790}
   iconStyle: 0
   iconCharLabel: {fileID: 635095561}
   iconCharFont: {fileID: 0}
@@ -5279,7 +5259,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 750107581}
@@ -7094,7 +7074,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 563127586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -7111,7 +7091,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 563127586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -8282,7 +8262,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 655706785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -8299,7 +8279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 655706785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -8960,7 +8940,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 554970120}
   interactable: {fileID: 742895404}
   seeItSayItLabel: {fileID: 1147520284}
-  seeItSayItLabelText: {fileID: 430938989}
+  seeItSatItLabelText: {fileID: 430938989}
   iconStyle: 0
   iconCharLabel: {fileID: 1500198804}
   iconCharFont: {fileID: 0}
@@ -9109,7 +9089,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 1147520284}
@@ -10214,9 +10194,9 @@ GameObject:
   - component: {fileID: 819330898}
   - component: {fileID: 819330903}
   - component: {fileID: 819330902}
+  - component: {fileID: 819330901}
   - component: {fileID: 819330900}
   - component: {fileID: 819330899}
-  - component: {fileID: 819330901}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10541,7 +10521,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 2030851299}
   interactable: {fileID: 839988584}
   seeItSayItLabel: {fileID: 1230030028}
-  seeItSayItLabelText: {fileID: 656864902}
+  seeItSatItLabelText: {fileID: 656864902}
   iconStyle: 0
   iconCharLabel: {fileID: 30319555}
   iconCharFont: {fileID: 0}
@@ -10690,7 +10670,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 1230030028}
@@ -11372,7 +11352,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1134762469}
   interactable: {fileID: 883941760}
   seeItSayItLabel: {fileID: 1307400263}
-  seeItSayItLabelText: {fileID: 270285087}
+  seeItSatItLabelText: {fileID: 270285087}
   iconStyle: 0
   iconCharLabel: {fileID: 1984914576}
   iconCharFont: {fileID: 0}
@@ -11521,7 +11501,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 1307400263}
@@ -12202,7 +12182,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1096989817}
   interactable: {fileID: 909328382}
   seeItSayItLabel: {fileID: 354642123}
-  seeItSayItLabelText: {fileID: 610554687}
+  seeItSatItLabelText: {fileID: 610554687}
   iconStyle: 0
   iconCharLabel: {fileID: 215600117}
   iconCharFont: {fileID: 0}
@@ -12351,7 +12331,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 354642123}
@@ -12914,7 +12894,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 939763472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -12931,7 +12911,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 939763472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -13672,7 +13652,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1561010239}
   interactable: {fileID: 1006394045}
   seeItSayItLabel: {fileID: 117201378}
-  seeItSayItLabelText: {fileID: 1730028518}
+  seeItSatItLabelText: {fileID: 1730028518}
   iconStyle: 0
   iconCharLabel: {fileID: 2042474452}
   iconCharFont: {fileID: 0}
@@ -13821,7 +13801,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 117201378}
@@ -14421,7 +14401,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 875994029}
   interactable: {fileID: 1043856493}
   seeItSayItLabel: {fileID: 1851440482}
-  seeItSayItLabelText: {fileID: 1110783660}
+  seeItSatItLabelText: {fileID: 1110783660}
   iconStyle: 0
   iconCharLabel: {fileID: 1899568468}
   iconCharFont: {fileID: 0}
@@ -14570,7 +14550,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 1851440482}
@@ -14896,7 +14876,6 @@ GameObject:
   - component: {fileID: 1047326340}
   - component: {fileID: 1047326343}
   - component: {fileID: 1047326344}
-  - component: {fileID: 1047326345}
   m_Layer: 0
   m_Name: RotationSnappingMug
   m_TagString: Untagged
@@ -14966,16 +14945,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 1047326345}
   elasticsManager: {fileID: 1047326344}
   onManipulationStarted:
     m_PersistentCalls:
@@ -15003,7 +14977,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  executionOrder: 0
   constraintOnMovement: -1
   useLocalSpaceForConstraint: 0
 --- !u!114 &1047326344
@@ -15043,20 +15016,6 @@ MonoBehaviour:
     RepeatSnapPoints: 0
     SnapRadius: 0
   elasticTypes: 2
---- !u!114 &1047326345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1047326338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &1078527653
 GameObject:
   m_ObjectHideFlags: 0
@@ -15928,7 +15887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d9acc7968244a8886f3af591305bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeProfile: {fileID: 11400000, guid: 7e7c962b9eb9dfa44993d5b2f2576752, type: 2}
+  activeProfile: {fileID: 11400000, guid: 3b601d97df71b5447be13f323f2221d5, type: 2}
 --- !u!4 &1107594379
 Transform:
   m_ObjectHideFlags: 0
@@ -16236,7 +16195,6 @@ GameObject:
   - component: {fileID: 1121831845}
   - component: {fileID: 1121831844}
   - component: {fileID: 1121831843}
-  - component: {fileID: 1121831847}
   m_Layer: 0
   m_Name: CoffeeCup 1 (2)
   m_TagString: Untagged
@@ -16332,16 +16290,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 0
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 1121831847}
   elasticsManager: {fileID: 1121831843}
   onManipulationStarted:
     m_PersistentCalls:
@@ -16369,20 +16322,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.17, z: 0}
---- !u!114 &1121831847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121831841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &1122388907
 GameObject:
   m_ObjectHideFlags: 0
@@ -16594,7 +16533,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1078527655}
   interactable: {fileID: 1126258587}
   seeItSayItLabel: {fileID: 751351765}
-  seeItSayItLabelText: {fileID: 1978681140}
+  seeItSatItLabelText: {fileID: 1978681140}
   iconStyle: 0
   iconCharLabel: {fileID: 1947668031}
   iconCharFont: {fileID: 0}
@@ -16743,7 +16682,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 751351765}
@@ -19376,7 +19315,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1348950257}
   interactable: {fileID: 1325274144}
   seeItSayItLabel: {fileID: 365348319}
-  seeItSayItLabelText: {fileID: 1719346464}
+  seeItSatItLabelText: {fileID: 1719346464}
   iconStyle: 0
   iconCharLabel: {fileID: 358332724}
   iconCharFont: {fileID: 0}
@@ -19525,7 +19464,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 365348319}
@@ -22400,7 +22339,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1905020866}
   interactable: {fileID: 1596252488}
   seeItSayItLabel: {fileID: 1030922484}
-  seeItSayItLabelText: {fileID: 2115450150}
+  seeItSatItLabelText: {fileID: 2115450150}
   iconStyle: 0
   iconCharLabel: {fileID: 1099871452}
   iconCharFont: {fileID: 0}
@@ -22549,7 +22488,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 1030922484}
@@ -23452,7 +23391,6 @@ GameObject:
   - component: {fileID: 1649535254}
   - component: {fileID: 1649535257}
   - component: {fileID: 1649535258}
-  - component: {fileID: 1649535259}
   m_Layer: 0
   m_Name: CoffeeCup 1 (1)
   m_TagString: Untagged
@@ -23510,16 +23448,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 0
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 1649535259}
   elasticsManager: {fileID: 1649535258}
   onManipulationStarted:
     m_PersistentCalls:
@@ -23561,7 +23494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  executionOrder: 0
   constraintOnMovement: -1
   useLocalSpaceForConstraint: 0
 --- !u!114 &1649535258
@@ -23601,20 +23533,6 @@ MonoBehaviour:
     RepeatSnapPoints: 0
     SnapRadius: 0
   elasticTypes: 2
---- !u!114 &1649535259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649535252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &1661380921
 GameObject:
   m_ObjectHideFlags: 0
@@ -23972,7 +23890,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1703722962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -23989,7 +23907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1703722962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -24960,33 +24878,23 @@ PrefabInstance:
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662,
         type: 3}
       propertyPath: m_text
-      value: '<size=42><b>Elastic System Examples</b></size>
-
-
-        The Elastic system allows for dynamic, responsive, and procedural feedback
-        and animations within MRTK. The Elastic system is built around a robust damped
-        harmonic oscillator simulation system, which is extensible to an arbitrary
-        number of dimensions. The output of an elastic system can be used to drive
-        shaders, materials, transforms, or pretty much anything your heart desires!
-
-
-        <b><size="32">Configurability</size></b>
-
-        The Elastic system is driven by two pieces of configuration info: the extent
-        info and and the properties of the elastic spring itself. The extent of the
-        spring can be configured to have defined min/max endpoints and snapping intervals/points,
+      value: "<size=42><b>Elastic System Examples</b></size>\r\n\nThe Elastic system
+        allows for dynamic, responsive, and procedural feedback and animations within
+        MRTK. The Elastic system is built around a robust damped harmonic oscillator
+        simulation system, which is extensible to an arbitrary number of dimensions.
+        The output of an elastic system can be used to drive shaders, materials, transforms,
+        or pretty much anything your heart desires!\n\n<b><size=\"32\">Configurability</size></b>\nThe
+        Elastic system is driven by two pieces of configuration info: the extent info
+        and and the properties of the elastic spring itself. The extent of the spring
+        can be configured to have defined min/max endpoints and snapping intervals/points,
         and the spring itself can have its mass, input spring constant, end-snap spring
         constant, snapping-interval spring constant, drag/damping factor, and the
-        snapping-point radius.
-
-
-        <b><size="32">Extensibility</size></b>
-
-        The base Elastic can be extended to suit several higher-dimensional use cases;
-        for instance, instead of using three one-dimensional springs to snap an object
+        snapping-point radius.\n\n<b><size=\"32\">Extensibility</size></b>\nThe base
+        Elastic can be extended to suit several higher-dimensional use cases; for
+        instance, instead of using three one-dimensional springs to snap an object
         in 3D space, you can use a three-dimensional spring! And, for rotations, you
         can use a four-dimensional spring to simulate elastic interactions in quaternion
-        4-space. Several of these extensions are included.'
+        4-space. Several of these extensions are included."
       objectReference: {fileID: 0}
     - target: {fileID: 2113875699234556495, guid: 18470d71939382448be2ecd06efa9662,
         type: 3}
@@ -26033,7 +25941,6 @@ GameObject:
   - component: {fileID: 1814460991}
   - component: {fileID: 1814460990}
   - component: {fileID: 1814460993}
-  - component: {fileID: 1814460994}
   m_Layer: 0
   m_Name: Icosa (1)
   m_TagString: Untagged
@@ -26103,16 +26010,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 1814460994}
   elasticsManager: {fileID: 1814460993}
   onManipulationStarted:
     m_PersistentCalls:
@@ -26163,20 +26065,6 @@ MonoBehaviour:
     RepeatSnapPoints: 0
     SnapRadius: 0
   elasticTypes: 1
---- !u!114 &1814460994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814460988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &1838628930
 GameObject:
   m_ObjectHideFlags: 0
@@ -26240,7 +26128,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838628930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -26257,7 +26145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838628930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -26824,7 +26712,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1860967762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -26841,7 +26729,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1860967762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -28239,7 +28127,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 1990974417}
   interactable: {fileID: 1915994456}
   seeItSayItLabel: {fileID: 1661380921}
-  seeItSayItLabelText: {fileID: 228782668}
+  seeItSatItLabelText: {fileID: 228782668}
   iconStyle: 0
   iconCharLabel: {fileID: 282394706}
   iconCharFont: {fileID: 0}
@@ -28388,7 +28276,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 1661380921}
@@ -29539,7 +29427,6 @@ GameObject:
   - component: {fileID: 1954211883}
   - component: {fileID: 1954211885}
   - component: {fileID: 1954211882}
-  - component: {fileID: 1954211886}
   m_Layer: 0
   m_Name: Icosa
   m_TagString: Untagged
@@ -29632,16 +29519,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 1954211886}
   elasticsManager: {fileID: 1954211882}
   onManipulationStarted:
     m_PersistentCalls:
@@ -29668,20 +29550,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.89
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1954211886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954211880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &1978681138
 GameObject:
   m_ObjectHideFlags: 0
@@ -30668,7 +30536,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991541264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -30685,7 +30553,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991541264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -31834,7 +31702,7 @@ MonoBehaviour:
   mainLabelText: {fileID: 975765791}
   interactable: {fileID: 2059886821}
   seeItSayItLabel: {fileID: 815727415}
-  seeItSayItLabelText: {fileID: 1870989936}
+  seeItSatItLabelText: {fileID: 1870989936}
   iconStyle: 0
   iconCharLabel: {fileID: 1981232357}
   iconCharFont: {fileID: 0}
@@ -31983,7 +31851,7 @@ MonoBehaviour:
   startDimensionIndex: 0
   CanSelect: 0
   CanDeselect: 0
-  voiceCommand: Select
+  VoiceCommand: Select
   voiceRequiresFocus: 1
   profiles:
   - Target: {fileID: 815727415}
@@ -32935,7 +32803,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101924094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -32952,7 +32820,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101924094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -33315,7 +33183,6 @@ GameObject:
   - component: {fileID: 1128101761368678}
   - component: {fileID: 1128101761368679}
   - component: {fileID: 1128101761368680}
-  - component: {fileID: 1128101761368681}
   m_Layer: 0
   m_Name: CoffeeCup 1
   m_TagString: Untagged
@@ -33343,16 +33210,11 @@ MonoBehaviour:
   oneHandRotationModeNear: 1
   oneHandRotationModeFar: 1
   releaseBehavior: 3
-  transformSmoothingLogicType:
-    reference: Microsoft.MixedReality.Toolkit.Utilities.DefaultTransformSmoothingLogic,
-      Microsoft.MixedReality.Toolkit.SDK
   smoothingFar: 1
   smoothingNear: 1
   moveLerpTime: 0.001
   rotateLerpTime: 0.001
   scaleLerpTime: 0.001
-  enableConstraints: 1
-  constraintsManager: {fileID: 1128101761368681}
   elasticsManager: {fileID: 1128101761368680}
   onManipulationStarted:
     m_PersistentCalls:
@@ -33394,7 +33256,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handType: 3
   proximityType: 3
-  executionOrder: 0
 --- !u!114 &1128101761368680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33432,20 +33293,6 @@ MonoBehaviour:
     RepeatSnapPoints: 0
     SnapRadius: 0
   elasticTypes: 1
---- !u!114 &1128101761368681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128101761368676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoConstraintSelection: 1
-  selectedConstraints: []
 --- !u!1 &1409004608862794
 GameObject:
   m_ObjectHideFlags: 0
