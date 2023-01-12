@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static FetchPdfImage;
 using UnityEngine.Networking;
 using System;
 using Microsoft.MixedReality.Toolkit.UI;
