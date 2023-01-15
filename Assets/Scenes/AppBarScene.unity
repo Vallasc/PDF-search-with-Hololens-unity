@@ -7152,7 +7152,7 @@ MonoBehaviour:
   scaleLerpTime: 0.001
   translateLerpTime: 0.001
   enableConstraints: 1
-  constraintsManager: {fileID: 0}
+  constraintsManager: {fileID: 1774193526}
   rotateStarted:
     m_PersistentCalls:
       m_Calls:
