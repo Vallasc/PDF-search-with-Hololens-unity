@@ -11,13 +11,19 @@ using static PdfManager;
 
 public class FetchPdfs : MonoBehaviour
 {
+    public GameObject pdfViewObject = null;
+    public GameObject NotFoundObject = null;
+    public GameObject PagesObject = null;
     public GameObject inputField = null;
-    public string url = "https://127.0.0.1:8573/pdfs";
+    public GameObject favCollection = null;
+    public GameObject favButton = null;
+
     public ScrollingObjectCollection firstScrollView;
     public ScrollingObjectCollection secondScrollView;
     public GameObject imageButton;
     public float cellWidth = 0.2f;
 
+    private string url = "https://127.0.0.1:8573/pdfs";
     private GridObjectCollection firstGridObjectCollection;
     private GridObjectCollection secondGridObjectCollection;
     private PdfsKeywordResponse pdfRes;
@@ -25,14 +31,16 @@ public class FetchPdfs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NotFoundObject.SetActive(false);
 
         firstScrollView.CellWidth = cellWidth;
         firstGridObjectCollection = firstScrollView.GetComponentInChildren<GridObjectCollection>();
         secondScrollView.CellWidth = cellWidth;
         secondGridObjectCollection = secondScrollView.GetComponentInChildren<GridObjectCollection>();
+        PagesObject.SetActive(false);
 
         //StartCoroutine(GetImage());
-        StartCoroutine(GetPdfs("ikea"));
+        StartCoroutine(GetPdfs(""));
     }
 
     // Update is called once per frame
@@ -45,43 +53,37 @@ public class FetchPdfs : MonoBehaviour
     IEnumerator GetPdfs(string searchKey)
     {
         Debug.Log("Get pdfs");
+        string newUrl = url;
         if (!searchKey.Equals(""))
-        {
-            UnityWebRequest webRequest = UnityWebRequest.Get(url + "?keyword=" + searchKey);
-            webRequest.certificateHandler = new BypassCertificate();
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.Success)
-            {
-                pdfRes = PdfsKeywordResponse.CreateFromJSON(webRequest.downloadHandler.text);
-                Debug.Log(pdfRes);
-                MakePdfList(pdfRes.pdfs);
+            newUrl = url + "?keyword=" + searchKey;
+        Debug.Log(url);
+        PagesObject.SetActive(false);
 
-                firstGridObjectCollection.UpdateCollection();
-                firstScrollView.UpdateContent();
+        UnityWebRequest webRequest = UnityWebRequest.Get(newUrl);
+        webRequest.certificateHandler = new BypassCertificate();
+        yield return webRequest.SendWebRequest();
+        if (webRequest.result == UnityWebRequest.Result.Success)
+        {
+            pdfRes = PdfsKeywordResponse.CreateFromJSON(webRequest.downloadHandler.text);
+            Debug.Log(pdfRes);
+            MakePdfList(pdfRes.pdfs);
+
+            if (pdfRes.pdfs.Length > 0)
+            {
+                NotFoundObject.SetActive(false);
             }
             else
             {
-                Debug.Log(webRequest.error);
+                NotFoundObject.SetActive(true);
             }
+
+            firstGridObjectCollection.UpdateCollection();
+            firstScrollView.UpdateContent();
         }
         else
         {
-            UnityWebRequest webRequest = UnityWebRequest.Get(url);
-            webRequest.certificateHandler = new BypassCertificate();
-            yield return webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.Success)
-            {
-                pdfRes = PdfsKeywordResponse.CreateFromJSON(webRequest.downloadHandler.text);
-                Debug.Log(pdfRes);
-                MakePdfList(pdfRes.pdfs);
-
-                firstGridObjectCollection.UpdateCollection();
-                firstScrollView.UpdateContent();
-            }
-            else
-            {
-                Debug.Log(webRequest.error);
-            }
+            NotFoundObject.SetActive(true);
+            Debug.Log(webRequest.error);
         }
     }
 
@@ -112,18 +114,18 @@ public class FetchPdfs : MonoBehaviour
     {
         while (firstGridObjectCollection.transform.childCount > 0)
             DestroyImmediate(firstGridObjectCollection.transform.GetChild(0).gameObject);
+        firstScrollView.MoveToIndex(0);
         firstGridObjectCollection.UpdateCollection();
-        firstScrollView.UpdateContent();
-        //firstScrollView.MoveToIndex(0);
+        //firstScrollView.UpdateContent();
     }
 
     private void ClearSecondGrid()
     {
         while (secondGridObjectCollection.transform.childCount > 0)
             DestroyImmediate(secondGridObjectCollection.transform.GetChild(0).gameObject);
+        secondScrollView.MoveToIndex(0);
         secondGridObjectCollection.UpdateCollection();
-        secondScrollView.UpdateContent();
-        //secondScrollView.MoveToIndex(0);
+        //secondScrollView.UpdateContent();
     }
 
     void OnPdfClick(PdfResponse pdf)
@@ -136,6 +138,24 @@ public class FetchPdfs : MonoBehaviour
         pdf.selected.GetComponent<MeshRenderer>().enabled = true;
         secondGridObjectCollection.UpdateCollection();
         secondScrollView.UpdateContent();
+    }
+
+    void OnPageClick(PageResponse page)
+    {
+        if(pdfViewObject != null)
+        {
+            PdfManager pdfObj = pdfViewObject.GetComponent<PdfManager>();
+            pdfObj.pdfId = page.pdfId;
+            pdfObj.currentPageNumber = page.number;
+            GameObject newPdfObj = Instantiate(pdfViewObject);
+            newPdfObj.SetActive(true);
+            transform.gameObject.SetActive(false);
+
+        } 
+        else
+        {
+            Debug.Log("No pdfViewObject found!");
+        }
     }
 
     Texture2D Base64ToTexture(string base64Image, int width, int height)
@@ -170,6 +190,13 @@ public class FetchPdfs : MonoBehaviour
         foreach(PdfResponse pdf in pdfs)
         {
             GameObject itemInstance = Instantiate(imageButton, firstGridObjectCollection.transform);
+
+            /*var grid = favCollection.GetComponentInChildren<GridObjectCollection>();
+            GameObject itemInstance2 = Instantiate(favButton, favCollection.transform);
+            grid.UpdateCollection();
+            Debug.Log("Bottone fav creato");*/
+
+
             itemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             itemInstance.name = pdf.name;
             itemInstance.GetComponentInChildren<TextMeshPro>().text = pdf.name;
@@ -197,6 +224,11 @@ public class FetchPdfs : MonoBehaviour
 
     private void MakePageList(PdfResponse pdf)
     {
+        if(pdf.pages.Length > 0)
+            PagesObject.SetActive(true);
+        else
+            PagesObject.SetActive(false);
+
         foreach (PageResponse page in pdf.pages)
         {
             GameObject itemInstance = Instantiate(imageButton, secondGridObjectCollection.transform);
@@ -209,7 +241,7 @@ public class FetchPdfs : MonoBehaviour
             selected.GetComponent<MeshRenderer>().enabled = false;
 
             ButtonConfigHelper button = itemInstance.GetComponent<ButtonConfigHelper>();
-            button.OnClick.AddListener(() => { Debug.Log("Click on " + itemInstance.name); });
+            button.OnClick.AddListener(() => { OnPageClick(page); });
 
             GameObject container = itemInstance.transform.Find("ImageContainer").gameObject;
             GameObject image = container.transform.Find("Image").gameObject;
