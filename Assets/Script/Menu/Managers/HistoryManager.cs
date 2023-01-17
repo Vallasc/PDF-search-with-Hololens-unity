@@ -157,9 +157,9 @@ public class HistoryManager : MonoBehaviour
         gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = history;
         gameObjectButton.name = history;
 
-        //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfSearch(history));
+        gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView("", 1));
         gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menuNew.GetComponent<HistoryManager>().CallUpdateHistory(history));
-
+        gameObjectButton.SetActive(true);
 
         //Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
 
@@ -182,11 +182,9 @@ public class HistoryManager : MonoBehaviour
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
         bool found = false;
 
-        Debug.Log(grid.childCount);
         int i = 0;
         while (!found && i < grid.childCount)
         {
-            Debug.Log(i);
             if (!found && string.Equals(grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText, newPdf))
             {
                 if (i != 2)
@@ -213,9 +211,12 @@ public class HistoryManager : MonoBehaviour
             gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
 
             gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = newPdf;
+
+            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView("", 1));
             gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menuNew.GetComponent<HistoryManager>().CallUpdateHistory(newPdf));
 
-            gameObjectButton.name = history;        
+            gameObjectButton.name = history;
+            gameObjectButton.SetActive(true);
 
 
             // DA INSERIRE ANCHE IL COLLEGAMENTO ALLA SCHERMATA SUCCESSIVA

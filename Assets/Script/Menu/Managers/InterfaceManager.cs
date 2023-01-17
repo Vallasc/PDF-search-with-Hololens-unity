@@ -9,10 +9,10 @@ public class InterfaceManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject menu;
-
     [SerializeField]
     private GameObject pdfSearch;
-
+    [SerializeField]
+    private GameObject pdfView;
 
     public void SetActivePdfSearch()
     {
@@ -21,10 +21,11 @@ public class InterfaceManager : MonoBehaviour
 
     public void SetActivePdfSearch(string keyword)
     {
+        // FAR PARTIRE QUI LA CHIAMATA AL SERVER
+        StartCoroutine(pdfSearch.GetComponent<FetchPdfs>().GetPdfs(keyword));
+
         TMP_InputField tmPro = pdfSearch.transform.Find("TitleBar").Find("TextField").Find("InputField (TMP)").gameObject.GetComponent<TMP_InputField>();
         tmPro.text = keyword;
-
-        // FAR PARTIRE QUI LA CHIAMATA AL SERVER
 
         SwitchInterfaceToPdfSearch();
     }
@@ -35,9 +36,20 @@ public class InterfaceManager : MonoBehaviour
         pdfSearch.SetActive(true);
     }
 
-    private void SwitchInterfaceToPdfView()
+    public void SetActivePdfView(string pdfId, int pageNumber)
     {
-        //menu.SetActive(false);
-        //pdfView.SetActive(true);
+        SwitchInterfaceToPdfView(pdfId, pageNumber);
+    }
+
+    private void SwitchInterfaceToPdfView(string pdfId, int pageNumber)
+    {
+        PdfManager pdfManager = pdfView.GetComponent<PdfManager>();
+        pdfManager.pdfId = pdfId;
+        pdfManager.currentPageNumber = pageNumber;
+
+        GameObject gameObjectPdfView = Instantiate(pdfView);
+
+        menu.SetActive(false);
+        gameObjectPdfView.SetActive(true);
     }
 }

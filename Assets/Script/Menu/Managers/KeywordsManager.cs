@@ -126,7 +126,7 @@ public class KeywordsManager : MonoBehaviour
 
         //GameObject buttonObject = new GameObject();
         //PressableButtonHoloLens2 button = buttonObject.AddComponent<PressableButtonHoloLens2>();
-        PressableButtonHoloLens2 button = buttonPrefab.GetComponent<PressableButtonHoloLens2>();
+        //PressableButtonHoloLens2 button = buttonPrefab.GetComponent<PressableButtonHoloLens2>();
         //buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
 
         if (keywords.Count == 0)
@@ -146,7 +146,7 @@ public class KeywordsManager : MonoBehaviour
                 gameObjectButton.name = k.GetKeyword();
 
                 gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfSearch(k.GetKeyword()));
-
+                gameObjectButton.SetActive(true);
 
                 //gameObjectButton.GetComponent<ButtonConfigHelper>().ForceRefresh();
                 //Debug.Log("button: " + gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle);
@@ -192,6 +192,7 @@ public class KeywordsManager : MonoBehaviour
                 gameObjectButton.name = k.GetKeyword();
 
                 gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfSearch(k.GetKeyword()));
+                gameObjectButton.SetActive(true);
 
                 //k.SetTimeLeft(10);
                 keywords.Add(k);

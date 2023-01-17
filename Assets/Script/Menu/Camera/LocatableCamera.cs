@@ -53,8 +53,8 @@ public class LocatableCamera : MonoBehaviour
     [SerializeField]
     private GameObject keys = null;
 
-    [SerializeField]
-    private GameObject pdfList = null;
+    private string urlOcr = "https://127.0.0.1:8574/upload";
+    private string urlKeyword = "https://127.0.0.1:8573/pdfs";
 
     private PhotoCapture photoCaptureObject = null;
     private Resolution cameraResolution = default(Resolution);
@@ -64,15 +64,8 @@ public class LocatableCamera : MonoBehaviour
     private float nextActionTime = 0.0f;
     private readonly float period = 6f;
 
-    private string url = "https://127.0.0.1:8574/upload";
-    private string urlKeyword = "https://127.0.0.1:8573/pdfs";
-
     private bool stopped = true;
 
-    [SerializeField]
-    Renderer quadRenderer;
-    [SerializeField]
-    GameObject quad;
 
     private void Start()
     {
@@ -116,14 +109,11 @@ public class LocatableCamera : MonoBehaviour
         if (stopped)
         {
             buttonPhoto.GetComponent<ButtonConfigHelper>().MainLabelText = "START";
-            //pdfList.transform.Find("Text").GetComponent<TMP_Text>().text = "PHOTO MODE: OFF";
         }
         else
         {
             buttonPhoto.GetComponent<ButtonConfigHelper>().MainLabelText = "STOP";
-            //pdfList.transform.Find("Text").GetComponent<TMP_Text>().text = "PHOTO MODE: ON";
         }
-        
     }
 
     private void OnPhotoCaptureCreated(PhotoCapture captureObject)
@@ -198,7 +188,7 @@ public class LocatableCamera : MonoBehaviour
             new MultipartFormDataSection("request_index", numPhotos.ToString())
         };
 
-        using UnityWebRequest uwr = UnityWebRequest.Post(url, sections);
+        using UnityWebRequest uwr = UnityWebRequest.Post(urlOcr, sections);
         uwr.certificateHandler = new BypassCertificate();
         yield return uwr.SendWebRequest();
 
@@ -217,45 +207,31 @@ public class LocatableCamera : MonoBehaviour
             Debug.Log(res.GetKeywords());
 
             keys.GetComponent<KeywordsManager>().UpdateKeywordsCollection(res.GetKeywords());
-
-            Transform scroll = keys.transform.Find("Keywords").Find("ScrollingObjectCollection");
-            Transform grid = scroll.Find("Container").Find("GridObjectCollection");
-            if (grid.Find("ikea") != null)
-            {
-                Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("ikea").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-            }
         }
-        //string[] list = new string[2];
-        //list[0] = "ikea";
-        //list[1] = "vediamo";
-        //keys.GetComponent<KeywordsManager>().UpdateKeywordsCollection(list);
-
     }
 
-    IEnumerator GetPdfList(string keyword)
-    {
-        Debug.Log("GET pdf list");
+    //public IEnumerator GetPdfs(string keyword)
+    //{
+    //    Debug.Log("GET pdf list");
 
-        using UnityWebRequest uwr = UnityWebRequest.Get(urlKeyword + "?keyword=" + keyword);
-        uwr.certificateHandler = new BypassCertificate();
-        yield return uwr.SendWebRequest();
+    //    using UnityWebRequest uwr = UnityWebRequest.Get(urlKeyword + "?keyword=" + keyword);
+    //    uwr.certificateHandler = new BypassCertificate();
+    //    yield return uwr.SendWebRequest();
 
-        Debug.Log("FINE GET");
-        if (uwr.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("ERRORE GET");
-            Debug.Log(uwr.error);
-        }
-        else
-        {
-            Debug.Log("RICHIESTA GET ESEGUITA!");
-            var serverResponse = uwr.downloadHandler.text;
+    //    Debug.Log("FINE GET");
+    //    if (uwr.result != UnityWebRequest.Result.Success)
+    //    {
+    //        Debug.Log("ERRORE GET");
+    //        Debug.Log(uwr.error);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("RICHIESTA GET ESEGUITA!");
+    //        var serverResponse = uwr.downloadHandler.text;
 
-            Debug.Log(serverResponse);
-        }
-
-        
-    }
+    //        Debug.Log(serverResponse);
+    //    }
+    //}
 
     private void OnPhotoCaptured(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
     {
@@ -272,7 +248,6 @@ public class LocatableCamera : MonoBehaviour
             photoCaptureFrame.UploadImageDataToTexture(targetTexture);
 
             numPhotos++;
-            quadRenderer.material.SetTexture("_MainTex", targetTexture);
             
             File.WriteAllBytes("./img.png", targetTexture.EncodeToPNG());
             textureString = Convert.ToBase64String(targetTexture.EncodeToPNG());
@@ -335,8 +310,6 @@ public class LocatableCamera : MonoBehaviour
         if (textureString != null)
         {
             StartCoroutine(PostPhotoCapture(textureString));
-
-            //StartCoroutine(GetPdfList("ikea"));
         }
     }
 

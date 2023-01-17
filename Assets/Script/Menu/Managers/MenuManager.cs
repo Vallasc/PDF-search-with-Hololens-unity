@@ -39,6 +39,10 @@ public class MenuManager : MonoBehaviour
     private float offsetY = -0.02f;
     [SerializeField]
     private float offsetX = 0.02f;
+    [SerializeField]
+    private float margin = 0.05f;
+    [SerializeField]
+    private float appBarOffset = 0.032f;
 
     private int maxNew = 3;
     private int maxFav = 3;
@@ -48,7 +52,9 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        UpdateMenu();
+        float x = UpdateMenu();
+        Transform appBar = menu.transform.Find("AppBarVertical");
+        appBar.localPosition = new Vector3(x + appBarOffset + margin, appBar.localPosition.y, appBar.localPosition.z);
     }
 
     public void OnHistoryPressed()
@@ -66,7 +72,7 @@ public class MenuManager : MonoBehaviour
         UpdateMenu();
     }
 
-    private void UpdateMenu()
+    private float UpdateMenu()
     {
         //Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         //Transform grid = scroll.Find("Container").Find("GridObjectCollection");
@@ -93,8 +99,10 @@ public class MenuManager : MonoBehaviour
 
 
         BoxCollider boxMenu = menu.GetComponent<BoxCollider>();
-        boxMenu.size = new Vector3(sizeX, sizeY, boxMenu.size.z);
+        boxMenu.size = new Vector3(sizeX + margin, sizeY + margin, boxMenu.size.z);
         boxMenu.center = new Vector3(centerX, (sizeY / 2) * -1, boxMenu.center.z);
+
+        return sizeX;
     }
 
 

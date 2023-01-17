@@ -42,7 +42,7 @@ public class FetchPdfs : MonoBehaviour
     }
 
 
-    IEnumerator GetPdfs(string searchKey)
+    public IEnumerator GetPdfs(string searchKey)
     {
         Debug.Log("Get pdfs");
         if (!searchKey.Equals(""))

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25637,7 +25637,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 963194234}
         m_TargetAssemblyTypeName: LocatableCamera, Assembly-CSharp
         m_MethodName: UpdateMode
         m_Mode: 1
@@ -38227,6 +38227,8 @@ MonoBehaviour:
   padding: 0.01
   offsetY: -0.02
   offsetX: 0.02
+  margin: 0.05
+  appBarOffset: 0.032
 --- !u!114 &821042687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38253,7 +38255,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821042684}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d1fea68463e4e84b86c395b654f950d, type: 3}
   m_Name: 
@@ -38270,7 +38272,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821042684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2547b4dd088644d6aaf64f45df657c79, type: 3}
   m_Name: 
@@ -38284,7 +38286,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821042684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4684083f6dff4a1d8a790bccc354fcf4, type: 3}
   m_Name: 
@@ -38297,9 +38299,9 @@ MonoBehaviour:
   smoothing: 1
   lifetime: 0
   referenceDirection: 1
-  minDistance: 1
-  maxDistance: 1.2
-  minViewDegrees: 0
+  minDistance: 0.2
+  maxDistance: 0.5
+  minViewDegrees: 15
   maxViewDegrees: 30
   aspectV: 1
   ignoreAngleClamp: 0
@@ -38616,8 +38618,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.26, z: 0.01}
-  m_Center: {x: 0.15, y: -0.11, z: 0}
+  m_Size: {x: 0.31, y: 0.27, z: 0.01}
+  m_Center: {x: 0.13, y: -0.11, z: 0}
 --- !u!4 &821042696
 Transform:
   m_ObjectHideFlags: 0
@@ -38626,7 +38628,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821042684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3671, y: 0.0795, z: 0.22}
+  m_LocalPosition: {x: -0.1, y: 0.07, z: 0.2}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 2067276107}
@@ -42660,7 +42662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935591465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.292, y: -0.112, z: -0.0066}
+  m_LocalPosition: {x: 0.342, y: -0.112, z: -0.0066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 238510688}
@@ -43267,6 +43269,7 @@ GameObject:
   - component: {fileID: 963194232}
   - component: {fileID: 963194230}
   - component: {fileID: 963194233}
+  - component: {fileID: 963194234}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -43426,6 +43429,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9c599bb8dcccf448a8788e94533644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &963194234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88f56364b0e09d458431b286be09b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textureShader: {fileID: 0}
+  text: {fileID: 0}
+  buttonPhoto: {fileID: 564504063}
+  keys: {fileID: 1189403385}
 --- !u!1 &964530566
 GameObject:
   m_ObjectHideFlags: 0
@@ -52173,7 +52192,6 @@ GameObject:
   - component: {fileID: 1189403391}
   - component: {fileID: 1189403390}
   - component: {fileID: 1189403389}
-  - component: {fileID: 1189403388}
   - component: {fileID: 1189403387}
   m_Layer: 0
   m_Name: MenuKeywords
@@ -52213,19 +52231,6 @@ MonoBehaviour:
   buttonPrefab: {fileID: 133467425}
   menu: {fileID: 821042684}
   menuKeys: {fileID: 1189403385}
---- !u!114 &1189403388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189403385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5fd25745cd9a94b9eb415555750312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 1189403385}
 --- !u!114 &1189403389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84834,7 +84839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1904987679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92710,7 +92715,6 @@ GameObject:
   - component: {fileID: 2067276112}
   - component: {fileID: 2067276111}
   - component: {fileID: 2067276110}
-  - component: {fileID: 2067276109}
   - component: {fileID: 2067276108}
   m_Layer: 0
   m_Name: MenuHistory
@@ -92754,19 +92758,6 @@ MonoBehaviour:
   buttonWidth: 0.032
   padding: 0.01
   offsetY: -0.05
---- !u!114 &2067276109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067276106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5fd25745cd9a94b9eb415555750312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 2067276106}
 --- !u!114 &2067276110
 MonoBehaviour:
   m_ObjectHideFlags: 0
