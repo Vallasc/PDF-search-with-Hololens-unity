@@ -9,8 +9,6 @@ using UnityEngine.Networking;
 
 public class PdfManager : MonoBehaviour
 {
-    public string host = "https://127.0.0.1";
-
     public string pdfId = "2";
     public int currentPageNumber = 2;
 
@@ -18,6 +16,7 @@ public class PdfManager : MonoBehaviour
     public GameObject windowTitleObject;
     public GameObject pageCounterObject;
 
+    private string host = "https://127.0.0.1:8573";
     private readonly string basePath = "/pdfs";
     private Pdf pdf = null;
 
@@ -39,7 +38,9 @@ public class PdfManager : MonoBehaviour
     private IEnumerator GetPdf(string pdfId)
     {
         Debug.Log("GET pdf");
-        UnityWebRequest webRequest = UnityWebRequest.Get(host + basePath + "/" + pdfId);
+        string url = host + basePath + "/" + pdfId;
+        Debug.Log(url);
+        UnityWebRequest webRequest = UnityWebRequest.Get(url);
         webRequest.certificateHandler = new BypassCertificate();
         yield return webRequest.SendWebRequest();
         if (webRequest.result == UnityWebRequest.Result.Success)
