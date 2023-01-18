@@ -157,8 +157,8 @@ public class HistoryManager : MonoBehaviour
         gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = history;
         gameObjectButton.name = history;
 
+        gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(history)));
         gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView("", 1));
-        gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menuNew.GetComponent<HistoryManager>().CallUpdateHistory(history));
         gameObjectButton.SetActive(true);
 
         //Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
@@ -170,10 +170,14 @@ public class HistoryManager : MonoBehaviour
         //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
-    public void CallUpdateHistory(string newPdf)
+    public IEnumerator CallUpdateHistory(string newPdf)
     {
         UpdateHistory(newPdf);
-        StartCoroutine(UpdateCollection());
+        if (this.gameObject.activeSelf == true)
+        {
+            yield return StartCoroutine(UpdateCollection());
+        }
+        
     }
 
     private void UpdateHistory(string newPdf)
@@ -212,8 +216,9 @@ public class HistoryManager : MonoBehaviour
 
             gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = newPdf;
 
+            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(newPdf)));
             gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView("", 1));
-            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menuNew.GetComponent<HistoryManager>().CallUpdateHistory(newPdf));
+            
 
             gameObjectButton.name = history;
             gameObjectButton.SetActive(true);
