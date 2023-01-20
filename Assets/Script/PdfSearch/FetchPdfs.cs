@@ -1,13 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using TMPro;
-using UnityEngine.UI;
-using static PdfManager;
+using System.Threading;
+using System.Runtime.InteropServices.ComTypes;
+using System.Collections.Generic;
 
 public class FetchPdfs : MonoBehaviour
 {
@@ -15,23 +15,24 @@ public class FetchPdfs : MonoBehaviour
     public GameObject NotFoundObject = null;
     public GameObject PagesObject = null;
     public GameObject inputField = null;
-    public GameObject favCollection = null;
-    public GameObject favButton = null;
+    //public GameObject favCollection = null;
+    //public GameObject favButton = null;
 
     public ScrollingObjectCollection firstScrollView;
     public ScrollingObjectCollection secondScrollView;
     public GameObject imageButton;
     public float cellWidth = 0.2f;
 
-    private string url = "https://127.0.0.1:8573/pdfs";
+    private string serverIp;
+    private int serverPort = 8573;
+    private string baseUrl;
     private GridObjectCollection firstGridObjectCollection;
     private GridObjectCollection secondGridObjectCollection;
     private PdfsKeywordResponse pdfRes;
 
-    // Start is called before the first frame update
     void Start()
     {
-        NotFoundObject.SetActive(false);
+        SetServerIp("127.0.0.1"); //TODO REMOVE
 
         firstScrollView.CellWidth = cellWidth;
         firstGridObjectCollection = firstScrollView.GetComponentInChildren<GridObjectCollection>();
@@ -39,24 +40,19 @@ public class FetchPdfs : MonoBehaviour
         secondGridObjectCollection = secondScrollView.GetComponentInChildren<GridObjectCollection>();
         PagesObject.SetActive(false);
 
-        //StartCoroutine(GetImage());
-        StartCoroutine(GetPdfs(""));
+        //StartCoroutine(GetPdfs(""));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() {}
 
 
     public IEnumerator GetPdfs(string searchKey)
     {
         Debug.Log("Get pdfs");
-        string newUrl = url;
+        string newUrl = baseUrl;
         if (!searchKey.Equals(""))
-            newUrl = url + "?keyword=" + searchKey;
-        Debug.Log(url);
+            newUrl = baseUrl + "?keyword=" + searchKey;
+        Debug.Log(baseUrl);
         PagesObject.SetActive(false);
 
         UnityWebRequest webRequest = UnityWebRequest.Get(newUrl);
@@ -87,48 +83,34 @@ public class FetchPdfs : MonoBehaviour
         }
     }
 
-    IEnumerator GetImage()
+    public void OnSearch()
     {
-        Debug.Log("GET image");
-        UnityWebRequest webRequest = UnityWebRequest.Get(url);
-        webRequest.certificateHandler = new BypassCertificate();
-        yield return webRequest.SendWebRequest();
-        if (webRequest.result == UnityWebRequest.Result.Success)
-        {
-            ImageResponse res = ImageResponse.CreateFromJSON(webRequest.downloadHandler.text);
-            //PaintImage(res.img, res.width, res.height);
+        Debug.Log(inputField);
+        Debug.Log(inputField.GetComponent<TMP_InputField>().text);
+        ClearFirstGrid();
+        ClearSecondGrid();
+        StartCoroutine(GetPdfs(inputField.GetComponent<TMP_InputField>().text));
+    }
 
-
-            // Make items
-            // MakeItem("Provola1", res.img, res.width, res.height);
-            firstGridObjectCollection.UpdateCollection();
-            firstScrollView.UpdateContent();
-        }
-        else
-        {
-            Debug.Log(webRequest.error);
-        }
+    public void SetServerIp(string serverIp)
+    {
+        this.serverIp = serverIp;
+        baseUrl = "https://" + serverIp + ":" + serverPort.ToString() + "/pdfs";
     }
 
     private void ClearFirstGrid()
     {
         while (firstGridObjectCollection.transform.childCount > 0)
             DestroyImmediate(firstGridObjectCollection.transform.GetChild(0).gameObject);
-        firstScrollView.MoveToIndex(0);
-        firstGridObjectCollection.UpdateCollection();
-        //firstScrollView.UpdateContent();
     }
 
     private void ClearSecondGrid()
     {
         while (secondGridObjectCollection.transform.childCount > 0)
             DestroyImmediate(secondGridObjectCollection.transform.GetChild(0).gameObject);
-        secondScrollView.MoveToIndex(0);
-        secondGridObjectCollection.UpdateCollection();
-        //secondScrollView.UpdateContent();
     }
 
-    void OnPdfClick(PdfResponse pdf)
+    private void OnPdfClick(PdfResponse pdf)
     {
         ClearSecondGrid();
         foreach (PdfResponse p in pdfRes.pdfs)
@@ -140,7 +122,7 @@ public class FetchPdfs : MonoBehaviour
         secondScrollView.UpdateContent();
     }
 
-    void OnPageClick(PageResponse page)
+    private void OnPageClick(PageResponse page)
     {
         if(pdfViewObject != null)
         {
@@ -149,7 +131,7 @@ public class FetchPdfs : MonoBehaviour
             pdfObj.currentPageNumber = page.number;
             GameObject newPdfObj = Instantiate(pdfViewObject);
             newPdfObj.SetActive(true);
-            transform.gameObject.SetActive(false);
+            //transform.gameObject.SetActive(false);
 
         } 
         else
@@ -158,7 +140,7 @@ public class FetchPdfs : MonoBehaviour
         }
     }
 
-    Texture2D Base64ToTexture(string base64Image, int width, int height)
+    private Texture2D Base64ToTexture(string base64Image, int width, int height)
     {
         Byte[] imgBytes = Convert.FromBase64String(base64Image);
         Texture2D tex = new Texture2D(width, height, TextureFormat.BC7, false);
@@ -166,7 +148,7 @@ public class FetchPdfs : MonoBehaviour
         return tex;
     }
 
-    Vector3 ChangeScale(Vector3 localScale, int width, int height)
+    private Vector3 ChangeScale(Vector3 localScale, int width, int height)
     {
         Vector3 initialScale = localScale;
 
@@ -187,15 +169,12 @@ public class FetchPdfs : MonoBehaviour
 
     private void MakePdfList(PdfResponse[] pdfs)
     {
-        foreach(PdfResponse pdf in pdfs)
+        ClearFirstGrid();
+        List<GameObject> objs = new List<GameObject>();
+        foreach (PdfResponse pdf in pdfs)
         {
             GameObject itemInstance = Instantiate(imageButton, firstGridObjectCollection.transform);
-
-            /*var grid = favCollection.GetComponentInChildren<GridObjectCollection>();
-            GameObject itemInstance2 = Instantiate(favButton, favCollection.transform);
-            grid.UpdateCollection();
-            Debug.Log("Bottone fav creato");*/
-
+            objs.Add(itemInstance);
 
             itemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             itemInstance.name = pdf.name;
@@ -220,11 +199,16 @@ public class FetchPdfs : MonoBehaviour
             image.GetComponent<UnityEngine.UI.Image>().material = mat;
 
         }
+        firstGridObjectCollection.UpdateCollection();
+        firstScrollView.UpdateContent();
+        firstScrollView.MoveToIndex(0);
     }
+
 
     private void MakePageList(PdfResponse pdf)
     {
-        if(pdf.pages.Length > 0)
+        ClearSecondGrid();
+        if (pdf.pages.Length > 0)
             PagesObject.SetActive(true);
         else
             PagesObject.SetActive(false);
@@ -251,15 +235,9 @@ public class FetchPdfs : MonoBehaviour
             mat.mainTexture = Base64ToTexture(page.thumbnail, page.thumbnailWidth, page.thumbnailHeight);
             image.GetComponent<UnityEngine.UI.Image>().material = mat;
         }
-    }
-
-    public void OnSearchButtonClick()
-    {
-        Debug.Log(inputField);
-        Debug.Log(inputField.GetComponent<TMP_InputField>().text);
-        ClearFirstGrid();
-        ClearSecondGrid();
-        StartCoroutine(GetPdfs(inputField.GetComponent<TMP_InputField>().text));
+        secondGridObjectCollection.UpdateCollection();
+        secondScrollView.UpdateContent();
+        secondScrollView.MoveToIndex(0);
     }
 
     [Serializable]
@@ -275,7 +253,6 @@ public class FetchPdfs : MonoBehaviour
         }
 
     }
-
 
     [Serializable]
     public class PdfsKeywordResponse
@@ -326,7 +303,6 @@ public class FetchPdfs : MonoBehaviour
         }
 
     }
-
 
     public class BypassCertificate : CertificateHandler
     {
