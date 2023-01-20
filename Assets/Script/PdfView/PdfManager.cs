@@ -1,9 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -108,7 +104,7 @@ public class PdfManager : MonoBehaviour
         yield return webRequest.SendWebRequest();
         if (webRequest.result == UnityWebRequest.Result.Success)
         {
-            PageImage res = PageImage.CreateFromJSON(webRequest.downloadHandler.text);
+            PageImageResponse res = PageImageResponse.CreateFromJSON(webRequest.downloadHandler.text);
             PaintImage(res.img, res.width, res.height);
             if (this.pdf != null)
             {
@@ -165,46 +161,6 @@ public class PdfManager : MonoBehaviour
             initialScale.y = aspectRatio;
         }
         return initialScale;
-    }
-
-    [Serializable]
-    public class Pdf
-    {
-        public string _id;
-        public string name;
-        public string path;
-        public int numPages;
-        public List<Pages> pages;
-
-        public static Pdf CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<Pdf>(jsonString);
-        }
-    }
-
-    [Serializable]
-    public class Pages
-    {
-        public int number;
-        public string pdfId;
-        public string path;
-        public string url;
-        public static Pages CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<Pages>(jsonString);
-        }
-    }
-
-    [Serializable]
-    public class PageImage
-    {
-        public string img;
-        public int width;
-        public int height;
-        public static PageImage CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<PageImage>(jsonString);
-        }
     }
 
     public class BypassCertificate: CertificateHandler

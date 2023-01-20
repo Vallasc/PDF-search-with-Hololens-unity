@@ -7,6 +7,7 @@ public class Pdf
     public string _id;
     public string name;
     public int numOccKeyword;
+    public int numPages;
     public Page[] pages;
     public string thumbnail;
     public int thumbnailWidth = 0;
