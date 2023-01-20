@@ -23,12 +23,15 @@ public class FetchPdfs : MonoBehaviour
     public GameObject imageButton;
     public float cellWidth = 0.2f;
 
+    private GridObjectCollection firstGridObjectCollection;
+    private GridObjectCollection secondGridObjectCollection;
+
     private string serverIp;
     private int serverPort = 8573;
     private string baseUrl;
-    private GridObjectCollection firstGridObjectCollection;
-    private GridObjectCollection secondGridObjectCollection;
-    private PdfsKeywordResponse pdfRes;
+
+    private PdfsResponse pdfRes;
+    private List<VisiblePdf> visiblePdfs = new List<VisiblePdf>();
 
     void Start()
     {
@@ -60,7 +63,7 @@ public class FetchPdfs : MonoBehaviour
         yield return webRequest.SendWebRequest();
         if (webRequest.result == UnityWebRequest.Result.Success)
         {
-            pdfRes = PdfsKeywordResponse.CreateFromJSON(webRequest.downloadHandler.text);
+            pdfRes = PdfsResponse.CreateFromJSON(webRequest.downloadHandler.text);
             Debug.Log(pdfRes);
             MakePdfList(pdfRes.pdfs);
 
@@ -110,19 +113,23 @@ public class FetchPdfs : MonoBehaviour
             DestroyImmediate(secondGridObjectCollection.transform.GetChild(0).gameObject);
     }
 
-    private void OnPdfClick(PdfResponse pdf)
+    private void OnPdfClick(Pdf pdf)
     {
         ClearSecondGrid();
-        foreach (PdfResponse p in pdfRes.pdfs)
-            p.selected.GetComponent<MeshRenderer>().enabled = false;
+        foreach (VisiblePdf p in visiblePdfs)
+        {
+            if(p.pdfId == pdf._id)
+                p.selected.GetComponent<MeshRenderer>().enabled = true;
+            else
+                p.selected.GetComponent<MeshRenderer>().enabled = false;
+        }
 
         MakePageList(pdf);
-        pdf.selected.GetComponent<MeshRenderer>().enabled = true;
         secondGridObjectCollection.UpdateCollection();
         secondScrollView.UpdateContent();
     }
 
-    private void OnPageClick(PageResponse page)
+    private void OnPageClick(Page page)
     {
         if(pdfViewObject != null)
         {
@@ -131,7 +138,7 @@ public class FetchPdfs : MonoBehaviour
             pdfObj.currentPageNumber = page.number;
             GameObject newPdfObj = Instantiate(pdfViewObject);
             newPdfObj.SetActive(true);
-            //transform.gameObject.SetActive(false);
+            //transform.gameObject.SetActive(false); Uncomment to hide pdf search
 
         } 
         else
@@ -167,11 +174,11 @@ public class FetchPdfs : MonoBehaviour
         return initialScale;
     }
 
-    private void MakePdfList(PdfResponse[] pdfs)
+    private void MakePdfList(Pdf[] pdfs)
     {
         ClearFirstGrid();
         List<GameObject> objs = new List<GameObject>();
-        foreach (PdfResponse pdf in pdfs)
+        foreach (Pdf pdf in pdfs)
         {
             GameObject itemInstance = Instantiate(imageButton, firstGridObjectCollection.transform);
             objs.Add(itemInstance);
@@ -184,8 +191,7 @@ public class FetchPdfs : MonoBehaviour
             GameObject selected = itemInstance.transform.Find("Selected").gameObject;
             selected.GetComponent<MeshRenderer>().enabled = false;
 
-            pdf.selected = selected;
-            pdf.button = itemInstance;
+            visiblePdfs.Add(new VisiblePdf(pdf._id, selected, itemInstance));
 
             ButtonConfigHelper button = itemInstance.GetComponent<ButtonConfigHelper>();
             button.OnClick.AddListener(() => { OnPdfClick(pdf); });
@@ -205,7 +211,7 @@ public class FetchPdfs : MonoBehaviour
     }
 
 
-    private void MakePageList(PdfResponse pdf)
+    private void MakePageList(Pdf pdf)
     {
         ClearSecondGrid();
         if (pdf.pages.Length > 0)
@@ -213,7 +219,7 @@ public class FetchPdfs : MonoBehaviour
         else
             PagesObject.SetActive(false);
 
-        foreach (PageResponse page in pdf.pages)
+        foreach (Page page in pdf.pages)
         {
             GameObject itemInstance = Instantiate(imageButton, secondGridObjectCollection.transform);
             itemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
@@ -240,68 +246,18 @@ public class FetchPdfs : MonoBehaviour
         secondScrollView.MoveToIndex(0);
     }
 
-    [Serializable]
-    public class ImageResponse
+    private class VisiblePdf
     {
-        public string img;
-        public int width;
-        public int height;
-
-        public static ImageResponse CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<ImageResponse>(jsonString);
-        }
-
-    }
-
-    [Serializable]
-    public class PdfsKeywordResponse
-    {
-        public PdfResponse[] pdfs;
-
-        public static PdfsKeywordResponse CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<PdfsKeywordResponse>(jsonString);
-        }
-
-    }
-
-    [Serializable]
-    public class PdfResponse
-    {
-        public string _id;
-        public string name;
-        public int numOccKeyword;
-        public PageResponse[] pages;
-        public string thumbnail;
-        public int thumbnailWidth = 0;
-        public int thumbnailHeight = 0;
-
+        public string pdfId;
         public GameObject selected;
         public GameObject button;
 
-        public static PdfResponse CreateFromJSON(string jsonString)
+        public VisiblePdf(string pdfId, GameObject selected, GameObject button)
         {
-            return JsonUtility.FromJson<PdfResponse>(jsonString);
+            this.pdfId = pdfId;
+            this.selected = selected; 
+            this.button = button;
         }
-
-    }
-
-    [Serializable]
-    public class PageResponse
-    {
-        public int number;
-        public string pdfId;
-        public string thumbnail;
-        public int thumbnailWidth = 0;
-        public int thumbnailHeight = 0;
-        public string url;
-        
-        public static PageResponse CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<PageResponse>(jsonString);
-        }
-
     }
 
     public class BypassCertificate : CertificateHandler
