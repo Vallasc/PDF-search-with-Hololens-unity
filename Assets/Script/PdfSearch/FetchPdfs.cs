@@ -35,7 +35,7 @@ public class FetchPdfs : MonoBehaviour
 
     void Start()
     {
-        SetServerIp("127.0.0.1"); //TODO REMOVE
+        //SetServerIp("127.0.0.1"); //TODO REMOVE
 
         firstScrollView.CellWidth = cellWidth;
         firstGridObjectCollection = firstScrollView.GetComponentInChildren<GridObjectCollection>();
@@ -136,6 +136,7 @@ public class FetchPdfs : MonoBehaviour
             PdfManager pdfObj = pdfViewObject.GetComponent<PdfManager>();
             pdfObj.pdfId = page.pdfId;
             pdfObj.currentPageNumber = page.number;
+            pdfObj.SetServerIp(serverIp);
             GameObject newPdfObj = Instantiate(pdfViewObject);
             newPdfObj.SetActive(true);
             //transform.gameObject.SetActive(false); Uncomment to hide pdf search
@@ -177,11 +178,10 @@ public class FetchPdfs : MonoBehaviour
     private void MakePdfList(Pdf[] pdfs)
     {
         ClearFirstGrid();
-        List<GameObject> objs = new List<GameObject>();
+        visiblePdfs.Clear();
         foreach (Pdf pdf in pdfs)
         {
             GameObject itemInstance = Instantiate(imageButton, firstGridObjectCollection.transform);
-            objs.Add(itemInstance);
 
             itemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             itemInstance.name = pdf.name;

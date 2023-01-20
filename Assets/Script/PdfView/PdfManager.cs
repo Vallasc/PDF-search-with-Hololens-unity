@@ -21,7 +21,7 @@ public class PdfManager : MonoBehaviour
 
     void Start()
     {
-        SetServerIp("127.0.0.1"); // TODO REMOVE
+        //SetServerIp("127.0.0.1"); // TODO REMOVE
 
         StartCoroutine(GetPdf(pdfId));
         StartCoroutine(GetPage(pdfId, currentPageNumber));
