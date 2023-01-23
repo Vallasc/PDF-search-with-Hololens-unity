@@ -22,7 +22,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField]
     private GameObject buttonPrefab;
 
-    
+
     [SerializeField]
     private float textHight = 0.01f;
     [SerializeField]
@@ -32,18 +32,23 @@ public class HistoryManager : MonoBehaviour
     [SerializeField]
     private float offsetY = -0.05f;
 
-    private string history = "";
+    //private string history = "";
+    private List<Pdf> his;
     private int maxNew = 3;
 
 
     void Start()
     {
+        StartCoroutine(OnStartHistory());
+    }
+
+    IEnumerator OnStartHistory()
+    {
+        his = new List<Pdf>();
         ReadHistortyFromFile();
         PopulateHistory();
-        //UpdateHistory(history);
-        StartCoroutine(UpdateCollection());
+        yield return StartCoroutine(UpdateCollection());
 
-        //yield return new WaitForEndOfFrame();
         menu.GetComponent<MenuManager>().OnHistoryUpdated();
 
         //Debug.Log("HISTORY FILE: " + history);
@@ -75,8 +80,24 @@ public class HistoryManager : MonoBehaviour
         Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
         Windows.Storage.StorageFile historyFile = await storageFolder.CreateFileAsync("History.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting);
 #endif
-        byte[] byteArray = System.Text.Encoding.UTF8.GetBytes("matteo");
-        File.WriteAllBytes("./History.txt", byteArray);
+
+        Pdf p = new Pdf();
+        p._id = "ikea";
+        p.name = "ikea";
+        p.path = "ikea";
+        p.page = 1;
+        his.Add(p);
+
+
+        History toSave = new History
+        {
+            history = his
+        };
+
+        string json = JsonUtility.ToJson(toSave);
+
+        byte[] historyByteArray = System.Text.Encoding.UTF8.GetBytes(json);
+        File.WriteAllBytes("./History.txt", historyByteArray);
     }
 
     private async void ReadHistortyFromFile()
@@ -86,8 +107,25 @@ public class HistoryManager : MonoBehaviour
         Windows.Storage.StorageFile historyFile = await storageFolder.GetFileAsync("History.txt");
         history = await Windows.Storage.FileIO.ReadTextAsync(historyFile);
 #endif
-        history = System.Text.Encoding.UTF8.GetString(File.ReadAllBytes("./History.txt"));
-        Debug.Log(history);
+        
+        string jsonHistory = System.Text.Encoding.UTF8.GetString(File.ReadAllBytes("./History.txt"));
+        History h = JsonUtility.FromJson<History>(jsonHistory);
+        his = h.history;
+
+        //Pdf[] tmp = Pdf.CreateFromJSON(jsonHistory);
+        //if(tmp.Length != 0)
+        //{
+        //    history = new List<Pdf>(tmp)
+        //    {
+        //        Capacity = maxNew
+        //    };
+        //}
+        //else
+        //{
+        //    history = new List<Pdf>(maxNew);
+        //}
+
+        //Debug.Log(history);
     }
 
     private IEnumerator UpdateCollection()
@@ -116,7 +154,7 @@ public class HistoryManager : MonoBehaviour
         }
         else
         {
-            
+
             scroll.gameObject.SetActive(true);
             if (grid.childCount < maxNew)
             {
@@ -145,21 +183,24 @@ public class HistoryManager : MonoBehaviour
         Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
 
-        //buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-        //buttonPrefab.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
-        //buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = history;
-        GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-        gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-        
-        gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
+        foreach (Pdf pdf in his)
+        {
+            //buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
+            //buttonPrefab.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
+            //buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = history;
+            GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
+            gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
+            gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
 
-        // DA MODIFICARE, NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
-        gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = history;
-        gameObjectButton.name = history;
+            // NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
+            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name;
+            gameObjectButton.name = pdf.name;
 
-        gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(history)));
-        gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView("", 1));
-        gameObjectButton.SetActive(true);
+            //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(pdf.name)));
+            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView(pdf._id, pdf.page));
+            
+            gameObjectButton.SetActive(true);
+        }
 
         //Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
 
@@ -170,17 +211,17 @@ public class HistoryManager : MonoBehaviour
         //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
-    public IEnumerator CallUpdateHistory(string newPdf)
+    public IEnumerator CallUpdateHistory(string id, string name, int page)
     {
-        UpdateHistory(newPdf);
+        UpdateHistory(id, name, page);
         if (this.gameObject.activeSelf == true)
         {
             yield return StartCoroutine(UpdateCollection());
         }
-        
+
     }
 
-    private void UpdateHistory(string newPdf)
+    private void UpdateHistory(string id, string name, int page)
     {
         Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
@@ -189,10 +230,12 @@ public class HistoryManager : MonoBehaviour
         int i = 0;
         while (!found && i < grid.childCount)
         {
-            if (!found && string.Equals(grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText, newPdf))
+            if (!found && string.Equals(grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText, name))
             {
                 if (i != 2)
                 {
+                    grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
+                    grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView(id, page));
                     grid.GetChild(i).SetAsLastSibling();
                 }
 
@@ -205,32 +248,85 @@ public class HistoryManager : MonoBehaviour
 
         if (!found)
         {
-            if (grid.childCount == 3)
+            if (grid.childCount == maxNew)
             {
-                Destroy(grid.GetChild(0));
+                Destroy(grid.GetChild(0).gameObject);
             }
 
 
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
             gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
 
-            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = newPdf;
+            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = name;
+            gameObjectButton.name = name;
 
-            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(newPdf)));
-            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView("", 1));
-            
+            //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(id, name, page)));
+            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfView(id, page));
 
-            gameObjectButton.name = history;
             gameObjectButton.SetActive(true);
 
 
             // DA INSERIRE ANCHE IL COLLEGAMENTO ALLA SCHERMATA SUCCESSIVA
         }
 
-        
+
         //yield return new WaitForEndOfFrame();
         //grid.GetComponent<GridObjectCollection>().UpdateCollection();
         //yield return new WaitForEndOfFrame();
         //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
+    }
+
+    public void ResetHistory()
+    {
+        StartCoroutine(ClearAndUpdateHistory());
+    }
+
+    private IEnumerator ClearAndUpdateHistory()
+    {
+        ClearHistory();
+        
+        if (this.gameObject.activeSelf == true)
+        {
+            yield return StartCoroutine(UpdateCollection());
+            menu.GetComponent<MenuManager>().OnHistoryUpdated();
+        }
+    }
+
+    private void ClearHistory()
+    {
+        Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
+        Transform grid = scroll.Find("Container").Find("GridObjectCollection");
+
+        foreach (Transform child in grid)
+        {
+            Destroy(child.gameObject);
+        }
+
+        his.Clear();
+    }
+
+    [Serializable]
+    public class History
+    {
+        public List<Pdf> history;
+    }
+
+    [Serializable]
+    public class Pdf
+    {
+        public string _id;
+        public string name;
+        public string path;
+        public int page;
+
+        //public static Pdf[] CreateFromJSON(string jsonString)
+        //{
+        //    return JsonUtility.FromJson<Pdf[]>(jsonString);
+        //}
+
+        //public static string HistoryToJSON(Pdf history)
+        //{
+        //    return JsonUtility.ToJson(history);
+        //}
     }
 }
