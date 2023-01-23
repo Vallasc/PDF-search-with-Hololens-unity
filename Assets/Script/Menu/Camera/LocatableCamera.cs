@@ -53,8 +53,9 @@ public class LocatableCamera : MonoBehaviour
     [SerializeField]
     private GameObject keys = null;
 
+    public string serverIp;
+    private int serverPort = 8574;
     private string urlOcr = "https://127.0.0.1:8574/upload";
-    private string urlKeyword = "https://127.0.0.1:8573/pdfs";
 
     private PhotoCapture photoCaptureObject = null;
     private Resolution cameraResolution = default(Resolution);
@@ -100,6 +101,11 @@ public class LocatableCamera : MonoBehaviour
                 TakePhoto();
             }
         }
+    }
+    public void SetServerIp(string serverIp)
+    {
+        this.serverIp = serverIp;
+        urlOcr = "https://" + serverIp + ":" + serverPort.ToString() + "/upload";
     }
 
     public void UpdateMode()
@@ -210,29 +216,6 @@ public class LocatableCamera : MonoBehaviour
         }
     }
 
-    //public IEnumerator GetPdfs(string keyword)
-    //{
-    //    Debug.Log("GET pdf list");
-
-    //    using UnityWebRequest uwr = UnityWebRequest.Get(urlKeyword + "?keyword=" + keyword);
-    //    uwr.certificateHandler = new BypassCertificate();
-    //    yield return uwr.SendWebRequest();
-
-    //    Debug.Log("FINE GET");
-    //    if (uwr.result != UnityWebRequest.Result.Success)
-    //    {
-    //        Debug.Log("ERRORE GET");
-    //        Debug.Log(uwr.error);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("RICHIESTA GET ESEGUITA!");
-    //        var serverResponse = uwr.downloadHandler.text;
-
-    //        Debug.Log(serverResponse);
-    //    }
-    //}
-
     private void OnPhotoCaptured(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
     {
         string textureString = null;
@@ -261,41 +244,7 @@ public class LocatableCamera : MonoBehaviour
             //Texture2D tex = new Texture2D(500, 700);
             //tex.LoadImage(Bytes);
 
-            
-
-            //Debug.Log(photoCaptureFrame.hasLocationData);
-            //if (photoCaptureFrame.hasLocationData)
-            //{
-
-            //photoCaptureFrame.TryGetCameraToWorldMatrix(out Matrix4x4 cameraToWorldMatrix);
-
-            //Vector3 position = cameraToWorldMatrix.GetColumn(3) - cameraToWorldMatrix.GetColumn(2);
-            //Quaternion rotation = Quaternion.LookRotation(-cameraToWorldMatrix.GetColumn(2), cameraToWorldMatrix.GetColumn(1));
-
-            //photoCaptureFrame.TryGetProjectionMatrix(Camera.main.nearClipPlane, Camera.main.farClipPlane, out Matrix4x4 projectionMatrix);
-
-            //targetTexture.wrapMode = TextureWrapMode.Clamp;
-
-
-            //quadRenderer.sharedMaterial.SetMatrix("_WorldToCameraMatrix", cameraToWorldMatrix.inverse);
-            //quadRenderer.sharedMaterial.SetMatrix("_CameraProjectionMatrix", projectionMatrix);
-
-            //quad.transform.position = position;
-            //quad.transform.rotation = rotation;
-
-            //if (text != null)
-            //{
-            //    text.text += $"\nPosition: ({position.x}, {position.y}, {position.z})";
-            //    text.text += $"\nRotation: ({rotation.x}, {rotation.y}, {rotation.z}, {rotation.w})";
-            //}
-            //}
-            //else
-            //{
-            //    if (text != null)
-            //    {
-            //        text.text += "\nNo location data :(";
-            //    }
-            //}
+           
         }
         else
         {

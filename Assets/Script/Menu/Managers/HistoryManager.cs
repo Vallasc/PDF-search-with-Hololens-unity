@@ -102,12 +102,13 @@ public class HistoryManager : MonoBehaviour
 
     private async void ReadHistortyFromFile()
     {
+        /*
 #if ENABLE_WINMD_SUPPORT
         Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
         Windows.Storage.StorageFile historyFile = await storageFolder.GetFileAsync("History.txt");
         history = await Windows.Storage.FileIO.ReadTextAsync(historyFile);
 #endif
-        
+        */
         string jsonHistory = System.Text.Encoding.UTF8.GetString(File.ReadAllBytes("./History.txt"));
         History h = JsonUtility.FromJson<History>(jsonHistory);
         his = h.history;

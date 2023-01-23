@@ -8,6 +8,7 @@ public class ServerIpManager : MonoBehaviour
     public GameObject pdfSearchObject = null;
     public GameObject pdfViewObject = null;
     public GameObject inputField = null;
+    public GameObject CameraCapture = null;
 
     void Start() {}
 
@@ -20,6 +21,8 @@ public class ServerIpManager : MonoBehaviour
         pdfSearchObject.GetComponent<FetchPdfs>().SetServerIp(ipText);
         StartCoroutine(runDelayed());
         pdfViewObject.GetComponent<PdfManager>().SetServerIp(ipText);
+
+        CameraCapture.GetComponent<LocatableCamera>().SetServerIp(ipText);
     }
 
     private IEnumerator runDelayed()
