@@ -19,12 +19,23 @@ public class PdfManager : MonoBehaviour
     private string baseUrl;
     private Pdf pdf = null;
 
+
+    [SerializeField]
+    private GameObject menuHistory;
+
     void Start()
     {
         //SetServerIp("127.0.0.1"); // TODO REMOVE
 
         StartCoroutine(GetPdf(pdfId));
         StartCoroutine(GetPage(pdfId, currentPageNumber));
+
+        StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, currentPageNumber));
+    }
+
+    void OnDestroy()
+    {
+        StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, currentPageNumber));
     }
 
     void Update() {}
@@ -110,6 +121,9 @@ public class PdfManager : MonoBehaviour
             {
                 SetPageCounter(pageNumber + 1, totalPages);
                 this.GetComponent<SliderManager>().SlideToPage(currentPageNumber, totalPages);
+
+                // VEDERE SE I VALORI SONO CORRETTI
+                StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
             }
         }
         else
