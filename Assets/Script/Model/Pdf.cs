@@ -12,6 +12,8 @@ public class Pdf
     public string thumbnail;
     public int thumbnailWidth = 0;
     public int thumbnailHeight = 0;
+    public bool isFav = false;
+    public int numVisit = 0;
 
     public static Pdf CreateFromJSON(string jsonString)
     {

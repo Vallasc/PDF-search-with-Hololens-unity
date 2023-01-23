@@ -33,6 +33,10 @@ public class FetchPdfs : MonoBehaviour
     private PdfsResponse pdfRes;
     private List<VisiblePdf> visiblePdfs = new List<VisiblePdf>();
 
+    private bool orderMostViewed;
+    private bool onlyFavourites;
+    private bool orderMoreOccurencies;
+
     void Start()
     {
         //SetServerIp("127.0.0.1"); //TODO REMOVE
@@ -188,6 +192,13 @@ public class FetchPdfs : MonoBehaviour
             itemInstance.GetComponentInChildren<TextMeshPro>().text = pdf.name;
             itemInstance.SetActive(true);
 
+            GameObject favButton = itemInstance.transform.Find("FavButton").gameObject;
+            favButton.SetActive(true);
+            FavButtonManager favButtonManager = favButton.GetComponent<FavButtonManager>();
+            favButtonManager.serverIp = serverIp;
+            favButtonManager.pdfId = pdf._id;
+            favButtonManager.selected = pdf.isFav;
+
             GameObject selected = itemInstance.transform.Find("Selected").gameObject;
             selected.GetComponent<MeshRenderer>().enabled = false;
 
@@ -226,6 +237,9 @@ public class FetchPdfs : MonoBehaviour
             itemInstance.name = pdf.name + "_" + page.number.ToString();
             itemInstance.GetComponentInChildren<TextMeshPro>().text = "Page " + page.number.ToString();
             itemInstance.SetActive(true);
+
+            GameObject favButton = itemInstance.transform.Find("FavButton").gameObject;
+            favButton.SetActive(false);
 
             GameObject selected = itemInstance.transform.Find("Selected").gameObject;
             selected.GetComponent<MeshRenderer>().enabled = false;
