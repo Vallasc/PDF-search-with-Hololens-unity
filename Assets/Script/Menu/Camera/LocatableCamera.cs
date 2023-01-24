@@ -64,8 +64,7 @@ public class LocatableCamera : MonoBehaviour
 
     private float nextActionTime = 0.0f;
     private readonly float period = 6f;
-
-    private bool stopped = true;
+    private bool stopped = false;
 
 
     private void Start()
@@ -273,6 +272,7 @@ public class LocatableCamera : MonoBehaviour
         photoCaptureObject.Dispose();
         photoCaptureObject = null;
     }
+
     private void OnDestroy()
     {
         Debug.Log("DISTRUZIONE");

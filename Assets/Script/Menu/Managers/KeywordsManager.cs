@@ -80,6 +80,7 @@ public class KeywordsManager : MonoBehaviour
         
     }
 
+    // SETTARE IL TEXT QUANDO NON CI SONO OBJECT NELLA GRID
     private IEnumerator UpdateCollection()
     {
         Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
@@ -96,6 +97,7 @@ public class KeywordsManager : MonoBehaviour
         if (grid.childCount == 0)
         {
             scroll.gameObject.SetActive(false);
+            menuKeys.transform.Find("Keywords").Find("NoObjectText").gameObject.SetActive(true);
         }
         else
         {

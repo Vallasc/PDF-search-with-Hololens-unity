@@ -155,7 +155,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.Unibo.PDF-Search-Hololens
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -641,6 +642,7 @@ PlayerSettings:
   platformCapabilities:
     WindowsStoreApps:
       GazeInput: True
+      InternetClientServer: True
       SpatialPerception: True
       InternetClient: True
       WebCam: True

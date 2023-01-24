@@ -142,7 +142,7 @@ public class MenuManager : MonoBehaviour
         //return sizeX;
     }
 
-
+    // CONTROLLARE QUALI SONO GLI OBJECT ATTIVI E CALCOLARE SIZE E CENTER
     private float[] UpdateMenuHistory()
     {
         //Transform quad = backplateHistory.transform.Find("Quad");
@@ -153,23 +153,26 @@ public class MenuManager : MonoBehaviour
         if (rec.activeSelf)
         {
             float collectionHeight;
-            Debug.Log("childNew: " + grid.childCount);
-            if (grid.childCount >= maxNew)
+            if (grid.childCount > 0)
             {
-                collectionHeight = maxNew * buttonWidth;
+                if (grid.childCount >= maxNew)
+                {
+                    collectionHeight = maxNew * buttonWidth;
+                }
+                else
+                {
+                    collectionHeight = grid.childCount * buttonWidth;
+                }
             }
             else
             {
-                collectionHeight = grid.childCount * buttonWidth;
+                collectionHeight = padding + 0.01f;
             }
 
 
             float quadScaleY = padding + textHight + padding;
             Debug.Log("QUAD Y: " + quadScaleY);
-            if (grid.childCount > 0)
-            {
-                quadScaleY += collectionHeight + padding;
-            }
+            quadScaleY += collectionHeight + padding;
 
 
             quad.localScale = new Vector3(quad.localScale.x, quadScaleY, quad.localScale.z);
@@ -189,7 +192,7 @@ public class MenuManager : MonoBehaviour
         return xy;
     }
 
-
+    // CONTROLLARE QUALI SONO GLI OBJECT ATTIVI E CALCOLARE SIZE E CENTER
     private float[] UpdateMenuPdfs()
     {
         //Transform quad = backplatePdfs.transform.Find("Quad");
@@ -201,22 +204,27 @@ public class MenuManager : MonoBehaviour
         if (pdfs.activeSelf)
         {
             float collectionHeight;
-            if (grid.childCount >= maxPdfs)
+            if (grid.childCount > 0)
             {
-                collectionHeight = maxPdfs * buttonWidth;
+                if (grid.childCount >= maxPdfs)
+                {
+                    collectionHeight = maxPdfs * buttonWidth;
+                }
+                else
+                {
+                    collectionHeight = grid.childCount * buttonWidth;
+                }
             }
             else
             {
-                collectionHeight = grid.childCount * buttonWidth;
+                collectionHeight = padding + 0.01f;
             }
 
 
             float quadScaleY = padding + textHight + padding;
             Debug.Log("childKeys: " + grid.childCount);
-            if (grid.childCount > 0)
-            {
-                quadScaleY += collectionHeight + padding;
-            }
+
+            quadScaleY += collectionHeight + padding;
 
 
             quad.localScale = new Vector3(quad.localScale.x, quadScaleY, quad.localScale.z);

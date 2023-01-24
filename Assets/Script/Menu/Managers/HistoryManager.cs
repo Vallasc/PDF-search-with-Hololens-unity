@@ -74,7 +74,7 @@ public class HistoryManager : MonoBehaviour
 
     private async void SaveHistoryToFile2()
     {
-#if ENABLE_WINMD_SUPPORT
+#if WINDOWS_UWP
         Debug.Log("creato");
         // Create sample file; replace if exists.
         Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -103,7 +103,7 @@ public class HistoryManager : MonoBehaviour
     private async void ReadHistortyFromFile()
     {
         /*
-#if ENABLE_WINMD_SUPPORT
+#if WINDOWS_UWP
         Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
         Windows.Storage.StorageFile historyFile = await storageFolder.GetFileAsync("History.txt");
         history = await Windows.Storage.FileIO.ReadTextAsync(historyFile);
@@ -129,6 +129,7 @@ public class HistoryManager : MonoBehaviour
         //Debug.Log(history);
     }
 
+    // SETTARE IL TEXT QUANDO NON CI SONO OBJECT NELLA GRID
     private IEnumerator UpdateCollection()
     {
         Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
@@ -152,6 +153,7 @@ public class HistoryManager : MonoBehaviour
         if (grid.childCount == 0)
         {
             scroll.gameObject.SetActive(false);
+            menuNew.transform.Find("History").Find("NoObjectText").gameObject.SetActive(true);
         }
         else
         {
