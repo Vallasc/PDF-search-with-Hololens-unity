@@ -45,7 +45,7 @@ public class HistoryManager : MonoBehaviour
     IEnumerator OnStartHistory()
     {
         his = new List<Pdf>();
-        ReadHistortyFromFile();
+        //ReadHistortyFromFile();
         PopulateHistory();
         yield return StartCoroutine(UpdateCollection());
 

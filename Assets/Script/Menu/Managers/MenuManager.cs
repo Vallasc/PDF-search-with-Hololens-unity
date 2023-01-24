@@ -40,7 +40,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private float offsetX = 0.02f;
     [SerializeField]
-    private float margin = 0.05f;
+    private float margin = 0.03f;
     [SerializeField]
     private float appBarOffset = 0.032f;
 
@@ -48,13 +48,30 @@ public class MenuManager : MonoBehaviour
     private int maxFav = 3;
     private int maxPdfs = 5;
 
+    private Vector3 oldSize;
+    private Vector3 oldCenter;
 
+    private Transform quad;
 
     void Start()
     {
-        float x = UpdateMenu();
         Transform appBar = menu.transform.Find("AppBarVertical");
-        appBar.localPosition = new Vector3(x + appBarOffset + margin, appBar.localPosition.y, appBar.localPosition.z);
+        quad = menu.transform.Find("AppBarVertical").Find("BackgroundBar").Find("Quad");
+
+        UpdateMenu();
+        //appBar.localPosition = new Vector3(x + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
+    }
+
+    void OnDisable()
+    {
+        oldSize = this.GetComponent<BoxCollider>().size;
+        oldCenter = this.GetComponent<BoxCollider>().center;
+    }
+
+    void OnEnable()
+    {
+        this.GetComponent<BoxCollider>().size = oldSize;
+        this.GetComponent<BoxCollider>().center = oldCenter;
     }
 
     public void OnHistoryPressed()
@@ -72,7 +89,26 @@ public class MenuManager : MonoBehaviour
         UpdateMenu();
     }
 
-    private float UpdateMenu()
+    private void UpdateAppBar(float sizeX, float sizeY, float centerX, float centerY)
+    {
+        Transform appBar = menu.transform.Find("AppBarVertical");
+        Transform back = appBar.Find("BackgroundBar");
+        Transform quad = back.Find("Quad");
+
+        //appBar.localPosition = new Vector3(sizeX + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
+
+        
+        if (back.localScale.y > sizeY)
+        {
+            sizeY = back.localScale.y;
+        }
+
+        BoxCollider boxMenu = menu.GetComponent<BoxCollider>();
+        boxMenu.size = new Vector3(sizeX + appBarOffset + (quad.localScale.x / 2) + margin, sizeY + margin, boxMenu.size.z);
+        boxMenu.center = new Vector3(centerX + ((appBarOffset + (quad.localScale.x / 2)) / 2), (sizeY / 2) * -1, boxMenu.center.z);
+    }
+
+    private void UpdateMenu()
     {
         //Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         //Transform grid = scroll.Find("Container").Find("GridObjectCollection");
@@ -97,12 +133,13 @@ public class MenuManager : MonoBehaviour
         }
         centerX += (sizeX / 2);
 
+        UpdateAppBar(sizeX, sizeY, centerX, (sizeY / 2) * -1);
 
-        BoxCollider boxMenu = menu.GetComponent<BoxCollider>();
-        boxMenu.size = new Vector3(sizeX + margin, sizeY + margin, boxMenu.size.z);
-        boxMenu.center = new Vector3(centerX, (sizeY / 2) * -1, boxMenu.center.z);
+        //BoxCollider boxMenu = menu.GetComponent<BoxCollider>();
+        //boxMenu.size = new Vector3(sizeX + margin, sizeY + margin, boxMenu.size.z);
+        //boxMenu.center = new Vector3(centerX, (sizeY / 2) * -1, boxMenu.center.z);
 
-        return sizeX;
+        //return sizeX;
     }
 
 
@@ -128,6 +165,7 @@ public class MenuManager : MonoBehaviour
 
 
             float quadScaleY = padding + textHight + padding;
+            Debug.Log("QUAD Y: " + quadScaleY);
             if (grid.childCount > 0)
             {
                 quadScaleY += collectionHeight + padding;

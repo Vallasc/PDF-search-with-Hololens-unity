@@ -36,6 +36,17 @@ public class InterfaceManager : MonoBehaviour
         pdfSearch.SetActive(true);
     }
 
+    public void SetActiveMenu()
+    {
+        SwitchInterfaceToMenu();
+    }
+
+    private void SwitchInterfaceToMenu()
+    {
+        menu.SetActive(true);
+        pdfSearch.SetActive(false);
+    }
+
     public void SetActivePdfView(string pdfId, int pageNumber)
     {
         SwitchInterfaceToPdfView(pdfId, pageNumber);

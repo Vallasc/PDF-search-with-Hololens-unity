@@ -99,7 +99,7 @@ public class HideManager : MonoBehaviour
 
         for (int c = 0; c < grid.childCount; c++)
         {
-            if (c == i || c == i + 3)
+            if (c == i || c > 4)
             {
                 grid.GetChild(c).gameObject.SetActive(false);
             }

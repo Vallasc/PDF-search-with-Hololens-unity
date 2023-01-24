@@ -114,11 +114,11 @@ public class LocatableCamera : MonoBehaviour
 
         if (stopped)
         {
-            buttonPhoto.GetComponent<ButtonConfigHelper>().MainLabelText = "START";
+            buttonPhoto.GetComponent<ButtonConfigHelper>().MainLabelText = "Off";
         }
         else
         {
-            buttonPhoto.GetComponent<ButtonConfigHelper>().MainLabelText = "STOP";
+            buttonPhoto.GetComponent<ButtonConfigHelper>().MainLabelText = "On";
         }
     }
 
@@ -232,7 +232,7 @@ public class LocatableCamera : MonoBehaviour
 
             numPhotos++;
             
-            File.WriteAllBytes("./img.png", targetTexture.EncodeToPNG());
+            //File.WriteAllBytes("./img.png", targetTexture.EncodeToPNG());
             textureString = Convert.ToBase64String(targetTexture.EncodeToPNG());
 
             Debug.Log(textureString);
