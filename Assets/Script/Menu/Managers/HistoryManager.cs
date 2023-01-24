@@ -194,7 +194,7 @@ public class HistoryManager : MonoBehaviour
             gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
 
             // NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
-            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name;
+            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name + " - p. " + pdf.page;
             gameObjectButton.name = pdf.name;
 
             //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(pdf.name)));
@@ -258,7 +258,7 @@ public class HistoryManager : MonoBehaviour
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
             gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
 
-            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = name;
+            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = name + " - p. " + page;
             gameObjectButton.name = name;
 
             //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(id, name, page)));
