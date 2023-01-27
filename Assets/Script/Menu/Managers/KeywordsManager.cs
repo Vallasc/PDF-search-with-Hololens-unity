@@ -101,6 +101,7 @@ public class KeywordsManager : MonoBehaviour
         }
         else
         {
+            menuKeys.transform.Find("Keywords").Find("NoObjectText").gameObject.SetActive(false);
             scroll.gameObject.SetActive(true);
             if (grid.childCount < maxPdfs)
             {

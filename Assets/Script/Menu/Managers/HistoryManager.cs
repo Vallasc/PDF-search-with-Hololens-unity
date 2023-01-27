@@ -157,7 +157,7 @@ public class HistoryManager : MonoBehaviour
         }
         else
         {
-
+            menuNew.transform.Find("History").Find("NoObjectText").gameObject.SetActive(false);
             scroll.gameObject.SetActive(true);
             if (grid.childCount < maxNew)
             {
