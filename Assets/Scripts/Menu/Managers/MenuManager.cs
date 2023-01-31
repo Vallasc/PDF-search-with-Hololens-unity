@@ -123,9 +123,10 @@ public class MenuManager : MonoBehaviour
             sizeY = back.localScale.y;
         }
 
+
         BoxCollider boxMenu = menu.GetComponent<BoxCollider>();
         boxMenu.size = new Vector3(sizeX + appBarOffset + (quad.localScale.x / 2) + margin, sizeY + margin, boxMenu.size.z);
-        boxMenu.center = new Vector3(centerX + ((appBarOffset + (quad.localScale.x / 2)) / 2), (sizeY / 2) * -1, boxMenu.center.z);
+        boxMenu.center = new Vector3(centerX + ((appBarOffset + (quad.localScale.x / 2)) / 2), (sizeY / 2) * -1, -0.01f); //boxMenu.center.z
     }
 
     private void UpdateMenu()
