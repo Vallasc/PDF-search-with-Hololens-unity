@@ -13212,6 +13212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pdfSearchObject: {fileID: 987238327}
   pdfViewObject: {fileID: 1745725441}
+  menuObject: {fileID: 1856216204}
   inputField: {fileID: 1772153723}
   CameraCapture: {fileID: 1025789218}
 --- !u!1 &219857362
@@ -53635,7 +53636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &987238328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53657,6 +53658,9 @@ MonoBehaviour:
   imageButton: {fileID: 1602789586}
   cellWidth: 0.18
   serverIp: 
+  onlyFavourites: 0
+  orderMostViewed: 0
+  orderMoreOccurencies: 0
 --- !u!4 &987238329
 Transform:
   m_ObjectHideFlags: 0
@@ -63569,6 +63573,7 @@ MonoBehaviour:
   favouritesToggle: {fileID: 1430407544}
   moreOccToggle: {fileID: 1903669351}
   mostViewedToggle: {fileID: 1702253592}
+  pdfSearchView: {fileID: 987238327}
 --- !u!1 &1187756054
 GameObject:
   m_ObjectHideFlags: 0
@@ -90074,7 +90079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1745725442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95076,7 +95081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1856216205
 MonoBehaviour:
   m_ObjectHideFlags: 0

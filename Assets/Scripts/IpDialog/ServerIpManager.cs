@@ -7,6 +7,7 @@ public class ServerIpManager : MonoBehaviour
 {
     public GameObject pdfSearchObject = null;
     public GameObject pdfViewObject = null;
+    public GameObject menuObject = null;
     public GameObject inputField = null;
     public GameObject CameraCapture = null;
 
@@ -24,6 +25,7 @@ public class ServerIpManager : MonoBehaviour
         //StartCoroutine(runDelayed());
         CameraCapture.GetComponent<CameraManager>().serverIp = ipText;
         CameraCapture.GetComponent<CameraManager>().UpdateBaseUrl();
+        menuObject.SetActive(true);
         transform.gameObject.SetActive(false);
     }
 

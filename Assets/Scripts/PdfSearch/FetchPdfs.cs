@@ -26,27 +26,27 @@ public class FetchPdfs : MonoBehaviour
     private GridObjectCollection firstGridObjectCollection;
     private GridObjectCollection secondGridObjectCollection;
 
-    public string serverIp;
+    public string serverIp = "127.0.0.1";
     private int serverPort = 8573;
     private string baseUrl;
 
     private PdfsResponse pdfRes;
     private List<VisiblePdf> visiblePdfs = new List<VisiblePdf>();
 
-    private bool orderMostViewed;
-    private bool onlyFavourites;
-    private bool orderMoreOccurencies;
+    public bool onlyFavourites = false;
+    public bool orderMostViewed = false;
+    public bool orderMoreOccurencies = false;
+
 
     void Start()
     {
-        //SetServerIp("127.0.0.1"); //TODO REMOVE
+        // updateUrl(); Needs to be called outside
 
         firstScrollView.CellWidth = cellWidth;
         firstGridObjectCollection = firstScrollView.GetComponentInChildren<GridObjectCollection>();
         secondScrollView.CellWidth = cellWidth;
         secondGridObjectCollection = secondScrollView.GetComponentInChildren<GridObjectCollection>();
         PagesObject.SetActive(false);
-
         //StartCoroutine(GetPdfs(""));
     }
 
@@ -56,9 +56,9 @@ public class FetchPdfs : MonoBehaviour
     public IEnumerator GetPdfs(string searchKey)
     {
         Debug.Log("Get pdfs");
-        string newUrl = baseUrl;
+        string newUrl = baseUrl + "?favFilter=" + onlyFavourites.ToString() + "&mostViewed=" + orderMostViewed.ToString() + "&moreOcc=" + orderMoreOccurencies.ToString();
         if (!searchKey.Equals(""))
-            newUrl = baseUrl + "?keyword=" + searchKey;
+            newUrl = newUrl + "&keyword=" + searchKey;
         Debug.Log(baseUrl);
         PagesObject.SetActive(false);
 
@@ -100,7 +100,6 @@ public class FetchPdfs : MonoBehaviour
         inputField.GetComponent<TMP_InputField>().text = text;
         ClearFirstGrid();
         ClearSecondGrid();
-        Debug.Log("CHAIAMTo");
         StartCoroutine(GetPdfs(text));
     }
 
