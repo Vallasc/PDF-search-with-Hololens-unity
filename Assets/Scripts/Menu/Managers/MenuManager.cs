@@ -36,6 +36,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private float padding = 0.01f;
     [SerializeField]
+    private float paddingFinal = 0.02f;
+    [SerializeField]
     private float offsetY = -0.02f;
     [SerializeField]
     private float offsetX = 0.02f;
@@ -45,6 +47,8 @@ public class MenuManager : MonoBehaviour
     private float appBarOffset = 0.032f;
     [SerializeField]
     private float offsetFromTitle = 0.01f;
+    [SerializeField]
+    private float offsetBoxCollider = 0.01f;
 
 
     private int maxNew = 3;
@@ -64,7 +68,7 @@ public class MenuManager : MonoBehaviour
         UpdateMenu();
         //appBar.localPosition = new Vector3(x + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
         Vector3 center = menu.transform.GetComponent<BoxCollider>().center;
-        menu.transform.GetComponent<BoxCollider>().center = new Vector3(center.x, center.y, 0.01f);
+        menu.transform.GetComponent<BoxCollider>().center = new Vector3(center.x, center.y, offsetBoxCollider);
     }
 
     void OnDisable()
@@ -200,7 +204,7 @@ public class MenuManager : MonoBehaviour
             float quadScaleY = padding + textHight + padding;
             if (collectionHeight != 0)
             {
-                quadScaleY += offsetFromTitle + collectionHeight + padding;
+                quadScaleY += offsetFromTitle + collectionHeight + paddingFinal;
             }
 
 
@@ -263,7 +267,7 @@ public class MenuManager : MonoBehaviour
             float quadScaleY = padding + textHight + padding;
             if (collectionHeight != 0)
             {
-                quadScaleY += offsetFromTitle + collectionHeight + padding;
+                quadScaleY += offsetFromTitle + collectionHeight + paddingFinal;
             }
 
             quad.localScale = new Vector3(quad.localScale.x, quadScaleY, quad.localScale.z);
