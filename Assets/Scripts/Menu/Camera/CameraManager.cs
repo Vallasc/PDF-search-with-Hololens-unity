@@ -50,6 +50,7 @@ public class CameraManager : MonoBehaviour
 
     public void TakePicture()
     {
+        keysListObject.GetComponent<KeywordsManager>().SetFirstPhotoTaken();
         warningBox.SetActive(true);
         StartCoroutine(TakePictureDelayed());
 

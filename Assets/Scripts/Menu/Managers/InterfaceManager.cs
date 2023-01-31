@@ -9,6 +9,7 @@ public class InterfaceManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject menu;
+    [SerializeField]
     public GameObject pdfSearch;
     [SerializeField]
     private GameObject pdfView;
@@ -22,7 +23,11 @@ public class InterfaceManager : MonoBehaviour
     {
         pdfSearch.SetActive(true);
         yield return new WaitForEndOfFrame();
-        pdfSearch.GetComponent<FetchPdfs>().OnSearch(keyword);
+        if (!string.IsNullOrEmpty(keyword))
+        {
+            pdfSearch.GetComponent<FetchPdfs>().OnSearch(keyword);
+        }
+       
         menu.SetActive(false);
     }
 

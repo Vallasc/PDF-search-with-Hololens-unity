@@ -152,10 +152,11 @@ public class HistoryManager : MonoBehaviour
         if (grid.childCount == 0)
         {
             scroll.gameObject.SetActive(false);
+            menuNew.transform.Find("History").Find("NoObjectText").gameObject.SetActive(true);
         }
         else
         {
-
+            menuNew.transform.Find("History").Find("NoObjectText").gameObject.SetActive(false);
             scroll.gameObject.SetActive(true);
             if (grid.childCount < maxNew)
             {
@@ -279,18 +280,22 @@ public class HistoryManager : MonoBehaviour
 
     public void ResetHistory()
     {
-        StartCoroutine(ClearAndUpdateHistory());
+        Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
+        Transform grid = scroll.Find("Container").Find("GridObjectCollection");
+
+        if (grid.childCount > 0)
+        {
+            StartCoroutine(ClearAndUpdateHistory());
+        }
     }
 
     private IEnumerator ClearAndUpdateHistory()
     {
         ClearHistory();
-        
-        if (this.gameObject.activeSelf == true)
-        {
-            yield return StartCoroutine(UpdateCollection());
-            menu.GetComponent<MenuManager>().OnHistoryUpdated();
-        }
+
+        //if (this.gameObject.activeSelf == true)
+        yield return StartCoroutine(UpdateCollection());
+        menu.GetComponent<MenuManager>().OnHistoryUpdated();
     }
 
     private void ClearHistory()

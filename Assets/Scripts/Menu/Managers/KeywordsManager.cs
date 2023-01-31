@@ -44,6 +44,7 @@ public class KeywordsManager : MonoBehaviour
 
     private List<Keyword> keywords = new List<Keyword>();
     private int maxPdfs = 5;
+    private bool firstPhotoTaken = false;
 
 
     public void UpdateKeywordsCollection(string[] response)
@@ -74,8 +75,6 @@ public class KeywordsManager : MonoBehaviour
 
         Debug.Log(Time.realtimeSinceStartup + "UPDATE " + grid.childCount);
         menu.GetComponent<MenuManager>().OnKeywordsUpdated();
-
-        
     }
 
     private IEnumerator UpdateCollection()
@@ -94,13 +93,25 @@ public class KeywordsManager : MonoBehaviour
         if (grid.childCount == 0)
         {
             scroll.gameObject.SetActive(false);
+            if (firstPhotoTaken)
+            {
+                menuKeys.transform.Find("Keywords").Find("TakeFirstPhotoText").gameObject.SetActive(false);
+                menuKeys.transform.Find("Keywords").Find("NoObjectText").gameObject.SetActive(true);
+                
+            }
+            else
+            {
+                menuKeys.transform.Find("Keywords").Find("NoObjectText").gameObject.SetActive(false);
+                menuKeys.transform.Find("Keywords").Find("TakeFirstPhotoText").gameObject.SetActive(true);
+            }
         }
         else
         {
+            menuKeys.transform.Find("Keywords").Find("TakeFirstPhotoText").gameObject.SetActive(false);
+            menuKeys.transform.Find("Keywords").Find("NoObjectText").gameObject.SetActive(false);
             scroll.gameObject.SetActive(true);
             if (grid.childCount < maxPdfs)
             {
-                Debug.Log(Time.realtimeSinceStartup + "C count " + grid.childCount);
                 scroll.GetComponent<ScrollingObjectCollection>().TiersPerPage = grid.childCount;
             }
             else
@@ -229,5 +240,13 @@ public class KeywordsManager : MonoBehaviour
         //grid.GetComponent<GridObjectCollection>().UpdateCollection();
         //yield return new WaitForEndOfFrame();
         //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
+    }
+
+    public void SetFirstPhotoTaken()
+    {
+        if (!firstPhotoTaken)
+        {
+            firstPhotoTaken = true;
+        }
     }
 }

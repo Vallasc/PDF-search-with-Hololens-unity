@@ -43,6 +43,9 @@ public class MenuManager : MonoBehaviour
     private float margin = 0.03f;
     [SerializeField]
     private float appBarOffset = 0.032f;
+    [SerializeField]
+    private float offsetFromTitle = 0.01f;
+
 
     private int maxNew = 3;
     private int maxFav = 3;
@@ -51,12 +54,12 @@ public class MenuManager : MonoBehaviour
     private Vector3 oldSize;
     private Vector3 oldCenter;
 
-    private Transform quad;
+    private bool firstPhotoTaken = false;
 
     void Start()
     {
-        Transform appBar = menu.transform.Find("AppBarVertical");
-        quad = menu.transform.Find("AppBarVertical").Find("BackgroundBar").Find("Quad");
+        //Transform appBar = menu.transform.Find("AppBarVertical");
+        //quad = menu.transform.Find("AppBarVertical").Find("BackgroundBar").Find("Quad");
 
         UpdateMenu();
         //appBar.localPosition = new Vector3(x + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
@@ -76,7 +79,24 @@ public class MenuManager : MonoBehaviour
 
     public void OnHistoryPressed()
     {
-        rec.SetActive(!rec.activeSelf);
+        if (rec.activeSelf)
+        {
+            HideHistory();
+        }
+        else
+        {
+            ShowHistory();
+        }
+    }
+    public void HideHistory()
+    {
+        rec.SetActive(false);
+
+        UpdateMenu();
+    }
+    public void ShowHistory()
+    {
+        rec.SetActive(true);
 
         UpdateMenu();
     }
@@ -97,7 +117,7 @@ public class MenuManager : MonoBehaviour
 
         //appBar.localPosition = new Vector3(sizeX + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
 
-        
+
         if (back.localScale.y > sizeY)
         {
             sizeY = back.localScale.y;
@@ -152,23 +172,33 @@ public class MenuManager : MonoBehaviour
         float[] xy = new float[2];
         if (rec.activeSelf)
         {
-            float collectionHeight;
-            Debug.Log("childNew: " + grid.childCount);
-            if (grid.childCount >= maxNew)
+            float collectionHeight = 0f;
+
+            if (grid.childCount > 0)
             {
-                collectionHeight = maxNew * buttonWidth;
+                if (grid.childCount >= maxNew)
+                {
+                    collectionHeight = maxNew * buttonWidth;
+                }
+                else
+                {
+                    collectionHeight = grid.childCount * buttonWidth;
+                }
             }
             else
             {
-                collectionHeight = grid.childCount * buttonWidth;
+                GameObject obj = menuNew.transform.Find("History").Find("NoObjectText").gameObject;
+                if (obj.activeSelf)
+                {
+                    RectTransform rect = obj.GetComponent<RectTransform>();
+                    collectionHeight = rect.rect.size.y * rect.localScale.y;
+                }
             }
 
-
             float quadScaleY = padding + textHight + padding;
-            Debug.Log("QUAD Y: " + quadScaleY);
-            if (grid.childCount > 0)
+            if (collectionHeight != 0)
             {
-                quadScaleY += collectionHeight + padding;
+                quadScaleY += offsetFromTitle + collectionHeight + padding;
             }
 
 
@@ -176,7 +206,7 @@ public class MenuManager : MonoBehaviour
 
             backplateHistory.transform.localPosition = new Vector3(backplateHistory.transform.localPosition.x, (quadScaleY / 2f) * -1, backplateHistory.transform.localPosition.z);
 
-        
+
             xy[1] = quadScaleY;
         }
         else
@@ -189,7 +219,6 @@ public class MenuManager : MonoBehaviour
         return xy;
     }
 
-
     private float[] UpdateMenuPdfs()
     {
         //Transform quad = backplatePdfs.transform.Find("Quad");
@@ -200,24 +229,40 @@ public class MenuManager : MonoBehaviour
         float[] xy = new float[2];
         if (pdfs.activeSelf)
         {
-            float collectionHeight;
-            if (grid.childCount >= maxPdfs)
+            float collectionHeight = 0f;
+
+            if (grid.childCount > 0)
             {
-                collectionHeight = maxPdfs * buttonWidth;
+                if (grid.childCount >= maxPdfs)
+                {
+                    collectionHeight = maxPdfs * buttonWidth;
+                }
+                else
+                {
+                    collectionHeight = grid.childCount * buttonWidth;
+                }
             }
             else
             {
-                collectionHeight = grid.childCount * buttonWidth;
+                GameObject first = menuKeys.transform.Find("Keywords").Find("TakeFirstPhotoText").gameObject;
+                GameObject obj = menuKeys.transform.Find("Keywords").Find("NoObjectText").gameObject;
+                if (obj.activeSelf)
+                {
+                    RectTransform rect = obj.GetComponent<RectTransform>();
+                    collectionHeight = rect.rect.size.y * rect.localScale.y;
+                }
+                else
+                {
+                    RectTransform rect = first.GetComponent<RectTransform>();
+                    collectionHeight = rect.rect.size.y * rect.localScale.y;
+                }
             }
-
 
             float quadScaleY = padding + textHight + padding;
-            Debug.Log("childKeys: " + grid.childCount);
-            if (grid.childCount > 0)
+            if (collectionHeight != 0)
             {
-                quadScaleY += collectionHeight + padding;
+                quadScaleY += offsetFromTitle + collectionHeight + padding;
             }
-
 
             quad.localScale = new Vector3(quad.localScale.x, quadScaleY, quad.localScale.z);
 
