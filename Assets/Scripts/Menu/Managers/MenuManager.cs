@@ -63,8 +63,6 @@ public class MenuManager : MonoBehaviour
 
         UpdateMenu();
         //appBar.localPosition = new Vector3(x + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
-        Vector3 center = menu.transform.GetComponent<BoxCollider>().center;
-        menu.transform.GetComponent<BoxCollider>().center = new Vector3(center.x, center.y, 0.01f);
     }
 
     void OnDisable()
