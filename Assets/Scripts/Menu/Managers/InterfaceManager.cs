@@ -7,14 +7,11 @@ using Microsoft.MixedReality.Toolkit.UI;
 
 public class InterfaceManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject menu;
-    [SerializeField]
+    public GameObject menu;
     public GameObject pdfSearch;
-    [SerializeField]
-    private GameObject pdfView;
+    public GameObject pdfView;
 
-    public void SetActivePdfSearch(string keyword)
+    public void SwitchToPdfSearch(string keyword)
     {
         StartCoroutine(SwitchInterfaceToPdfSearch(keyword));
     }
@@ -23,39 +20,29 @@ public class InterfaceManager : MonoBehaviour
     {
         pdfSearch.SetActive(true);
         yield return new WaitForEndOfFrame();
-        if (!string.IsNullOrEmpty(keyword))
-        {
-            pdfSearch.GetComponent<FetchPdfs>().OnSearch(keyword);
-        }
+        pdfSearch.GetComponent<FetchPdfs>().OnSearch(keyword);
        
         menu.SetActive(false);
     }
 
-    public void SetActiveMenu()
-    {
-        SwitchInterfaceToMenu();
-    }
-
-    private void SwitchInterfaceToMenu()
+    public void SwitchToMenu()
     {
         menu.SetActive(true);
         pdfSearch.SetActive(false);
     }
 
-    public void SetActivePdfView(string pdfId, int pageNumber)
+    public void OpenNewPdfView(string pdfId, int pageNumber)
     {
-        SwitchInterfaceToPdfView(pdfId, pageNumber);
+        OpenPdfView(pdfId, pageNumber);
     }
 
-    private void SwitchInterfaceToPdfView(string pdfId, int pageNumber)
+    private void OpenPdfView(string pdfId, int pageNumber)
     {
         PdfManager pdfManager = pdfView.GetComponent<PdfManager>();
         pdfManager.pdfId = pdfId;
         pdfManager.currentPageNumber = pageNumber;
 
         GameObject gameObjectPdfView = Instantiate(pdfView);
-
-        menu.SetActive(false);
         gameObjectPdfView.SetActive(true);
     }
 }

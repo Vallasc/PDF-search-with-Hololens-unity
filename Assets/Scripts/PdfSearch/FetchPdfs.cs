@@ -15,8 +15,7 @@ public class FetchPdfs : MonoBehaviour
     public GameObject NotFoundObject = null;
     public GameObject PagesObject = null;
     public GameObject inputField = null;
-    //public GameObject favCollection = null;
-    //public GameObject favButton = null;
+    public GameObject interfaceManagerObject = null;
 
     public ScrollingObjectCollection firstScrollView;
     public ScrollingObjectCollection secondScrollView;
@@ -140,14 +139,8 @@ public class FetchPdfs : MonoBehaviour
     {
         if(pdfViewObject != null)
         {
-            PdfManager pdfObj = pdfViewObject.GetComponent<PdfManager>();
-            pdfObj.pdfId = page.pdfId;
-            pdfObj.currentPageNumber = page.number;
-            pdfObj.serverIp = serverIp;
-            GameObject newPdfObj = Instantiate(pdfViewObject);
-            newPdfObj.SetActive(true);
-            //transform.gameObject.SetActive(false); Uncomment to hide pdf search
-
+            this.interfaceManagerObject.GetComponent<InterfaceManager>().OpenNewPdfView(page.pdfId, page.number);
+            this.interfaceManagerObject.GetComponent<InterfaceManager>().SwitchToMenu();
         } 
         else
         {

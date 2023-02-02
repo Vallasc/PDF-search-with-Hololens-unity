@@ -13,6 +13,7 @@ public class PdfManager : MonoBehaviour
     public GameObject imageObject;
     public GameObject windowTitleObject;
     public GameObject pageCounterObject;
+    public GameObject buttonStar;
 
     public string serverIp;
     private int serverPort = 8573;
@@ -29,8 +30,12 @@ public class PdfManager : MonoBehaviour
         StartCoroutine(GetPdf(pdfId));
         StartCoroutine(GetPage(pdfId, currentPageNumber));
 
+        FavManager favButton = buttonStar.GetComponent<FavManager>();
+        favButton.pdfId = pdfId;
+        favButton.serverIp = serverIp;
         // TODO
         // StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, currentPageNumber));
+
     }
 
     void OnDestroy()
@@ -103,6 +108,7 @@ public class PdfManager : MonoBehaviour
             SetWindowTitle(this.pdf.name);
             SetPageCounter(currentPageNumber, totalPages);
             this.GetComponent<SliderManager>().SlideToPage(currentPageNumber, totalPages);
+            buttonStar.GetComponent<FavManager>().SetFav(this.pdf.isFav);
         }
 
     }
@@ -184,4 +190,5 @@ public class PdfManager : MonoBehaviour
             return true;
         }
     }
+
 }
