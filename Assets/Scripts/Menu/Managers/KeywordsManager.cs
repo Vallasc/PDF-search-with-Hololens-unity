@@ -275,10 +275,10 @@ public class KeywordsManager : MonoBehaviour
     {
         Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
-        Debug.Log(index);
+        Debug.Log(index - 1);
 
         //Debug.Log(grid.GetChild(index).gameObject.name);
-        global.GetComponent<InterfaceManager>().SwitchToPdfSearch(grid.GetChild(index).gameObject.name);
+        global.GetComponent<InterfaceManager>().SwitchToPdfSearch(grid.GetChild(index - 1).gameObject.name);
     }
 
     public void OnKeywordRecognized_Prova(int index)

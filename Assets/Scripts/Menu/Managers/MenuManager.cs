@@ -64,6 +64,8 @@ public class MenuManager : MonoBehaviour
     {
         //Transform appBar = menu.transform.Find("AppBarVertical");
         //quad = menu.transform.Find("AppBarVertical").Find("BackgroundBar").Find("Quad");
+        oldSize = new Vector3(0, 0, 0);
+        oldCenter = new Vector3(0, 0, 0);
 
         UpdateMenu();
         //appBar.localPosition = new Vector3(x + appBarOffset, appBar.localPosition.y, appBar.localPosition.z);
@@ -73,16 +75,22 @@ public class MenuManager : MonoBehaviour
 
     void OnDisable()
     {
-        Debug.Log("disabled");
-        oldSize = this.GetComponent<BoxCollider>().size;
-        oldCenter = this.GetComponent<BoxCollider>().center;
+        if (!oldSize.Equals((0, 0, 0)) && !oldCenter.Equals((0, 0, 0)))
+        {
+            Debug.Log("disabled");
+            oldSize = this.GetComponent<BoxCollider>().size;
+            oldCenter = this.GetComponent<BoxCollider>().center;
+        }
     }
 
     void OnEnable()
     {
-        Debug.Log("enabled");
-        this.GetComponent<BoxCollider>().size = oldSize;
-        this.GetComponent<BoxCollider>().center = oldCenter;
+        if (!((oldSize == new Vector3(0, 0, 0)) && oldCenter == new Vector3(0, 0, 0)))
+        {
+            Debug.Log("enabled");
+            this.GetComponent<BoxCollider>().size = oldSize;
+            this.GetComponent<BoxCollider>().center = oldCenter;
+        }
     }
 
     public void OnHistoryPressed()

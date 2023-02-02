@@ -39328,7 +39328,7 @@ MonoBehaviour:
   OnMomentumStarted:
     m_PersistentCalls:
       m_Calls: []
-  cameraMethods: {fileID: 0}
+  cameraMethods: {fileID: 1909325066}
   scrollContainer: {fileID: 1898757542}
   clippingObject: {fileID: 324326933}
   clipBox: {fileID: 324326936}
