@@ -73,12 +73,14 @@ public class MenuManager : MonoBehaviour
 
     void OnDisable()
     {
+        Debug.Log("disabled");
         oldSize = this.GetComponent<BoxCollider>().size;
         oldCenter = this.GetComponent<BoxCollider>().center;
     }
 
     void OnEnable()
     {
+        Debug.Log("enabled");
         this.GetComponent<BoxCollider>().size = oldSize;
         this.GetComponent<BoxCollider>().center = oldCenter;
     }

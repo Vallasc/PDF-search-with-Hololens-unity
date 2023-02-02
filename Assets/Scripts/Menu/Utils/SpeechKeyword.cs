@@ -94,8 +94,8 @@ public class SpeechKeyword : MonoBehaviour
         }
         
         Debug.Log(index);
-        //this.gameObject.GetComponent<KeywordsManager>().OnKeywordRecognized(index);
-        this.gameObject.GetComponent<KeywordsManager>().OnKeywordRecognized_Prova(index);
+        this.gameObject.GetComponent<KeywordsManager>().OnKeywordRecognized(index);
+        //this.gameObject.GetComponent<KeywordsManager>().OnKeywordRecognized_Prova(index);
     }
 
     //void IMixedRealitySpeechHandler.OnSpeechKeywordRecognized(SpeechEventData eventData)
