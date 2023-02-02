@@ -39110,7 +39110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &695779165
 Transform:
   m_ObjectHideFlags: 0
@@ -43615,7 +43615,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf12ee76e7e00a44a9a84256760020e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeList: []
+  nodeList:
+  - Name: PressableButtonHoloLens2_32x96(Clone) (1)
+    Offset: {x: 0, y: 0}
+    Radius: 0
+    Transform: {fileID: 0}
+    Colliders: []
+  - Name: PressableButtonHoloLens2_32x96(Clone)
+    Offset: {x: 0, y: 0}
+    Radius: 0
+    Transform: {fileID: 0}
+    Colliders: []
   ignoreInactiveTransforms: 1
   sortType: 3
   surfaceType: 1
@@ -43628,7 +43638,7 @@ MonoBehaviour:
   radius: 2
   radialRange: 180
   distance: 0
-  rows: 0
+  rows: 2
   columns: 1
   cellWidth: 0.096
   cellHeight: 0.032
@@ -97074,8 +97084,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.28, y: 0.25, z: 0}
-  m_Center: {x: 0.125, y: -0.11, z: 0.01}
+  m_Size: {x: 0.328, y: 0.158, z: 0}
+  m_Center: {x: 0.149, y: -0.064, z: 0.01}
 --- !u!4 &1856216216
 Transform:
   m_ObjectHideFlags: 0
