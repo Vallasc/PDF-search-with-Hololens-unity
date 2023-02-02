@@ -28,7 +28,7 @@ MonoBehaviour:
     keyCode: 0
     action:
       id: 0
-      description: None
+      description: 
       axisConstraint: 0
   - localizationKey: 
     keyword: Pin
