@@ -31,16 +31,17 @@ public class InterfaceManager : MonoBehaviour
         pdfSearch.SetActive(false);
     }
 
-    public void OpenNewPdfView(string pdfId, int pageNumber)
+    public void OpenNewPdfView(string pdfId, int pageNumber, string keyword = "")
     {
-        OpenPdfView(pdfId, pageNumber);
+        OpenPdfView(pdfId, pageNumber, keyword);
     }
 
-    private void OpenPdfView(string pdfId, int pageNumber)
+    private void OpenPdfView(string pdfId, int pageNumber, string keyword)
     {
         PdfManager pdfManager = pdfView.GetComponent<PdfManager>();
         pdfManager.pdfId = pdfId;
         pdfManager.currentPageNumber = pageNumber;
+        pdfManager.keyword = keyword;
 
         GameObject gameObjectPdfView = Instantiate(pdfView);
         gameObjectPdfView.SetActive(true);
