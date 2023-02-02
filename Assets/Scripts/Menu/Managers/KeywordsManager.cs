@@ -8,6 +8,7 @@ using Microsoft.MixedReality.Toolkit.Utilities.Solvers;
 
 using UnityEngine.Networking;
 using Microsoft.MixedReality.Toolkit.Input;
+using TMPro;
 
 public class KeywordsManager : MonoBehaviour
 {
@@ -37,7 +38,9 @@ public class KeywordsManager : MonoBehaviour
         }
     }
 
-
+    [SerializeField]
+    public GameObject global;
+    [SerializeField]
     public GameObject buttonPrefab;
     [SerializeField]
     private GameObject menu;
@@ -88,6 +91,14 @@ public class KeywordsManager : MonoBehaviour
     {
         Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
+
+        for (int i = (grid.childCount - 1); i >= 0; i--)
+        {
+            int n = grid.childCount - i;
+            grid.GetChild(i).Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = n.ToString();
+            //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = .ToString();
+            //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
+        }
 
         //Debug.Log(Time.realtimeSinceStartup + "PRE YIELD GRID " + grid.childCount);
         //Debug.Log(Time.realtimeSinceStartup + "PRE YIELD SCROLL " + scroll.GetComponent<ScrollingObjectCollection>().TiersPerPage);
@@ -157,11 +168,12 @@ public class KeywordsManager : MonoBehaviour
                 buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
                 //button.GetComponent<Interactable>().OnClick.AddListener(() => keys.GetComponent<NewFavManager>().CallUpdateHistory(k.GetKeyword()));
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-                gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-                gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
+                gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
+                gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
+                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.name = k.GetKeyword();
 
-                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
+                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
                 gameObjectButton.SetActive(true);
 
                 //gameObjectButton.GetComponent<ButtonConfigHelper>().ForceRefresh();
@@ -202,12 +214,14 @@ public class KeywordsManager : MonoBehaviour
             foreach (Keyword k in newKey)
             {
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-                gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-                gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
+                gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
+                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = k.GetKeyword();
+                gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
+                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
                 gameObjectButton.name = k.GetKeyword();
 
-                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
+                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
                 gameObjectButton.SetActive(true);
 
                 //k.SetTimeLeft(10);
@@ -266,7 +280,7 @@ public class KeywordsManager : MonoBehaviour
         //Transform grid = scroll.Find("Container").Find("GridObjectCollection");
 
         //Debug.Log(grid.GetChild(index).gameObject.name);
-        //menu.GetComponent<InterfaceManager>().SetActivePdfSearch(grid.GetChild(index).gameObject.name);
+        //global.GetComponent<InterfaceManager>().SetActivePdfSearch(grid.GetChild(index).gameObject.name);
     }
 
     public void OnKeywordRecognized_Prova(int index)
@@ -279,6 +293,9 @@ public class KeywordsManager : MonoBehaviour
         GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
         gameObjectButton.name = index.ToString();
         gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = index.ToString();
+        //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
+        //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
+        //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
         gameObjectButton.SetActive(true);
 
         StartCoroutine(UpdateCollection());

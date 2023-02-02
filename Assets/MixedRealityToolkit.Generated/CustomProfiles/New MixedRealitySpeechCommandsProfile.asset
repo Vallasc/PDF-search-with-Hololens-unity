@@ -17,14 +17,14 @@ MonoBehaviour:
   recognitionConfidenceLevel: 2
   speechCommands:
   - localizationKey: 
-    keyword: Hide Menu
+    keyword: Hide
     keyCode: 0
     action:
       id: 0
       description: None
       axisConstraint: 0
   - localizationKey: 
-    keyword: Show Menu
+    keyword: Show
     keyCode: 0
     action:
       id: 0
