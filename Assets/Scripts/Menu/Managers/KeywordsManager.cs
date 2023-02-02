@@ -161,7 +161,7 @@ public class KeywordsManager : MonoBehaviour
                 gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.name = k.GetKeyword();
 
-                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfSearch(k.GetKeyword()));
+                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
                 gameObjectButton.SetActive(true);
 
                 //gameObjectButton.GetComponent<ButtonConfigHelper>().ForceRefresh();
@@ -207,7 +207,7 @@ public class KeywordsManager : MonoBehaviour
                 gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
                 gameObjectButton.name = k.GetKeyword();
 
-                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SetActivePdfSearch(k.GetKeyword()));
+                gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
                 gameObjectButton.SetActive(true);
 
                 //k.SetTimeLeft(10);
