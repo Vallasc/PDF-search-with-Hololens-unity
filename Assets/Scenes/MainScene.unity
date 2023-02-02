@@ -64741,6 +64741,7 @@ GameObject:
   - component: {fileID: 1202450335}
   - component: {fileID: 1202450334}
   - component: {fileID: 1202450333}
+  - component: {fileID: 1202450339}
   m_Layer: 0
   m_Name: MenuKeywords
   m_TagString: Untagged
@@ -64955,6 +64956,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1202450339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202450331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acabde1294fd50645b1fb6b0b901df85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keywords: []
 --- !u!1 &1203337019
 GameObject:
   m_ObjectHideFlags: 0
@@ -94871,7 +94885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1856216205
 MonoBehaviour:
   m_ObjectHideFlags: 0

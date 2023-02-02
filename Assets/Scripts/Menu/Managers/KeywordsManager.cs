@@ -7,6 +7,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities.Solvers;
 
 using UnityEngine.Networking;
+using Microsoft.MixedReality.Toolkit.Input;
 
 public class KeywordsManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class KeywordsManager : MonoBehaviour
         }
     }
 
+
     public GameObject buttonPrefab;
     [SerializeField]
     private GameObject menu;
@@ -46,6 +48,10 @@ public class KeywordsManager : MonoBehaviour
     private int maxPdfs = 5;
     private bool firstPhotoTaken = false;
 
+    void Start()
+    {
+        this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(2);
+    }
 
     public void UpdateKeywordsCollection(string[] response)
     {
@@ -73,6 +79,7 @@ public class KeywordsManager : MonoBehaviour
         InsertKeywords(tmp);
         yield return StartCoroutine(UpdateCollection());
 
+        this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(grid.childCount);
         Debug.Log(Time.realtimeSinceStartup + "UPDATE " + grid.childCount);
         menu.GetComponent<MenuManager>().OnKeywordsUpdated();
     }
@@ -248,5 +255,34 @@ public class KeywordsManager : MonoBehaviour
         {
             firstPhotoTaken = true;
         }
+    }
+
+    public void OnKeywordRecognized(int index)
+    {
+        Debug.Log(index);
+        this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(4);
+
+        //Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
+        //Transform grid = scroll.Find("Container").Find("GridObjectCollection");
+
+        //Debug.Log(grid.GetChild(index).gameObject.name);
+        //menu.GetComponent<InterfaceManager>().SetActivePdfSearch(grid.GetChild(index).gameObject.name);
+    }
+
+    public void OnKeywordRecognized_Prova(int index)
+    {
+        Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
+        Transform grid = scroll.Find("Container").Find("GridObjectCollection");
+
+        Debug.Log(index);
+
+        GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
+        gameObjectButton.name = index.ToString();
+        gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = index.ToString();
+        gameObjectButton.SetActive(true);
+
+        StartCoroutine(UpdateCollection());
+
+        this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(4);
     }
 }
