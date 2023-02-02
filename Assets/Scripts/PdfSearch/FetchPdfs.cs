@@ -29,6 +29,8 @@ public class FetchPdfs : MonoBehaviour
     private int serverPort = 8573;
     private string baseUrl;
 
+    private string currentKeyword = "";
+
     private PdfsResponse pdfRes;
     private List<VisiblePdf> visiblePdfs = new List<VisiblePdf>();
 
@@ -96,6 +98,7 @@ public class FetchPdfs : MonoBehaviour
 
     public void OnSearch(string text)
     {
+        currentKeyword = text;
         inputField.GetComponent<TMP_InputField>().text = text;
         ClearFirstGrid();
         ClearSecondGrid();
@@ -139,7 +142,7 @@ public class FetchPdfs : MonoBehaviour
     {
         if(pdfViewObject != null)
         {
-            this.interfaceManagerObject.GetComponent<InterfaceManager>().OpenNewPdfView(page.pdfId, page.number);
+            this.interfaceManagerObject.GetComponent<InterfaceManager>().OpenNewPdfView(page.pdfId, page.number, currentKeyword);
             this.interfaceManagerObject.GetComponent<InterfaceManager>().SwitchToMenu();
         } 
         else

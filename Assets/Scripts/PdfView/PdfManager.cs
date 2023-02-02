@@ -9,6 +9,7 @@ public class PdfManager : MonoBehaviour
     public string pdfId = "2";
     public int currentPageNumber = 0;
     private int totalPages = 0;
+    public string keyword = "";
 
     public GameObject imageObject;
     public GameObject windowTitleObject;
@@ -141,8 +142,10 @@ public class PdfManager : MonoBehaviour
 
     private void SetWindowTitle(string title)
     {
-        this.windowTitleObject.GetComponent<TextMeshPro>().text = title;
+        string text = "File: " + title.Substring(0, Math.Min(20, title.Length));
+        this.windowTitleObject.GetComponent<TextMeshPro>().text = keyword.Length == 0? text : text + "      Keyword: " + keyword.Substring(0, Math.Min(15, keyword.Length));
     }
+
     private void SetPageCounter(int currentpage, int totalpages)
     {
         this.pageCounterObject.GetComponent<TextMeshPro>().text = currentpage.ToString() + "/" + totalpages.ToString();
