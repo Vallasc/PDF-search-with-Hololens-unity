@@ -113,7 +113,6 @@ public class SpeechKeyword : MonoBehaviour
         {
             kr.Start();
         }
-        
     }
 
     void OnDisable()
@@ -123,7 +122,7 @@ public class SpeechKeyword : MonoBehaviour
 
     void OnDestroy()
     {
-        kr.Stop();
+        kr.Dispose();
     }
 }
 

@@ -37,9 +37,24 @@ public class HistoryManager : MonoBehaviour
     private int maxNew = 3;
 
 
+    [SerializeField]
+    private TextMeshPro tmp;
+
+    private string tmpShow = "Say \"Show History\"";
+    private string tmpHide = "Say \"Hide History\"";
+
+
     void Start()
     {
         StartCoroutine(OnStartHistory());
+        if (this.gameObject.activeSelf)
+        {
+            ChangeSISIToHide();
+        }
+        else
+        {
+            ChangeSISIToShow();
+        }
     }
 
     IEnumerator OnStartHistory()
@@ -309,6 +324,16 @@ public class HistoryManager : MonoBehaviour
         }
 
         his.Clear();
+    }
+
+    public void ChangeSISIToShow()
+    {
+        tmp.text = tmpShow;
+    }
+
+    public void ChangeSISIToHide()
+    {
+        tmp.text = tmpHide;
     }
 
     [Serializable]
