@@ -19177,7 +19177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &313213405
 Transform:
   m_ObjectHideFlags: 0
@@ -93695,7 +93695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 1856216204}
   menuNew: {fileID: 1799804539}
-  buttonPrefab: {fileID: 1234341898}
+  buttonPrefab: {fileID: 249074068}
   textHight: 0.01
   buttonWidth: 0.032
   padding: 0.01
