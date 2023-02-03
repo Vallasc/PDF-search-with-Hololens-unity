@@ -35,7 +35,7 @@ public class SliderManager : MonoBehaviour
         if (externalChange == 0)
         {
             PdfManager pdfManager = this.GetComponent<PdfManager>();
-            int pageCount = (int)((pdfManager.getTotalPageCount() - 1) * data.NewValue);
+            int pageCount = (int)((pdfManager.GetTotalPageCount() - 1) * data.NewValue);
             this.counterTMPObject.GetComponent<TextMeshPro>().text = "Page " + (pageCount + 1);
             overlayObject.SetActive(true);
             StartCoroutine(disableOverlay(++counter, pageCount));
@@ -53,7 +53,7 @@ public class SliderManager : MonoBehaviour
         if (overlayId == counter)
         {
             PdfManager pdfManager = this.GetComponent<PdfManager>();
-            pdfManager.goToPagePageNumber(pageNumber);
+            pdfManager.GoToPagePageNumber(pageNumber);
             overlayObject.SetActive(false);
         }
     }

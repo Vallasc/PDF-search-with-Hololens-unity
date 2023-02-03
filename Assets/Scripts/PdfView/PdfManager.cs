@@ -21,6 +21,8 @@ public class PdfManager : MonoBehaviour
     private string baseUrl;
     private Pdf pdf = null;
 
+    public bool showKeywords = false;
+
 
     [SerializeField]
     private GameObject menuHistory;
@@ -74,20 +76,25 @@ public class PdfManager : MonoBehaviour
         }
     }
 
-    public int getTotalPageCount()
+    public int GetTotalPageCount()
     {
         return totalPages;
     }
 
-    public int getCurrentPageNumber()
+    public int GetCurrentPageNumber()
     {
         return currentPageNumber;
     }
 
-    public void goToPagePageNumber(int pageNumber)
+    public void GoToPagePageNumber(int pageNumber)
     {
         currentPageNumber = pageNumber;
         StartCoroutine(GetPage(pdfId, pageNumber));
+    }
+
+    public void UpdatePage()
+    {
+        StartCoroutine(GetPage(pdfId, currentPageNumber));
     }
 
     private IEnumerator GetPdf(string pdfId)
@@ -117,7 +124,9 @@ public class PdfManager : MonoBehaviour
     private IEnumerator GetPage(string pdfId, int pageNumber)
     {
         Debug.Log("GET page");
-        UnityWebRequest webRequest = UnityWebRequest.Get(baseUrl + "/" + pdfId + "/" + pageNumber.ToString());
+        string url = baseUrl + "/" + pdfId + "/" + pageNumber.ToString();
+        url = showKeywords ? url + "?keyword=" + keyword : url;
+        UnityWebRequest webRequest = UnityWebRequest.Get(url);
         webRequest.certificateHandler = new BypassCertificate();
         yield return webRequest.SendWebRequest();
         if (webRequest.isHttpError || webRequest.isNetworkError)

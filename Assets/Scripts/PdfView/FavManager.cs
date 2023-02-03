@@ -44,10 +44,10 @@ public class FavManager : MonoBehaviour
         starIconOutline.SetActive(!value);
         if (value)
         {
-            text.GetComponent<TextMeshPro>().text = "Remove from favourites";
+            text.GetComponent<TextMeshPro>().text = "Remove from Favourites";
         } else
         {
-            text.GetComponent<TextMeshPro>().text = "Add to favourites";
+            text.GetComponent<TextMeshPro>().text = "Add to Favourites";
         }
         selected = value;
         StartCoroutine(PostFav(selected));
