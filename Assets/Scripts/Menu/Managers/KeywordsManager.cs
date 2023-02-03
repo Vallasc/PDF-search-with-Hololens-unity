@@ -51,6 +51,9 @@ public class KeywordsManager : MonoBehaviour
     private int maxPdfs = 5;
     private bool firstPhotoTaken = false;
 
+    private string baseSISI = "Say ";
+    private string escape = "\"";
+
     void Start()
     {
         this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(2);
@@ -96,6 +99,7 @@ public class KeywordsManager : MonoBehaviour
         {
             int n = grid.childCount - i;
             grid.GetChild(i).Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = n.ToString();
+            grid.GetChild(i).Find("SeeItSayItLabel").Find("TextMeshPro").GetComponent<TextMeshPro>().text = baseSISI + escape + Converter.NumToString.NumIntToWords(n.ToString()) + escape;
             //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = .ToString();
             //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
         }
@@ -170,6 +174,8 @@ public class KeywordsManager : MonoBehaviour
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
                 gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
                 gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
+                
+                    
                 //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.name = k.GetKeyword();
 
@@ -275,10 +281,10 @@ public class KeywordsManager : MonoBehaviour
     {
         Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
-        Debug.Log(index - 1);
+        Debug.Log(grid.childCount - index);
 
         //Debug.Log(grid.GetChild(index).gameObject.name);
-        global.GetComponent<InterfaceManager>().SwitchToPdfSearch(grid.GetChild(index - 1).gameObject.name);
+        global.GetComponent<InterfaceManager>().SwitchToPdfSearch(grid.GetChild(grid.childCount - index).gameObject.name);
     }
 
     public void OnKeywordRecognized_Prova(int index)

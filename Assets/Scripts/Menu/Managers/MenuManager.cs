@@ -73,21 +73,33 @@ public class MenuManager : MonoBehaviour
         menu.transform.GetComponent<BoxCollider>().center = new Vector3(center.x, center.y, offsetBoxCollider);
     }
 
-    void OnDisable()
+    public void SetOldBoxCollider(Vector3 oldCenter, Vector3 oldSize)
     {
-        if (!oldSize.Equals((0, 0, 0)) && !oldCenter.Equals((0, 0, 0)))
-        {
-            Debug.Log("disabled");
-            oldSize = this.GetComponent<BoxCollider>().size;
-            oldCenter = this.GetComponent<BoxCollider>().center;
-        }
+        this.oldCenter = oldCenter;
+        this.oldSize = oldSize;
     }
+
+    //void OnDisable()
+    //{
+    //    if (!oldSize.Equals((0, 0, 0)) && !oldCenter.Equals((0, 0, 0)))
+    //    {
+    //        Debug.Log("disabled");
+    //        oldSize = this.GetComponent<BoxCollider>().size;
+    //        oldCenter = this.GetComponent<BoxCollider>().center;
+    //        //Debug.Log(oldSize.x);
+    //        //Debug.Log(oldSize.y);
+    //        //Debug.Log(oldSize.z);
+    //        //Debug.Log(oldCenter);
+    //    }
+    //}
 
     void OnEnable()
     {
         if (!((oldSize == new Vector3(0, 0, 0)) && oldCenter == new Vector3(0, 0, 0)))
         {
             Debug.Log("enabled");
+            //Debug.Log(oldSize);
+            //Debug.Log(oldCenter);
             this.GetComponent<BoxCollider>().size = oldSize;
             this.GetComponent<BoxCollider>().center = oldCenter;
         }

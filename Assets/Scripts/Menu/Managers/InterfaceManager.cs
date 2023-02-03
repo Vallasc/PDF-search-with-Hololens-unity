@@ -18,6 +18,8 @@ public class InterfaceManager : MonoBehaviour
 
     private IEnumerator SwitchInterfaceToPdfSearch(string keyword)
     {
+        menu.GetComponent<MenuManager>().SetOldBoxCollider(menu.GetComponent<BoxCollider>().center, menu.GetComponent<BoxCollider>().size);
+
         pdfSearch.SetActive(true);
         yield return new WaitForEndOfFrame();
         pdfSearch.GetComponent<FetchPdfs>().OnSearch(keyword);

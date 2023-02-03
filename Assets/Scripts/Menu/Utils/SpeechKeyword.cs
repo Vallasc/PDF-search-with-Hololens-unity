@@ -80,18 +80,18 @@ public class SpeechKeyword : MonoBehaviour
     {
         Debug.Log(args.text);
         int index = keywords.IndexOf(args.text) + 1;
-        Debug.Log(index);
-        index = 0;
-        string[] array = keywords.ToArray();
-        bool found = false;
-        while (!found && index < array.Length)
-        {
-            if (string.Equals(args.text, array[index]))
-            {
-                found = true;
-            }
-            index++;
-        }
+        //Debug.Log(index);
+        //index = 0;
+        //string[] array = keywords.ToArray();
+        //bool found = false;
+        //while (!found && index < array.Length)
+        //{
+        //    if (string.Equals(args.text, array[index]))
+        //    {
+        //        found = true;
+        //    }
+        //    index++;
+        //}
         
         Debug.Log(index);
         this.gameObject.GetComponent<KeywordsManager>().OnKeywordRecognized(index);
