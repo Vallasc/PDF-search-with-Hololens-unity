@@ -18,6 +18,9 @@ public class HistoryManager : MonoBehaviour
     private GameObject menu;
     [SerializeField]
     private GameObject menuNew;
+    [SerializeField]
+    private GameObject global;
+    
 
     [SerializeField]
     private GameObject buttonPrefab;
@@ -214,7 +217,7 @@ public class HistoryManager : MonoBehaviour
             gameObjectButton.name = pdf.name;
 
             //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(pdf.name)));
-            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().OpenNewPdfView(pdf._id, pdf.page));
+            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(pdf._id, pdf.page));
             
             gameObjectButton.SetActive(true);
         }
@@ -252,7 +255,7 @@ public class HistoryManager : MonoBehaviour
                 if (i != 2)
                 {
                     grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
-                    grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
+                    grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
                     grid.GetChild(i).SetAsLastSibling();
                 }
 
@@ -278,7 +281,7 @@ public class HistoryManager : MonoBehaviour
             gameObjectButton.name = name;
 
             //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(id, name, page)));
-            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => menu.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
+            gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
 
             gameObjectButton.SetActive(true);
 
@@ -324,6 +327,15 @@ public class HistoryManager : MonoBehaviour
         }
 
         his.Clear();
+    }
+
+    public void OpenLastOnePdf()
+    {
+        if (his.Count > 0) //  && !menuNew.activeSelf
+        {
+            Pdf last = his[his.Count - 1];
+            global.GetComponent<InterfaceManager>().OpenNewPdfView(last._id, last.page);
+        }
     }
 
     public void ChangeSISIToShow()
