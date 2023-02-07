@@ -86,3 +86,17 @@ MonoBehaviour:
       id: 0
       description: None
       axisConstraint: 0
+  - localizationKey: 
+    keyword: Close Search
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Follow Me Search
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
