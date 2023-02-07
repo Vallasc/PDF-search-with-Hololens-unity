@@ -243,6 +243,7 @@ public class HistoryManager : MonoBehaviour
         Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
         bool found = false;
+        Pdf newPdf;
 
         int i = 0;
         while (!found && i < his.Count)
@@ -255,19 +256,22 @@ public class HistoryManager : MonoBehaviour
             i++;   
         }
 
-        int rev = his.Count - i;
-        his.RemoveAt(i - 1);
-        Pdf newPdf = new Pdf
+        if (found)
         {
-            _id = id,
-            name = name,
-            page = page
-        };
-        his.Add(newPdf);
-        grid.GetChild(rev).GetComponent<ButtonConfigHelper>().MainLabelText = newPdf.name + " - p. " + newPdf.page;
-        grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
-        grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
-        grid.GetChild(rev).SetAsLastSibling();
+            int rev = his.Count - i;
+            his.RemoveAt(i - 1);
+            newPdf = new Pdf
+            {
+                _id = id,
+                name = name,
+                page = page
+            };
+            his.Add(newPdf);
+            grid.GetChild(rev).GetComponent<ButtonConfigHelper>().MainLabelText = newPdf.name + " - p. " + newPdf.page;
+            grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
+            grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
+            grid.GetChild(rev).SetAsLastSibling();
+        }
 
 
         //while (!found && i < grid.childCount)
