@@ -146,7 +146,6 @@ public class PdfManager : MonoBehaviour
                 StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
             }
         }
-
     }
 
     private void SetWindowTitle(string title)
