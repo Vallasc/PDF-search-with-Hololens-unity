@@ -41,14 +41,11 @@ public class FetchPdfs : MonoBehaviour
 
     void Start()
     {
-        // updateUrl(); Needs to be called outside
-
         firstScrollView.CellWidth = cellWidth;
         firstGridObjectCollection = firstScrollView.GetComponentInChildren<GridObjectCollection>();
         secondScrollView.CellWidth = cellWidth;
         secondGridObjectCollection = secondScrollView.GetComponentInChildren<GridObjectCollection>();
         PagesObject.SetActive(false);
-        //StartCoroutine(GetPdfs(""));
     }
 
     void Update() {}
@@ -142,7 +139,8 @@ public class FetchPdfs : MonoBehaviour
     {
         if(pdfViewObject != null)
         {
-            this.interfaceManagerObject.GetComponent<InterfaceManager>().OpenNewPdfView(page.pdfId, page.number, currentKeyword);
+            string key = currentKeyword.Equals("") ? null : currentKeyword;
+            this.interfaceManagerObject.GetComponent<InterfaceManager>().OpenNewPdfView(page.pdfId, page.number, key);
             this.interfaceManagerObject.GetComponent<InterfaceManager>().SwitchToMenu();
         } 
         else

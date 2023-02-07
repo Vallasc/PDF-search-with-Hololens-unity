@@ -12837,7 +12837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &218522802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53976,7 +53976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &987238328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54280,7 +54280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b3eff181cc4244a8a14234096e62fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFocusRequired: 1
+  isFocusRequired: 0
   keywords:
   - keyword: Follow Me Search
     response:
@@ -91117,12 +91117,12 @@ MonoBehaviour:
   pdfId: Prova
   currentPageNumber: 2
   keyword: 
+  showKeyword: 0
   imageObject: {fileID: 1209982567}
   windowTitleObject: {fileID: 530097999}
   pageCounterObject: {fileID: 251837839}
   buttonStar: {fileID: 588151680}
   serverIp: 
-  showKeywords: 0
   menuHistory: {fileID: 1799804539}
 --- !u!114 &1745725443
 MonoBehaviour:

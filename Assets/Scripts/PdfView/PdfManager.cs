@@ -9,7 +9,8 @@ public class PdfManager : MonoBehaviour
     public string pdfId = "2";
     public int currentPageNumber = 0;
     private int totalPages = 0;
-    public string keyword = "";
+    public string keyword = null;
+    public bool showKeyword = false;
 
     public GameObject imageObject;
     public GameObject windowTitleObject;
@@ -20,8 +21,6 @@ public class PdfManager : MonoBehaviour
     private int serverPort = 8573;
     private string baseUrl;
     private Pdf pdf = null;
-
-    public bool showKeywords = false;
 
 
     [SerializeField]
@@ -36,15 +35,10 @@ public class PdfManager : MonoBehaviour
         FavManager favButton = buttonStar.GetComponent<FavManager>();
         favButton.pdfId = pdfId;
         favButton.serverIp = serverIp;
-        // TODO
-        // StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, currentPageNumber));
-
     }
 
     void OnDestroy()
     {
-        // TODO
-        // StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, currentPageNumber));
     }
 
     void Update() {}
@@ -125,7 +119,7 @@ public class PdfManager : MonoBehaviour
     {
         Debug.Log("GET page");
         string url = baseUrl + "/" + pdfId + "/" + pageNumber.ToString();
-        url = showKeywords ? url + "?keyword=" + keyword : url;
+        url = showKeyword ? url + "?keyword=" + keyword : url;
         UnityWebRequest webRequest = UnityWebRequest.Get(url);
         webRequest.certificateHandler = new BypassCertificate();
         yield return webRequest.SendWebRequest();

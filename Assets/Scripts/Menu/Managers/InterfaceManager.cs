@@ -33,7 +33,7 @@ public class InterfaceManager : MonoBehaviour
         pdfSearch.SetActive(false);
     }
 
-    public void OpenNewPdfView(string pdfId, int pageNumber, string keyword = "")
+    public void OpenNewPdfView(string pdfId, int pageNumber, string keyword = null)
     {
         OpenPdfView(pdfId, pageNumber, keyword);
     }
@@ -43,7 +43,7 @@ public class InterfaceManager : MonoBehaviour
         PdfManager pdfManager = pdfView.GetComponent<PdfManager>();
         pdfManager.pdfId = pdfId;
         pdfManager.currentPageNumber = pageNumber;
-        pdfManager.keyword = keyword;
+        pdfManager.keyword = keyword != null && !keyword.Equals("")? keyword : null;
 
         GameObject gameObjectPdfView = Instantiate(pdfView);
         gameObjectPdfView.SetActive(true);
