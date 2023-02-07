@@ -63,6 +63,7 @@ public class HistoryManager : MonoBehaviour
     IEnumerator OnStartHistory()
     {
         his = new List<Pdf>();
+
         //ReadHistortyFromFile();
         PopulateHistory();
         yield return StartCoroutine(UpdateCollection());
@@ -210,15 +211,15 @@ public class HistoryManager : MonoBehaviour
             //buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = history;
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
             //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-            gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
+            //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
 
             // NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
-            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name + " - p. " + pdf.page;
+            int p = pdf.page + 1;
+            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name + " - p. " + p.ToString();
             gameObjectButton.name = pdf.name;
 
             //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(pdf.name)));
             gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(pdf._id, pdf.page));
-            
             gameObjectButton.SetActive(true);
         }
 
@@ -231,14 +232,20 @@ public class HistoryManager : MonoBehaviour
         //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
-    public IEnumerator CallUpdateHistory(string id, string name, int page)
+    public void CallUpdateHistory(string id, string name, int page)
     {
-        UpdateHistory(id, name, page);
+        StartCoroutine(UpdateHistory(id, name, page));
+    }
+
+
+    private IEnumerator UpdateHistory(string id, string name, int page)
+    {
+        InsertPdfHistory(id, name, page);
         yield return StartCoroutine(UpdateCollection());
         menu.GetComponent<MenuManager>().OnHistoryUpdated();
     }
 
-    private void UpdateHistory(string id, string name, int page)
+    private void InsertPdfHistory(string id, string name, int page)
     {
         Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
@@ -248,18 +255,25 @@ public class HistoryManager : MonoBehaviour
         int i = 0;
         while (!found && i < his.Count)
         {
-            if (string.Equals(his[i]._id, id) && string.Equals(his[i].name, name))
+            if (string.Equals(his[i]._id, id))
             {
                 found = true;
             }
-                
-            i++;   
+            else
+            {
+                i++;
+            } 
         }
 
         if (found)
         {
-            int rev = his.Count - i;
-            his.RemoveAt(i - 1);
+            int p = page + 1;
+            grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText = name + " - p. " + p.ToString();
+            grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
+            grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
+            grid.GetChild(i).SetAsLastSibling();
+
+            his.RemoveAt(i);
             newPdf = new Pdf
             {
                 _id = id,
@@ -267,49 +281,22 @@ public class HistoryManager : MonoBehaviour
                 page = page
             };
             his.Add(newPdf);
-            grid.GetChild(rev).GetComponent<ButtonConfigHelper>().MainLabelText = newPdf.name + " - p. " + newPdf.page;
-            grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
-            grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
-            grid.GetChild(rev).SetAsLastSibling();
         }
-
-
-        //while (!found && i < grid.childCount)
-        //{
-        //    if (!found && string.Equals(grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText, name))
-        //    {
-        //        if (i != 2)
-        //        {
-        //            grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
-        //            grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
-        //            grid.GetChild(i).SetAsLastSibling();
-        //        }
-
-        //        found = true;
-        //    }
-
-        //    i++;
-        //}
-
-
-        if (!found)
+        else 
         {
-            if (grid.childCount == maxNew)
+            if (his.Count == maxNew)
             {
                 Destroy(grid.GetChild(0).gameObject);
-                his.RemoveAt(his.Count - 1);
+                his.RemoveAt(0);
             }
 
 
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-            //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
 
-            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = name + " - p. " + page;
+            int p = page + 1;
+            gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = name + " - p. " + p.ToString();
             gameObjectButton.name = name;
-
-            //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(id, name, page)));
             gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
-
             gameObjectButton.SetActive(true);
 
             newPdf = new Pdf
@@ -318,6 +305,7 @@ public class HistoryManager : MonoBehaviour
                 name = name,
                 page = page
             };
+
             his.Add(newPdf);
         }
 

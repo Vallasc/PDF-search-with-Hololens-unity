@@ -169,9 +169,10 @@ public class KeywordsManager : MonoBehaviour
                 //Debug.Log("button: " + buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle);
                 //Debug.Log("ui: " + buttonPrefab.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
                 //button.gameObject.tag = k.GetKeyword(); 
-                buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
+                
                 //button.GetComponent<Interactable>().OnClick.AddListener(() => keys.GetComponent<NewFavManager>().CallUpdateHistory(k.GetKeyword()));
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
+                gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
                 gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
                 gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
                 

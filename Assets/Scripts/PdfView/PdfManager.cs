@@ -137,7 +137,8 @@ public class PdfManager : MonoBehaviour
                 this.GetComponent<SliderManager>().SlideToPage(currentPageNumber, totalPages);
 
                 // Update history
-                StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
+                //StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
+                menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber);
             }
         }
     }
