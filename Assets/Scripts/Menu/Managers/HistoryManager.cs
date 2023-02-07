@@ -234,11 +234,8 @@ public class HistoryManager : MonoBehaviour
     public IEnumerator CallUpdateHistory(string id, string name, int page)
     {
         UpdateHistory(id, name, page);
-        //if (this.gameObject.activeSelf == true)
-        //{
         yield return StartCoroutine(UpdateCollection());
-        //}
-
+        menu.GetComponent<MenuManager>().OnHistoryUpdated();
     }
 
     private void UpdateHistory(string id, string name, int page)
@@ -318,9 +315,6 @@ public class HistoryManager : MonoBehaviour
                 page = page
             };
             his.Add(newPdf);
-
-
-            // DA INSERIRE ANCHE IL COLLEGAMENTO ALLA SCHERMATA SUCCESSIVA
         }
 
 
