@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static KeywordsManager;
 
 public class KeyManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class KeyManager : MonoBehaviour
         text = this.transform.Find("IconAndText").Find("TextMeshPro").gameObject;
         selected = false;
 
+        disabled = pdfViewObject.GetComponent<PdfManager>().keyword == null || pdfViewObject.GetComponent<PdfManager>().keyword.Equals("");
+        Debug.Log(pdfViewObject.GetComponent<PdfManager>().keyword);
         if (disabled)
         {
             this.GetComponent<Interactable>().IsEnabled = false;
@@ -59,7 +62,7 @@ public class KeyManager : MonoBehaviour
         {
             text.GetComponent<TextMeshPro>().text = "Show Keyword";
         }
-        pdfViewObject.GetComponent<PdfManager>().showKeywords = selected;
+        pdfViewObject.GetComponent<PdfManager>().showKeyword = selected;
         pdfViewObject.GetComponent<PdfManager>().UpdatePage();
     }
 }
