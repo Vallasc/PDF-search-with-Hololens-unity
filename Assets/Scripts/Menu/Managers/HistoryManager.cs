@@ -209,7 +209,7 @@ public class HistoryManager : MonoBehaviour
             //buttonPrefab.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
             //buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = history;
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-            gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
+            //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
             gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
 
             // NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
@@ -302,7 +302,7 @@ public class HistoryManager : MonoBehaviour
 
 
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-            gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
+            //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
 
             gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = name + " - p. " + page;
             gameObjectButton.name = name;
