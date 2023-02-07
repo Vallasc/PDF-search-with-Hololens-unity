@@ -142,8 +142,8 @@ public class PdfManager : MonoBehaviour
                 SetPageCounter(pageNumber + 1, totalPages);
                 this.GetComponent<SliderManager>().SlideToPage(currentPageNumber, totalPages);
 
-                // TODO VEDERE SE I VALORI SONO CORRETTI
-                //StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
+                // Update history
+                StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
             }
         }
 
