@@ -234,11 +234,8 @@ public class HistoryManager : MonoBehaviour
     public IEnumerator CallUpdateHistory(string id, string name, int page)
     {
         UpdateHistory(id, name, page);
-        if (this.gameObject.activeSelf == true)
-        {
-            yield return StartCoroutine(UpdateCollection());
-        }
-
+        yield return StartCoroutine(UpdateCollection());
+        menu.GetComponent<MenuManager>().OnHistoryUpdated();
     }
 
     private void UpdateHistory(string id, string name, int page)
@@ -248,22 +245,47 @@ public class HistoryManager : MonoBehaviour
         bool found = false;
 
         int i = 0;
-        while (!found && i < grid.childCount)
+        while (!found && i < his.Count)
         {
-            if (!found && string.Equals(grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText, name))
+            if (string.Equals(his[i]._id, id) && string.Equals(his[i].name, name))
             {
-                if (i != 2)
-                {
-                    grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
-                    grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
-                    grid.GetChild(i).SetAsLastSibling();
-                }
-
                 found = true;
             }
-
-            i++;
+                
+            i++;   
         }
+
+        int rev = his.Count - i;
+        his.RemoveAt(i - 1);
+        Pdf newPdf = new Pdf
+        {
+            _id = id,
+            name = name,
+            page = page
+        };
+        his.Add(newPdf);
+        grid.GetChild(rev).GetComponent<ButtonConfigHelper>().MainLabelText = newPdf.name + " - p. " + newPdf.page;
+        grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
+        grid.GetChild(rev).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
+        grid.GetChild(rev).SetAsLastSibling();
+
+
+        //while (!found && i < grid.childCount)
+        //{
+        //    if (!found && string.Equals(grid.GetChild(i).GetComponent<ButtonConfigHelper>().MainLabelText, name))
+        //    {
+        //        if (i != 2)
+        //        {
+        //            grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.RemoveAllListeners();
+        //            grid.GetChild(i).gameObject.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(id, page));
+        //            grid.GetChild(i).SetAsLastSibling();
+        //        }
+
+        //        found = true;
+        //    }
+
+        //    i++;
+        //}
 
 
         if (!found)
@@ -271,6 +293,7 @@ public class HistoryManager : MonoBehaviour
             if (grid.childCount == maxNew)
             {
                 Destroy(grid.GetChild(0).gameObject);
+                his.RemoveAt(his.Count - 1);
             }
 
 
@@ -285,8 +308,13 @@ public class HistoryManager : MonoBehaviour
 
             gameObjectButton.SetActive(true);
 
-
-            // DA INSERIRE ANCHE IL COLLEGAMENTO ALLA SCHERMATA SUCCESSIVA
+            newPdf = new Pdf
+            {
+                _id = id,
+                name = name,
+                page = page
+            };
+            his.Add(newPdf);
         }
 
 
