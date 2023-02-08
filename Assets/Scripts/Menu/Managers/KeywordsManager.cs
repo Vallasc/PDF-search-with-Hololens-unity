@@ -173,10 +173,10 @@ public class KeywordsManager : MonoBehaviour
                 //button.GetComponent<Interactable>().OnClick.AddListener(() => keys.GetComponent<NewFavManager>().CallUpdateHistory(k.GetKeyword()));
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
                 gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
-                gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
-                gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
-                
-                    
+                //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
+                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
+                //gameObjectButton.GetComponent<ButtonConfigHelper>().SetCharIcon(3);
+
                 //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.name = k.GetKeyword();
 
@@ -221,7 +221,7 @@ public class KeywordsManager : MonoBehaviour
             foreach (Keyword k in newKey)
             {
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-                gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
+                //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
                 //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = k.GetKeyword();
                 gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
                 //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
