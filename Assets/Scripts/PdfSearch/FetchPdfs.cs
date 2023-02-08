@@ -245,7 +245,7 @@ public class FetchPdfs : MonoBehaviour
 
         }
         firstGridObjectCollection.UpdateCollection();
-        firstScrollView.UpdateContent();
+        //firstScrollView.UpdateContent();
         firstScrollView.MoveToIndex(0);
     }
 
@@ -284,7 +284,7 @@ public class FetchPdfs : MonoBehaviour
             image.GetComponent<UnityEngine.UI.Image>().material = mat;
         }
         secondGridObjectCollection.UpdateCollection();
-        secondScrollView.UpdateContent();
+        //secondScrollView.UpdateContent();
         secondScrollView.MoveToIndex(0);
     }
 
