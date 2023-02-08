@@ -47,6 +47,7 @@ public class HistoryManager : MonoBehaviour
     private string tmpHide = "Say \"Hide History\"";
 
     private string historyFileName = "History.txt";
+    private string faToken;
 
 
     void Start()
@@ -95,7 +96,9 @@ public class HistoryManager : MonoBehaviour
             if (folder != null)  
             {  
                 // Application now has read/write access to all contents in the picked folder  
-                // (including other sub-folder contents)  
+                // (including other sub-folder contents)
+
+                //string faToken = Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace(folder);  
                 Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);  
             }  
         }, false);  
@@ -120,6 +123,24 @@ public class HistoryManager : MonoBehaviour
         }  
 #endif
     }
+
+    private void ReadFile()
+    {
+#if ENABLE_WINMD_SUPPORT
+        if (Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.ContainsItem("PickedFolderToken"))   
+        {
+            //Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFolder storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");  
+            Windows.Storage.StorageFile historyFile = await storageFolder.GetFileAsync(historyFileName);
+
+            string json = await Windows.Storage.FileIO.ReadTextAsync(historyFile);
+
+            History h = JsonUtility.FromJson<History>(json);
+            his = h.history;
+        }
+#endif
+    }
+
 
     private async void SaveHistoryToFile()
     {
