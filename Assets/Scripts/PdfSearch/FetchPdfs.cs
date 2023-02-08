@@ -232,7 +232,7 @@ public class FetchPdfs : MonoBehaviour
             GameObject itemInstance = Instantiate(imageButton, secondGridObjectCollection.transform);
             itemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             itemInstance.name = pdf.name + "_" + page.number.ToString();
-            itemInstance.GetComponentInChildren<TextMeshPro>().text = "Page " + page.number.ToString();
+            itemInstance.GetComponentInChildren<TextMeshPro>().text = "Page " + (page.number + 1).ToString();
             itemInstance.SetActive(true);
 
             GameObject favButton = itemInstance.transform.Find("FavButton").gameObject;

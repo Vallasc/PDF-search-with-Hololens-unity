@@ -94,7 +94,7 @@ public class PdfManager : MonoBehaviour
     private IEnumerator GetPdf(string pdfId)
     {
         Debug.Log("GET pdf");
-        string url = baseUrl + "/" + pdfId;
+        string url = baseUrl + "/" + pdfId + "?visit=true";
         Debug.Log(url);
         UnityWebRequest webRequest = UnityWebRequest.Get(url);
         webRequest.certificateHandler = new BypassCertificate();
@@ -137,10 +137,15 @@ public class PdfManager : MonoBehaviour
                 this.GetComponent<SliderManager>().SlideToPage(currentPageNumber, totalPages);
 
                 // Update history
-                //StartCoroutine(menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber));
-                menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfId, pageNumber);
+                StartCoroutine(updateHistory(pdfId, pdfId, pageNumber));
             }
         }
+    }
+
+    private IEnumerator updateHistory(string pdfId, string pdfName, int pageNumber)
+    {
+        yield return new WaitForSeconds(2);
+        menuHistory.GetComponent<HistoryManager>().CallUpdateHistory(pdfId, pdfName, pageNumber);
     }
 
     private void SetWindowTitle(string title)
