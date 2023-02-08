@@ -187,7 +187,7 @@ public class PdfManager : MonoBehaviour
         }
         else
         {
-            float aspectRatio = (float)width / (float)height;
+            float aspectRatio = (float)height / (float)width;
             initialScale.x = 1;
             initialScale.y = aspectRatio;
         }

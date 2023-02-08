@@ -8,6 +8,7 @@ using TMPro;
 using System.Threading;
 using System.Runtime.InteropServices.ComTypes;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class FetchPdfs : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class FetchPdfs : MonoBehaviour
     public bool orderMostViewed = false;
     public bool orderMoreOccurencies = false;
 
+    private List<GameObject> pagesObjects = new List<GameObject>();
+    private int lastVisibleCellIndex;
 
     void Start()
     {
@@ -47,8 +50,36 @@ public class FetchPdfs : MonoBehaviour
         secondGridObjectCollection = secondScrollView.GetComponentInChildren<GridObjectCollection>();
         PagesObject.SetActive(false);
     }
+    void Update() 
+    {
+        /*if(lastVisibleCellIndex != secondScrollView.FirstVisibleCellIndex)
+        {
+            lastVisibleCellIndex = secondScrollView.FirstVisibleCellIndex;
+            for (int i = 0; i < secondGridObjectCollection.transform.childCount; i++)
+            {
+                if (i < lastVisibleCellIndex || i > lastVisibleCellIndex + 2)
+                {
+                    SetLayerAllChildren(secondGridObjectCollection.transform.GetChild(i), LayerMask.NameToLayer("Invisible"));
+                    secondGridObjectCollection.transform.GetChild(i).gameObject.SetActive(false);
+                }
+                else
+                {
+                    SetLayerAllChildren(secondGridObjectCollection.transform.GetChild(i), LayerMask.NameToLayer("Default"));
+                    secondGridObjectCollection.transform.GetChild(i).gameObject.SetActive(true);
+                }
 
-    void Update() {}
+            }
+        }*/
+    }
+
+    void SetLayerAllChildren(Transform root, int layer)
+    {
+        for (int i = 0; i< root.childCount; i++)
+        {
+            SetLayerAllChildren(root.GetChild(i), layer);
+        }
+        root.gameObject.layer = layer;
+    }
 
 
     public IEnumerator GetPdfs(string searchKey)
@@ -169,7 +200,7 @@ public class FetchPdfs : MonoBehaviour
         }
         else
         {
-            float aspectRatio = (float)width / (float)height;
+            float aspectRatio = (float)height / (float)width;
             initialScale.x = 1;
             initialScale.y = aspectRatio;
         }
@@ -255,6 +286,11 @@ public class FetchPdfs : MonoBehaviour
         secondGridObjectCollection.UpdateCollection();
         secondScrollView.UpdateContent();
         secondScrollView.MoveToIndex(0);
+    }
+
+    private void createPageObject()
+    {
+
     }
 
     private class VisiblePdf
