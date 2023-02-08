@@ -32,14 +32,14 @@ public class TogglesManager : MonoBehaviour
         
     }
 
-    void OnFavClick()
+    public void OnFavClick()
     {
         bool value = favouritesToggle.GetComponent<Interactable>().IsToggled;
         Debug.Log("Fav filter " + value);
         UpdateFlags();
     }
 
-    void OnMoreClick()
+    public void OnMoreClick()
     {
         bool value = moreOccToggle.GetComponent<Interactable>().IsToggled;
         mostViewedToggle.GetComponent<Interactable>().IsToggled = !value;
@@ -47,7 +47,7 @@ public class TogglesManager : MonoBehaviour
         UpdateFlags();
     }
 
-    void OnMostViewedClick()
+    public void OnMostViewedClick()
     {
         bool value = mostViewedToggle.GetComponent<Interactable>().IsToggled;
         moreOccToggle.GetComponent<Interactable>().IsToggled = !value;
