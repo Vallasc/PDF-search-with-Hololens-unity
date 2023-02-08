@@ -46,6 +46,8 @@ public class HistoryManager : MonoBehaviour
     private string tmpShow = "Say \"Show History\"";
     private string tmpHide = "Say \"Hide History\"";
 
+    private string historyFileName = "History.txt";
+
 
     void Start()
     {
@@ -75,7 +77,48 @@ public class HistoryManager : MonoBehaviour
 
     void OnDestroy()
     {
-        SaveHistoryToFile2();
+        //SaveHistoryToFile2();
+        SelectFolder();
+        SaveFile();
+    }
+
+    private void SelectFolder()
+    {
+#if ENABLE_WINMD_SUPPORT
+        UnityEngine.WSA.Application.InvokeOnUIThread(async () =>  
+        {  
+            var folderPicker = new Windows.Storage.Pickers.FolderPicker();  
+            folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;  
+            folderPicker.FileTypeFilter.Add("*.txt");  
+  
+            Windows.Storage.StorageFolder folder = await folderPicker.PickSingleFolderAsync();  
+            if (folder != null)  
+            {  
+                // Application now has read/write access to all contents in the picked folder  
+                // (including other sub-folder contents)  
+                Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);  
+            }  
+        }, false);  
+#endif
+    }
+
+    private async void SaveFile()
+    {
+#if ENABLE_WINMD_SUPPORT
+        if (Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.ContainsItem("PickedFolderToken"))   
+        {  
+            Windows.Storage.StorageFolder storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");  
+            Windows.Storage.StorageFile historyFile = await storageFolder.CreateFileAsync(historyFileName, Windows.Storage.CreationCollisionOption.OpenIfExists);
+            
+            History toSave = new History
+            {
+                history = his
+            };
+            string json = JsonUtility.ToJson(toSave);
+
+            await Windows.Storage.FileIO.WriteTextAsync(historyFile, json);  
+        }  
+#endif
     }
 
     private async void SaveHistoryToFile()
