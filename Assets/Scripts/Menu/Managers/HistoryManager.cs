@@ -46,9 +46,6 @@ public class HistoryManager : MonoBehaviour
     private string tmpShow = "Say \"Show History\"";
     private string tmpHide = "Say \"Hide History\"";
 
-    private string historyFileName = "History.txt";
-    private string faToken;
-
 
     void Start()
     {
@@ -67,170 +64,52 @@ public class HistoryManager : MonoBehaviour
     {
         his = new List<Pdf>();
 
-        //ReadHistortyFromFile();
+        ReadHistory();
         PopulateHistory();
         yield return StartCoroutine(UpdateCollection());
 
         menu.GetComponent<MenuManager>().OnHistoryUpdated();
-
-        //Debug.Log("HISTORY FILE: " + history);
     }
 
     void OnDestroy()
     {
-        //SaveHistoryToFile2();
-        SelectFolder();
-        SaveFile();
+        SaveHistory();
     }
 
-    private void SelectFolder()
+    private void ReadHistory()
     {
-#if ENABLE_WINMD_SUPPORT
-        UnityEngine.WSA.Application.InvokeOnUIThread(async () =>  
-        {  
-            var folderPicker = new Windows.Storage.Pickers.FolderPicker();  
-            folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;  
-            folderPicker.FileTypeFilter.Add("*.txt");  
-  
-            Windows.Storage.StorageFolder folder = await folderPicker.PickSingleFolderAsync();  
-            if (folder != null)  
-            {  
-                // Application now has read/write access to all contents in the picked folder  
-                // (including other sub-folder contents)
-
-                //string faToken = Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace(folder);  
-                Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);  
-            }  
-        }, false);  
-#endif
-    }
-
-    private async void SaveFile()
-    {
-#if ENABLE_WINMD_SUPPORT
-        if (Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.ContainsItem("PickedFolderToken"))   
-        {  
-            Windows.Storage.StorageFolder storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");  
-            Windows.Storage.StorageFile historyFile = await storageFolder.CreateFileAsync(historyFileName, Windows.Storage.CreationCollisionOption.OpenIfExists);
-            
-            History toSave = new History
-            {
-                history = his
-            };
-            string json = JsonUtility.ToJson(toSave);
-
-            await Windows.Storage.FileIO.WriteTextAsync(historyFile, json);  
-        }  
-#endif
-    }
-
-    private void ReadFile()
-    {
-#if ENABLE_WINMD_SUPPORT
-        if (Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.ContainsItem("PickedFolderToken"))   
+        string json = PlayerPrefs.GetString("History");
+        Debug.Log("READ");
+        Debug.Log(json);
+        if (json != "")
         {
-            //Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            Windows.Storage.StorageFolder storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");  
-            Windows.Storage.StorageFile historyFile = await storageFolder.GetFileAsync(historyFileName);
-
-            string json = await Windows.Storage.FileIO.ReadTextAsync(historyFile);
-
             History h = JsonUtility.FromJson<History>(json);
             his = h.history;
         }
-#endif
     }
 
-
-    private async void SaveHistoryToFile()
+    private void SaveHistory()
     {
-#if WINDOWS_UWP
-        Debug.Log("salvato");
-        if (Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.ContainsItem("PickedFolderToken"))
-        {
-            Windows.Storage.StorageFolder storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync("PickedFolderToken");
-            Windows.Storage.StorageFile historyFile = await storageFolder.CreateFileAsync("History.txt", Windows.Storage.CreationCollisionOption.OpenIfExists);
-            await Windows.Storage.FileIO.WriteTextAsync(historyFile, "ikea");
-        }
-#endif
-    }
-
-    private async void SaveHistoryToFile2()
-    {
-#if ENABLE_WINMD_SUPPORT
-        Debug.Log("creato");
-        // Create sample file; replace if exists.
-        Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-        Windows.Storage.StorageFile historyFile = await storageFolder.CreateFileAsync("History.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting);
-#endif
-
-        Pdf p = new Pdf();
-        p._id = "ikea";
-        p.name = "ikea";
-        p.path = "ikea";
-        p.page = 1;
-        his.Add(p);
-
-
         History toSave = new History
         {
             history = his
         };
 
         string json = JsonUtility.ToJson(toSave);
-
-        byte[] historyByteArray = System.Text.Encoding.UTF8.GetBytes(json);
-        File.WriteAllBytes("./History.txt", historyByteArray);
-    }
-
-    private async void ReadHistortyFromFile()
-    {
-        /*
-#if ENABLE_WINMD_SUPPORT
-        Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-        Windows.Storage.StorageFile historyFile = await storageFolder.GetFileAsync("History.txt");
-        history = await Windows.Storage.FileIO.ReadTextAsync(historyFile);
-#endif
-        */
-        string jsonHistory = System.Text.Encoding.UTF8.GetString(File.ReadAllBytes("./History.txt"));
-        History h = JsonUtility.FromJson<History>(jsonHistory);
-        his = h.history;
-
-        //Pdf[] tmp = Pdf.CreateFromJSON(jsonHistory);
-        //if(tmp.Length != 0)
-        //{
-        //    history = new List<Pdf>(tmp)
-        //    {
-        //        Capacity = maxNew
-        //    };
-        //}
-        //else
-        //{
-        //    history = new List<Pdf>(maxNew);
-        //}
-
-        //Debug.Log(history);
-    }
+        Debug.Log("SAVE");
+        Debug.Log(json);
+        PlayerPrefs.SetString("History", json);
+    } 
 
     private IEnumerator UpdateCollection()
     {
         Transform scroll = menuNew.transform.Find("History").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
 
-        //if (grid.Find("matteo") != null)
-        //{
-        //    Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-        //}
-
         yield return new WaitForEndOfFrame();
         grid.GetComponent<GridObjectCollection>().UpdateCollection();
         yield return new WaitForEndOfFrame();
         scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
-
-        //if (grid.Find("matteo") != null)
-        //{
-        //    Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-        //}
 
         if (grid.childCount == 0)
         {
@@ -243,7 +122,6 @@ public class HistoryManager : MonoBehaviour
             scroll.gameObject.SetActive(true);
             if (grid.childCount < maxNew)
             {
-                Debug.Log("active: " + grid.childCount);
                 scroll.GetComponent<ScrollingObjectCollection>().TiersPerPage = grid.childCount;
             }
             else
@@ -256,11 +134,6 @@ public class HistoryManager : MonoBehaviour
         grid.GetComponent<GridObjectCollection>().UpdateCollection();
         yield return new WaitForEndOfFrame();
         scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
-
-        //if (grid.Find("matteo") != null)
-        //{
-        //    Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-        //}
     }
 
     private void PopulateHistory()
@@ -270,30 +143,16 @@ public class HistoryManager : MonoBehaviour
 
         foreach (Pdf pdf in his)
         {
-            //buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-            //buttonPrefab.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
-            //buttonPrefab.GetComponent<ButtonConfigHelper>().MainLabelText = history;
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-            //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-            //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
 
             // NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
             int p = pdf.page + 1;
             gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name + " - p. " + p.ToString();
             gameObjectButton.name = pdf.name;
 
-            //gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => StartCoroutine(menuNew.GetComponent<HistoryManager>().CallUpdateHistory(pdf.name)));
             gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().OpenNewPdfView(pdf._id, pdf.page));
             gameObjectButton.SetActive(true);
         }
-
-        //Debug.Log(Time.realtimeSinceStartup + " ui: " + grid.Find("matteo").Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-
-
-        //yield return new WaitForEndOfFrame();
-        //grid.GetComponent<GridObjectCollection>().UpdateCollection();
-        //yield return new WaitForEndOfFrame();
-        //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
     public void CallUpdateHistory(string id, string name, int page)
@@ -372,12 +231,6 @@ public class HistoryManager : MonoBehaviour
 
             his.Add(newPdf);
         }
-
-
-        //yield return new WaitForEndOfFrame();
-        //grid.GetComponent<GridObjectCollection>().UpdateCollection();
-        //yield return new WaitForEndOfFrame();
-        //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
     public void ResetHistory()
@@ -395,7 +248,6 @@ public class HistoryManager : MonoBehaviour
     {
         ClearHistory();
 
-        //if (this.gameObject.activeSelf == true)
         yield return StartCoroutine(UpdateCollection());
         menu.GetComponent<MenuManager>().OnHistoryUpdated();
     }
@@ -445,15 +297,5 @@ public class HistoryManager : MonoBehaviour
         public string name;
         public string path;
         public int page;
-
-        //public static Pdf[] CreateFromJSON(string jsonString)
-        //{
-        //    return JsonUtility.FromJson<Pdf[]>(jsonString);
-        //}
-
-        //public static string HistoryToJSON(Pdf history)
-        //{
-        //    return JsonUtility.ToJson(history);
-        //}
     }
 }

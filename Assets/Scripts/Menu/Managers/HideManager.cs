@@ -12,7 +12,6 @@ public class HideManager : MonoBehaviour
     private bool scrollNew = true;
     private bool scrollFav = true;
     private bool scrollPdfs = true;
-    //private bool back = true;
 
     private Vector3 size;
     private Vector3 center;
@@ -29,12 +28,10 @@ public class HideManager : MonoBehaviour
         scrollNew = menu.transform.Find("MenuHistory").gameObject.activeSelf;
         scrollFav = menu.transform.Find("MenuFavorites").gameObject.activeSelf;
         scrollPdfs = menu.transform.Find("MenuKeywords").gameObject.activeSelf;
-        //back = menu.transform.Find("Backplate").gameObject.activeSelf;
 
         menu.transform.Find("MenuHistory").gameObject.SetActive(false);
         menu.transform.Find("MenuFavorites").gameObject.SetActive(false);
         menu.transform.Find("MenuKeywords").gameObject.SetActive(false);
-        //menu.transform.Find("Backplate").gameObject.SetActive(false);
 
         StartCoroutine(UpdateAppBarVerticalHide());
     }
@@ -81,7 +78,6 @@ public class HideManager : MonoBehaviour
         menu.transform.Find("MenuHistory").gameObject.SetActive(scrollNew);
         menu.transform.Find("MenuFavorites").gameObject.SetActive(scrollFav);
         menu.transform.Find("MenuKeywords").gameObject.SetActive(scrollPdfs);
-        //menu.transform.Find("Backplate").gameObject.SetActive(back);
 
         StartCoroutine(UpdateAppBarVerticalShow());
     }
@@ -112,12 +108,7 @@ public class HideManager : MonoBehaviour
 
         back.localScale = new Vector3(back.localScale.x, n * buttonHeight, back.localScale.z);
         appBar.localPosition = new Vector3(appBar.localPosition.x, (n * buttonHeight) / -2, appBar.localPosition.z);
-       
-        //Vector3 targetBarSize = new Vector3(back.localScale.x, n * buttonHeight, back.localScale.z);
-        //Vector3 finalPosition = new Vector3(transform.localPosition.x, (n * buttonHeight) / -2, transform.localPosition.z);
-        //back.localScale = Vector3.Lerp(back.localScale, targetBarSize, Time.deltaTime * 5);
-        //transform.localPosition = true ? Vector3.Lerp(transform.localPosition, finalPosition, Time.deltaTime * 5) : finalPosition;
-
+        
         yield return new WaitForEndOfFrame();
         grid.GetComponent<GridObjectCollection>().UpdateCollection();
     }

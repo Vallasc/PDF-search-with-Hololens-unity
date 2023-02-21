@@ -58,7 +58,7 @@ public class NewFavManager : MonoBehaviour
         ReadHistortyFromFile();
         StartCoroutine(PopulateHistory());
         StartCoroutine(UpdateCollection());
-        menu.GetComponent<MenuManager>().OnHistoryReaded();
+        //menu.GetComponent<MenuManager>().OnHistoryReaded();
 
         Debug.Log("HISTORY FILE: " + history);
         

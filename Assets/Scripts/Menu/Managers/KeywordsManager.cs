@@ -56,7 +56,7 @@ public class KeywordsManager : MonoBehaviour
 
     void Start()
     {
-        this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(2);
+        //this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(0);
     }
 
     public void UpdateKeywordsCollection(string[] response)
@@ -86,7 +86,6 @@ public class KeywordsManager : MonoBehaviour
         yield return StartCoroutine(UpdateCollection());
 
         this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(grid.childCount);
-        Debug.Log(Time.realtimeSinceStartup + "UPDATE " + grid.childCount);
         menu.GetComponent<MenuManager>().OnKeywordsUpdated();
     }
 
@@ -100,12 +99,7 @@ public class KeywordsManager : MonoBehaviour
             int n = grid.childCount - i;
             grid.GetChild(i).Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = n.ToString();
             grid.GetChild(i).Find("SeeItSayItLabel").Find("TextMeshPro").GetComponent<TextMeshPro>().text = baseSISI + escape + Converter.NumToString.NumIntToWords(n.ToString()) + escape;
-            //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = .ToString();
-            //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
         }
-
-        //Debug.Log(Time.realtimeSinceStartup + "PRE YIELD GRID " + grid.childCount);
-        //Debug.Log(Time.realtimeSinceStartup + "PRE YIELD SCROLL " + scroll.GetComponent<ScrollingObjectCollection>().TiersPerPage);
 
         yield return new WaitForEndOfFrame();
         grid.GetComponent<GridObjectCollection>().UpdateCollection();
@@ -146,8 +140,6 @@ public class KeywordsManager : MonoBehaviour
         grid.GetComponent<GridObjectCollection>().UpdateCollection();
         yield return new WaitForEndOfFrame();
         scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
-        //Debug.Log(Time.realtimeSinceStartup + "FINE YIELD GRID " + grid.childCount);
-        //Debug.Log(Time.realtimeSinceStartup + "FINE YIELD SCROLL " + scroll.GetComponent<ScrollingObjectCollection>().TiersPerPage);
     }
 
     private void InsertKeywords(List<Keyword> newKey)
@@ -155,38 +147,18 @@ public class KeywordsManager : MonoBehaviour
         Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
 
-        //GameObject buttonObject = new GameObject();
-        //PressableButtonHoloLens2 button = buttonObject.AddComponent<PressableButtonHoloLens2>();
-        //PressableButtonHoloLens2 button = buttonPrefab.GetComponent<PressableButtonHoloLens2>();
-        //buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.None;
-
         if (keywords.Count == 0)
         {
             keywords = newKey;
 
             foreach (Keyword k in keywords)
             {
-                //Debug.Log("button: " + buttonPrefab.GetComponent<ButtonConfigHelper>().IconStyle);
-                //Debug.Log("ui: " + buttonPrefab.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-                //button.gameObject.tag = k.GetKeyword(); 
-                
-                //button.GetComponent<Interactable>().OnClick.AddListener(() => keys.GetComponent<NewFavManager>().CallUpdateHistory(k.GetKeyword()));
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
                 gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
-                //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
-                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
-                //gameObjectButton.GetComponent<ButtonConfigHelper>().SetCharIcon(3);
-
-                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.name = k.GetKeyword();
 
                 gameObjectButton.GetComponent<Interactable>().OnClick.AddListener(() => global.GetComponent<InterfaceManager>().SwitchToPdfSearch(k.GetKeyword()));
                 gameObjectButton.SetActive(true);
-
-                //gameObjectButton.GetComponent<ButtonConfigHelper>().ForceRefresh();
-                //Debug.Log("button: " + gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle);
-                //Debug.Log("ui: " + gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.activeSelf);
-
             }
         }
         else
@@ -199,17 +171,9 @@ public class KeywordsManager : MonoBehaviour
                 {
                     if (string.Equals(old.GetKeyword(), k.GetKeyword()))
                     {
-                        Debug.Log(Time.realtimeSinceStartup + " trovata");
                         Destroy(grid.Find(old.GetKeyword()).gameObject);
                         toRemove.Add(old);
-                        //keywords.Remove(old);
                     }
-                    
-                    //button.gameObject.tag = k.GetKeyword();
-                    //button.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
-                    ////button.GetComponent<Interactable>().OnClick.AddListener(() => keys.GetComponent<NewFavManager>().CallUpdateHistoryk.GetKeyword()));
-                    //Instantiate(obj, grid);
-                    //keywords.Add(k);
                 }
             }
 
@@ -221,10 +185,7 @@ public class KeywordsManager : MonoBehaviour
             foreach (Keyword k in newKey)
             {
                 GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-                //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
-                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").GetComponent<TextMeshPro>().text = k.GetKeyword();
                 gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
-                //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
                 gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = k.GetKeyword();
                 gameObjectButton.name = k.GetKeyword();
 
@@ -235,12 +196,6 @@ public class KeywordsManager : MonoBehaviour
                 keywords.Add(k);
             }
         }
-        
-
-        //yield return new WaitForEndOfFrame();
-        //grid.GetComponent<GridObjectCollection>().UpdateCollection();
-        //yield return new WaitForEndOfFrame();
-        //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
     private void DecreaseTimeLeftCollection()
@@ -263,11 +218,6 @@ public class KeywordsManager : MonoBehaviour
         {
             keywords.Remove(k);
         }
-
-        //yield return new WaitForEndOfFrame();
-        //grid.GetComponent<GridObjectCollection>().UpdateCollection();
-        //yield return new WaitForEndOfFrame();
-        //scroll.GetComponent<ScrollingObjectCollection>().UpdateContent();
     }
 
     public void SetFirstPhotoTaken()
@@ -282,29 +232,7 @@ public class KeywordsManager : MonoBehaviour
     {
         Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
         Transform grid = scroll.Find("Container").Find("GridObjectCollection");
-        Debug.Log(grid.childCount - index);
 
-        //Debug.Log(grid.GetChild(index).gameObject.name);
         global.GetComponent<InterfaceManager>().SwitchToPdfSearch(grid.GetChild(grid.childCount - index).gameObject.name);
-    }
-
-    public void OnKeywordRecognized_Prova(int index)
-    {
-        Transform scroll = menuKeys.transform.Find("Keywords").Find("ScrollingObjectCollection");
-        Transform grid = scroll.Find("Container").Find("GridObjectCollection");
-
-        Debug.Log(index);
-
-        GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-        gameObjectButton.name = index.ToString();
-        gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = index.ToString();
-        //gameObjectButton.GetComponent<ButtonConfigHelper>().IconStyle = ButtonIconStyle.Char;
-        //gameObjectButton.transform.Find("IconAndText").Find("UIButtonCharIcon").gameObject.SetActive(true);
-        //gameObjectButton.transform.Find("IconAndText").Find("UIButtonSquareIcon").gameObject.SetActive(false);
-        gameObjectButton.SetActive(true);
-
-        StartCoroutine(UpdateCollection());
-
-        this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(4);
     }
 }
