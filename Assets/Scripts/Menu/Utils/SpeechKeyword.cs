@@ -20,6 +20,7 @@ public class SpeechKeyword : MonoBehaviour
 
     public void UpdateKeywordRecognizer(int num)
     {
+        Debug.Log("update speech");
         if (keywords.Count != num)
         {
             if (keywords.Count > num)
