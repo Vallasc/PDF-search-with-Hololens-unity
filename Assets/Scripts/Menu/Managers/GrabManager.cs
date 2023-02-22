@@ -40,7 +40,6 @@ public class GrabManager : MonoBehaviour
 
     public void OnManipulationStarted()
     {
-        Debug.Log("levato");
         radialViewEn = radialView.enabled;
         menu.GetComponent<RadialView>().enabled = false;
     }
@@ -54,13 +53,11 @@ public class GrabManager : MonoBehaviour
     {
         if (buttonPin.GetComponent<ButtonConfigHelper>().MainLabelText == "Pin")
         {
-            buttonPin.GetComponent<ButtonConfigHelper>().MainLabelText = "Follow me";
-            buttonPin.GetComponent<ButtonConfigHelper>().SetQuadIcon(follow);
+            ChangeButtonToFollowMe();
         }
         else
         {
-            buttonPin.GetComponent<ButtonConfigHelper>().MainLabelText = "Pin";
-            buttonPin.GetComponent<ButtonConfigHelper>().SetQuadIcon(pin);
+            ChangeButtonToPin();
         }
 
     }

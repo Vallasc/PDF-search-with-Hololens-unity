@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3679,16 +3679,13 @@ MonoBehaviour:
   - Target: {fileID: 1338996992}
     Themes:
     - {fileID: 11400000, guid: 0c4c73f326f602744bdcfff481fd6f20, type: 2}
-  - Target: {fileID: 5875670466504710340, guid: 83c02591e2867124181bcd3bcb65e288,
-      type: 3}
+  - Target: {fileID: 1247686907}
     Themes:
     - {fileID: 11400000, guid: 60e63f25f69f72a4d9e322c210e715bf, type: 2}
-  - Target: {fileID: 5875670467545949594, guid: 83c02591e2867124181bcd3bcb65e288,
-      type: 3}
+  - Target: {fileID: 944208750}
     Themes:
     - {fileID: 11400000, guid: 8e13c3fe1aec7be428a1f6be54b08d56, type: 2}
-  - Target: {fileID: 5875670466288401384, guid: 83c02591e2867124181bcd3bcb65e288,
-      type: 3}
+  - Target: {fileID: 337622117}
     Themes:
     - {fileID: 11400000, guid: 42f40fd9294bfa041a76d7f4068ae3c2, type: 2}
   OnClick:
@@ -63730,16 +63727,13 @@ MonoBehaviour:
   - Target: {fileID: 627448192}
     Themes:
     - {fileID: 11400000, guid: 0c4c73f326f602744bdcfff481fd6f20, type: 2}
-  - Target: {fileID: 5875670466504710340, guid: 83c02591e2867124181bcd3bcb65e288,
-      type: 3}
+  - Target: {fileID: 1149395605}
     Themes:
     - {fileID: 11400000, guid: 60e63f25f69f72a4d9e322c210e715bf, type: 2}
-  - Target: {fileID: 5875670467545949594, guid: 83c02591e2867124181bcd3bcb65e288,
-      type: 3}
+  - Target: {fileID: 824525617}
     Themes:
     - {fileID: 11400000, guid: 8e13c3fe1aec7be428a1f6be54b08d56, type: 2}
-  - Target: {fileID: 5875670466288401384, guid: 83c02591e2867124181bcd3bcb65e288,
-      type: 3}
+  - Target: {fileID: 1046617474}
     Themes:
     - {fileID: 11400000, guid: 42f40fd9294bfa041a76d7f4068ae3c2, type: 2}
   OnClick:
@@ -94846,58 +94840,6 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1633798537}
           m_MethodName: ShowMenu
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Pin
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1856216209}
-          m_MethodName: ToggleFollowMeBehavior
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1633798536}
-          m_MethodName: ChangeSISIToFollowMe
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - keyword: Follow Me
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1856216209}
-          m_MethodName: ToggleFollowMeBehavior
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1633798536}
-          m_MethodName: ChangeSISIToPin
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
