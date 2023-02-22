@@ -21,6 +21,8 @@ public class SpeechCommandsHandler : MonoBehaviour
         GameObject last = headGaze.GetLastFocusedObject();
         if (last.name.Equals("PdfView(Clone)"))
             last.SetActive(false);
+        if (last.name.Equals("PdfSearch"))
+            this.GetComponent<InterfaceManager>().SwitchToMenu();
     }
 
     public void FollowMeLastFocused()
