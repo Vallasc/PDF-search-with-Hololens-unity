@@ -6,7 +6,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Windows.WebCam;
-using static LocatableCamera;
 
 public class CameraManager : MonoBehaviour
 {

@@ -5,25 +5,21 @@ using UnityEngine;
 
 public class TogglesManager : MonoBehaviour
 {
-    public GameObject favouritesToggle;
-    public GameObject moreOccToggle;
-    public GameObject mostViewedToggle;
-    public GameObject pdfSearchView;
-
-    private FetchPdfs pdfSearch;
-    private
+    public Interactable favouritesToggle;
+    public Interactable moreOccToggle;
+    public Interactable mostViewedToggle;
+    public FetchPdfs pdfSearchView;
 
     void Start()
     {
-        pdfSearch = pdfSearchView.GetComponent<FetchPdfs>();
-        moreOccToggle.GetComponent<Interactable>().IsToggled = true;
-        pdfSearch.orderMoreOccurencies = true;
-        moreOccToggle.GetComponent<Interactable>().OnClick.AddListener(OnMoreClick);
-        mostViewedToggle.GetComponent<Interactable>().IsToggled = false;
-        pdfSearch.orderMostViewed = false;
-        mostViewedToggle.GetComponent<Interactable>().OnClick.AddListener(OnMostViewedClick);
+        moreOccToggle.IsToggled = true;
+        pdfSearchView.orderMoreOccurencies = true;
+        moreOccToggle.OnClick.AddListener(OnMoreClick);
+        mostViewedToggle.IsToggled = false;
+        pdfSearchView.orderMostViewed = false;
+        mostViewedToggle.OnClick.AddListener(OnMostViewedClick);
         favouritesToggle.GetComponent<Interactable>().IsToggled = false;
-        pdfSearch.onlyFavourites = false;
+        pdfSearchView.onlyFavourites = false;
         favouritesToggle.GetComponent<Interactable>().OnClick.AddListener(OnFavClick);
     }
 
@@ -34,32 +30,50 @@ public class TogglesManager : MonoBehaviour
 
     public void OnFavClick()
     {
-        bool value = favouritesToggle.GetComponent<Interactable>().IsToggled;
-        Debug.Log("Fav filter " + value);
+        bool value = favouritesToggle.IsToggled;
+        //Debug.Log("Fav filter " + value);
         UpdateFlags();
     }
 
     public void OnMoreClick()
     {
-        bool value = moreOccToggle.GetComponent<Interactable>().IsToggled;
-        mostViewedToggle.GetComponent<Interactable>().IsToggled = !value;
-        Debug.Log("More filter " + value);
+        bool value = moreOccToggle.IsToggled;
+        if (!moreOccToggle.IsToggled)
+        {
+            moreOccToggle.IsToggled = !value;
+            mostViewedToggle.IsToggled = value;
+        }
+        else
+        {
+            moreOccToggle.IsToggled = value;
+            mostViewedToggle.IsToggled = !value;
+        }
+        //Debug.Log("More filter " + value);
         UpdateFlags();
     }
 
     public void OnMostViewedClick()
     {
-        bool value = mostViewedToggle.GetComponent<Interactable>().IsToggled;
-        moreOccToggle.GetComponent<Interactable>().IsToggled = !value;
-        Debug.Log("Most filter " + value);
+        bool value = mostViewedToggle.IsToggled;
+        if (!mostViewedToggle.IsToggled)
+        {
+            mostViewedToggle.IsToggled = !value;
+            moreOccToggle.IsToggled = value;
+        }
+        else
+        {
+            mostViewedToggle.IsToggled = value;
+            moreOccToggle.IsToggled = !value;
+        }
+        //Debug.Log("Most filter " + value);
         UpdateFlags();
     }
 
     void UpdateFlags()
     {
-        pdfSearch.orderMostViewed = mostViewedToggle.GetComponent<Interactable>().IsToggled;
-        pdfSearch.orderMoreOccurencies = moreOccToggle.GetComponent<Interactable>().IsToggled;
-        pdfSearch.onlyFavourites = favouritesToggle.GetComponent<Interactable>().IsToggled;
-        pdfSearch.OnSearch();
+        pdfSearchView.orderMostViewed = mostViewedToggle.IsToggled;
+        pdfSearchView.orderMoreOccurencies = moreOccToggle.IsToggled;
+        pdfSearchView.onlyFavourites = favouritesToggle.IsToggled;
+        pdfSearchView.OnSearch();
     }
 }
