@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Microsoft.MixedReality.Toolkit.UI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,12 @@ public class SpeechCommandsHandler : MonoBehaviour
         GameObject last = headGaze.GetLastFocusedObject();
         if (last.name.Equals("PdfView(Clone)") || last.name.Equals("PdfSearch"))
             last.GetComponent<FollowMeButton>().SetFollowMe();
+
+        if (last.name.Equals("Menu"))
+        {
+            last.GetComponent<FollowMeToggle>().ToggleFollowMeBehavior();
+            last.transform.Find("AppBarVertical").gameObject.GetComponent<GrabManager>().ChangeButtonToPin();
+        }
     }
 
     public void PinLastFocused()
@@ -37,6 +44,12 @@ public class SpeechCommandsHandler : MonoBehaviour
         GameObject last = headGaze.GetLastFocusedObject();
         if (last.name.Equals("PdfView(Clone)") || last.name.Equals("PdfSearch"))
             last.GetComponent<FollowMeButton>().SetPin();
+
+        if (last.name.Equals("Menu"))
+        {
+            last.GetComponent<FollowMeToggle>().ToggleFollowMeBehavior();
+            last.transform.Find("AppBarVertical").gameObject.GetComponent<GrabManager>().ChangeButtonToFollowMe();
+        }
     }
 
     public void NextPage()
