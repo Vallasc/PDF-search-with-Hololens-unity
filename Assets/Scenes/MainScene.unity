@@ -63076,10 +63076,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddf193a4ed1493478fb82a14bb948b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  favouritesToggle: {fileID: 1430407544}
-  moreOccToggle: {fileID: 1903669351}
-  mostViewedToggle: {fileID: 1702253592}
-  pdfSearchView: {fileID: 987238327}
+  favouritesToggle: {fileID: 1430407549}
+  moreOccToggle: {fileID: 1903669356}
+  mostViewedToggle: {fileID: 1702253597}
+  pdfSearchView: {fileID: 987238328}
 --- !u!1 &1190449818
 GameObject:
   m_ObjectHideFlags: 0
