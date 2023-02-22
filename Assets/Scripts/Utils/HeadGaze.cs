@@ -31,7 +31,7 @@ public class HeadGaze : MonoBehaviour
     public GameObject GetLastFocusedObject()
     {
         GameObject gameObject = lastFocusedObject;
-        while (gameObject.transform.parent != null && !gameObject.name.Equals("PdfSearch") && !gameObject.name.Equals("PdfView(Clone)") && !gameObject.name.Equals("Menu"))
+        while (gameObject != null && gameObject.transform.parent != null && !gameObject.name.Equals("PdfSearch") && !gameObject.name.Equals("PdfView(Clone)") && !gameObject.name.Equals("Menu"))
             gameObject = gameObject.transform.parent.gameObject;
         return gameObject;
     }

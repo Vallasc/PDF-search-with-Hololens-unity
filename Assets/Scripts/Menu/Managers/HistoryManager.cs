@@ -144,8 +144,6 @@ public class HistoryManager : MonoBehaviour
         foreach (Pdf pdf in his)
         {
             GameObject gameObjectButton = Instantiate(buttonPrefab, grid);
-
-            // NON VERRANNO RITORNATE DELLE STRINGHE, MA JSON DEI PDF
             int p = pdf.page + 1;
             gameObjectButton.GetComponent<ButtonConfigHelper>().MainLabelText = pdf.name + " - p. " + p.ToString();
             gameObjectButton.name = pdf.name;

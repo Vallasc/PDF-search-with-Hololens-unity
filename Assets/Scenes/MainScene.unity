@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12696,7 +12696,7 @@ Transform:
   m_GameObject: {fileID: 218522801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.57, y: -0.04, z: 0.5}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.7}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 445014865}
   - {fileID: 1236674564}
@@ -52783,7 +52783,7 @@ Transform:
   m_GameObject: {fileID: 987238327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.028, y: 0.16, z: 0.7}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1170055580}
   - {fileID: 2073406433}
@@ -89609,7 +89609,7 @@ Transform:
   m_GameObject: {fileID: 1745725441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.565, y: 0.16, z: 0.7}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 6630100128548968281}
   - {fileID: 1171161314}
@@ -94588,16 +94588,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateLinkedTransform: 0
-  moveLerpTime: 0.1
-  rotateLerpTime: 0.1
+  moveLerpTime: 0.3
+  rotateLerpTime: 0.3
   scaleLerpTime: 0
   maintainScale: 1
   smoothing: 1
   lifetime: 0
   referenceDirection: 1
-  minDistance: 0.3
+  minDistance: 0.4
   maxDistance: 0.7
-  minViewDegrees: 15
+  minViewDegrees: 0
   maxViewDegrees: 30
   aspectV: 1
   ignoreAngleClamp: 0
