@@ -11,6 +11,7 @@ public class FavManager : MonoBehaviour
     public bool selected = false;
     public string pdfId;
     public string serverIp;
+    public GameObject favButton;
 
     private int serverPort = 8573;
     private GameObject starIconFilled;
@@ -20,10 +21,10 @@ public class FavManager : MonoBehaviour
 
     void Start()
     {
-        starIconOutline = this.transform.Find("IconAndText").Find("StarIcon").gameObject;
-        starIconFilled = this.transform.Find("IconAndText").Find("StarIconFilled").gameObject;
-        text = this.transform.Find("IconAndText").Find("TextMeshPro").gameObject;
-        SetFav(selected);
+        starIconOutline = favButton.transform.Find("IconAndText").Find("StarIcon").gameObject;
+        starIconFilled = favButton.transform.Find("IconAndText").Find("StarIconFilled").gameObject;
+        text = favButton.transform.Find("IconAndText").Find("TextMeshPro").gameObject;
+        SetFav(selected, false);
     }
 
     void Update()
@@ -37,20 +38,24 @@ public class FavManager : MonoBehaviour
         SetFav(selected);
     }
 
-    public void SetFav(bool value)
+    public void SetFav(bool value, bool sendRequest = true)
     {
         url = "https://" + serverIp + ":" + serverPort.ToString() + "/favs/" + pdfId;
         starIconFilled.SetActive(value);
         starIconOutline.SetActive(!value);
-        if (value)
-        {
-            text.GetComponent<TextMeshPro>().text = "Remove from Favourites";
-        } else
-        {
-            text.GetComponent<TextMeshPro>().text = "Add to Favourites";
-        }
         selected = value;
-        StartCoroutine(PostFav(selected));
+        if ( sendRequest)
+        {
+            if (value)
+            {
+                text.GetComponent<TextMeshPro>().text = "Remove from Favourites";
+            }
+            else
+            {
+                text.GetComponent<TextMeshPro>().text = "Add to Favourites";
+            }
+            StartCoroutine(PostFav(selected));
+        }
     }
 
     public IEnumerator PostFav(bool selected)

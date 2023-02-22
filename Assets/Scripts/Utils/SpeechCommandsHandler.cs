@@ -11,7 +11,6 @@ public class SpeechCommandsHandler : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -22,5 +21,42 @@ public class SpeechCommandsHandler : MonoBehaviour
         GameObject last = headGaze.GetLastFocusedObject();
         if (last.name.Equals("PdfView(Clone)"))
             last.SetActive(false);
+    }
+
+    public void FollowMeLastFocused()
+    {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)") || last.name.Equals("PdfSearch"))
+            last.GetComponent<FollowMeButton>().SetFollowMe();
+    }
+
+    public void PinLastFocused()
+    {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)") || last.name.Equals("PdfSearch"))
+            last.GetComponent<FollowMeButton>().SetPin();
+    }
+
+    public void NextPage()
+    {
+    }
+
+    public void PrevPage()
+    {
+
+    }
+
+    public void AddToFavourites()
+    {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)"))
+            last.GetComponent<FavManager>().SetFav(true);
+    }
+
+    public void RemoveFromFavourites()
+    {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)"))
+            last.GetComponent<FavManager>().SetFav(false);
     }
 }

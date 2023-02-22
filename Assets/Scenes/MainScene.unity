@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23653,7 +23653,6 @@ GameObject:
   - component: {fileID: 426493417}
   - component: {fileID: 426493416}
   - component: {fileID: 426493415}
-  - component: {fileID: 426493422}
   m_Layer: 0
   m_Name: ButtonFollow
   m_TagString: Untagged
@@ -23859,18 +23858,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 426493422}
+      - m_Target: {fileID: 1745725452}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -24167,20 +24155,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032, y: 0.032, z: 0.016}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &426493422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426493413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53a04ac0559d7714e8d6cbec9fbb7226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followMeToggleObject: {fileID: 1745725441}
-  followMeEnabled: 1
 --- !u!1 &428530196
 GameObject:
   m_ObjectHideFlags: 0
@@ -31409,7 +31383,6 @@ GameObject:
   - component: {fileID: 588151684}
   - component: {fileID: 588151683}
   - component: {fileID: 588151682}
-  - component: {fileID: 588151689}
   m_Layer: 0
   m_Name: ButtonStar
   m_TagString: Untagged
@@ -31614,7 +31587,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 588151689}
+      - m_Target: {fileID: 1745725453}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -31911,21 +31884,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032, y: 0.032, z: 0.016}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &588151689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588151680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eeb14863f9dbd5458ff4051893e6ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selected: 0
-  pdfId: 
-  serverIp: 
 --- !u!1 &595566903
 GameObject:
   m_ObjectHideFlags: 0
@@ -52786,6 +52744,7 @@ GameObject:
   - component: {fileID: 987238331}
   - component: {fileID: 987238328}
   - component: {fileID: 987238338}
+  - component: {fileID: 987238339}
   m_Layer: 0
   m_Name: PdfSearch
   m_TagString: Untagged
@@ -53102,7 +53061,7 @@ MonoBehaviour:
     response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1825020349}
+        - m_Target: {fileID: 0}
           m_MethodName: OnClick
           m_Mode: 1
           m_Arguments:
@@ -53132,7 +53091,7 @@ MonoBehaviour:
     response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1825020349}
+        - m_Target: {fileID: 0}
           m_MethodName: OnClick
           m_Mode: 1
           m_Arguments:
@@ -53190,6 +53149,21 @@ MonoBehaviour:
           m_CallState: 2
   persistentKeywords: 0
   speechConfirmationTooltipPrefab: {fileID: 0}
+--- !u!114 &987238339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987238327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a04ac0559d7714e8d6cbec9fbb7226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followMeToggle: {fileID: 987238330}
+  followMeEnabled: 1
+  followMeButtonObject: {fileID: 1825020340}
 --- !u!1 &987958340
 GameObject:
   m_ObjectHideFlags: 0
@@ -55142,6 +55116,66 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1025789224}
           m_MethodName: CloseLastFocused
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Follow Me
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: FollowMeLastFocused
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Pin
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: PinLastFocused
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Add To Favourites
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: AddToFavourites
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Remove From Favourites
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: RemoveFromFavourites
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -89312,6 +89346,8 @@ GameObject:
   - component: {fileID: 1745725443}
   - component: {fileID: 1745725442}
   - component: {fileID: 1745725451}
+  - component: {fileID: 1745725452}
+  - component: {fileID: 1745725453}
   m_Layer: 0
   m_Name: PdfView
   m_TagString: Untagged
@@ -89338,7 +89374,7 @@ MonoBehaviour:
   imageObject: {fileID: 1209982567}
   windowTitleObject: {fileID: 530097999}
   pageCounterObject: {fileID: 251837839}
-  buttonStar: {fileID: 588151680}
+  favButtonManager: {fileID: 1745725453}
   serverIp: 
   menuHistory: {fileID: 1799804539}
 --- !u!114 &1745725443
@@ -89587,6 +89623,37 @@ MonoBehaviour:
   sliderObject: {fileID: 6630100128548968276}
   overlayObject: {fileID: 707032529}
   counterTMPObject: {fileID: 735249340}
+--- !u!114 &1745725452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745725441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a04ac0559d7714e8d6cbec9fbb7226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followMeToggle: {fileID: 1745725449}
+  followMeEnabled: 1
+  followMeButtonObject: {fileID: 426493413}
+--- !u!114 &1745725453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745725441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb14863f9dbd5458ff4051893e6ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: 0
+  pdfId: 
+  serverIp: 
+  favButton: {fileID: 588151680}
 --- !u!1 &1749351423
 GameObject:
   m_ObjectHideFlags: 0
@@ -93155,7 +93222,6 @@ GameObject:
   - component: {fileID: 1825020344}
   - component: {fileID: 1825020343}
   - component: {fileID: 1825020342}
-  - component: {fileID: 1825020349}
   m_Layer: 0
   m_Name: ButtonFollow
   m_TagString: Untagged
@@ -93361,7 +93427,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1825020349}
+      - m_Target: {fileID: 987238339}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -93658,20 +93724,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032, y: 0.032, z: 0.016}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1825020349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825020340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53a04ac0559d7714e8d6cbec9fbb7226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followMeToggleObject: {fileID: 987238327}
-  followMeEnabled: 1
 --- !u!1 &1833166168
 GameObject:
   m_ObjectHideFlags: 0

@@ -135,3 +135,17 @@ MonoBehaviour:
       id: 0
       description: None
       axisConstraint: 0
+  - localizationKey: 
+    keyword: Add To Favourites
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Remove From Favourites
+    keyCode: 0
+    action:
+      id: 0
+      description: None
+      axisConstraint: 0

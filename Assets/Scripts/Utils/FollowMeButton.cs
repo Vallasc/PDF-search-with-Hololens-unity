@@ -3,15 +3,16 @@ using UnityEngine;
 
 public class FollowMeButton : MonoBehaviour
 {
-    public GameObject followMeToggleObject;
+    public FollowMeToggle followMeToggle;
     public bool followMeEnabled = true;
+    public GameObject followMeButtonObject;
     private GameObject pinObject;
     private GameObject followObject;
 
     void Start()
     {
-        pinObject = transform.Find("Pin").gameObject;
-        followObject = transform.Find("FollowMe").gameObject;
+        pinObject = followMeButtonObject.transform.Find("Pin").gameObject;
+        followObject = followMeButtonObject.transform.Find("FollowMe").gameObject;
         pinObject.SetActive(followMeEnabled);
         followObject.SetActive(!followMeEnabled);
     }
@@ -21,8 +22,20 @@ public class FollowMeButton : MonoBehaviour
     public void OnClick()
     {
         followMeEnabled = !followMeEnabled;
-        followMeToggleObject.GetComponent<FollowMeToggle>().ToggleFollowMeBehavior();
+        followMeToggle.ToggleFollowMeBehavior();
         pinObject.SetActive(followMeEnabled);
         followObject.SetActive(!followMeEnabled);
+    }
+
+    public void SetPin()
+    {
+        if (followMeEnabled)
+            OnClick();
+    }
+
+    public void SetFollowMe()
+    {
+        if (!followMeEnabled)
+            OnClick();
     }
 }
