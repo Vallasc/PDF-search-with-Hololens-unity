@@ -1,17 +1,14 @@
 ﻿using Microsoft.MixedReality.Toolkit.UI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static KeywordsManager;
 
 public class KeyManager : MonoBehaviour
 {
     public bool selected = false;
     public bool disabled = false;
 
-    public GameObject pdfViewObject;
+    public PdfManager pdfViewObject;
+    public GameObject showKeywordButtonObject;
     private GameObject iconShow;
     private GameObject iconShowDisabled;
     private GameObject iconHide;
@@ -19,17 +16,17 @@ public class KeyManager : MonoBehaviour
 
     void Start()
     {
-        iconShow = this.transform.Find("IconAndText").Find("ShowIcon").gameObject;
-        iconHide = this.transform.Find("IconAndText").Find("HideIcon").gameObject;
-        iconShowDisabled = this.transform.Find("IconAndText").Find("ShowIconDisabled").gameObject;
-        text = this.transform.Find("IconAndText").Find("TextMeshPro").gameObject;
+        iconShow = showKeywordButtonObject.transform.Find("IconAndText").Find("ShowIcon").gameObject;
+        iconHide = showKeywordButtonObject.transform.Find("IconAndText").Find("HideIcon").gameObject;
+        iconShowDisabled = showKeywordButtonObject.transform.Find("IconAndText").Find("ShowIconDisabled").gameObject;
+        text = showKeywordButtonObject.transform.Find("IconAndText").Find("TextMeshPro").gameObject;
         selected = false;
 
         disabled = pdfViewObject.GetComponent<PdfManager>().keyword == null || pdfViewObject.GetComponent<PdfManager>().keyword.Equals("");
         Debug.Log(pdfViewObject.GetComponent<PdfManager>().keyword);
         if (disabled)
         {
-            this.GetComponent<Interactable>().IsEnabled = false;
+            showKeywordButtonObject.GetComponent<Interactable>().IsEnabled = false;
             iconShow.SetActive(false);
             iconHide.SetActive(false);
             iconShowDisabled.SetActive(true);
@@ -64,5 +61,21 @@ public class KeyManager : MonoBehaviour
         }
         pdfViewObject.GetComponent<PdfManager>().showKeyword = selected;
         pdfViewObject.GetComponent<PdfManager>().UpdatePage();
+    }
+
+    public void ShowKeyword()
+    {
+        if (disabled)
+            return;
+        if (!selected)
+            OnClick();
+    }
+
+    public void HideKeyword()
+    {
+        if (disabled)
+            return;
+        if (selected)
+            OnClick();
     }
 }

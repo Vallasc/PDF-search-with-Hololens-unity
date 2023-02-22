@@ -55140,6 +55140,66 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - keyword: Next
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: NextPage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Previous
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: PrevPage
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Show Keyword
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: ShowKeyword
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Hide Keyword
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1025789224}
+          m_MethodName: HideKeyword
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   persistentKeywords: 0
   speechConfirmationTooltipPrefab: {fileID: 0}
 --- !u!114 &1025789224
@@ -89303,6 +89363,7 @@ GameObject:
   - component: {fileID: 1745725451}
   - component: {fileID: 1745725452}
   - component: {fileID: 1745725453}
+  - component: {fileID: 1745725454}
   m_Layer: 0
   m_Name: PdfView
   m_TagString: Untagged
@@ -89609,6 +89670,22 @@ MonoBehaviour:
   pdfId: 
   serverIp: 
   favButton: {fileID: 588151680}
+--- !u!114 &1745725454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745725441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21451d4dfe47b75418ba33371679ee5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: 0
+  disabled: 1
+  pdfViewObject: {fileID: 1745725442}
+  showKeywordButtonObject: {fileID: 1922582189}
 --- !u!1 &1749351423
 GameObject:
   m_ObjectHideFlags: 0
@@ -100414,7 +100491,6 @@ GameObject:
   - component: {fileID: 1922582193}
   - component: {fileID: 1922582192}
   - component: {fileID: 1922582191}
-  - component: {fileID: 1922582198}
   m_Layer: 0
   m_Name: BtnSearch
   m_TagString: Untagged
@@ -100620,7 +100696,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1922582198}
+      - m_Target: {fileID: 1745725454}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -100917,21 +100993,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032, y: 0.032, z: 0.016}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1922582198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922582189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21451d4dfe47b75418ba33371679ee5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selected: 0
-  disabled: 1
-  pdfViewObject: {fileID: 1745725441}
 --- !u!1 &1925496603
 GameObject:
   m_ObjectHideFlags: 0

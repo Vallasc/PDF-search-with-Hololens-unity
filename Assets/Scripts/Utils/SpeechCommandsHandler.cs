@@ -41,11 +41,16 @@ public class SpeechCommandsHandler : MonoBehaviour
 
     public void NextPage()
     {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)"))
+            last.GetComponent<PdfManager>().GoNextPage();
     }
 
     public void PrevPage()
     {
-
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)"))
+            last.GetComponent<PdfManager>().GoPreviousPage();
     }
 
     public void AddToFavourites()
@@ -60,5 +65,19 @@ public class SpeechCommandsHandler : MonoBehaviour
         GameObject last = headGaze.GetLastFocusedObject();
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<FavManager>().SetFav(false);
+    }
+
+    public void ShowKeyword()
+    {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)"))
+            last.GetComponent<KeyManager>().ShowKeyword();
+    }
+
+    public void HideKeyword()
+    {
+        GameObject last = headGaze.GetLastFocusedObject();
+        if (last.name.Equals("PdfView(Clone)"))
+            last.GetComponent<KeyManager>().HideKeyword();
     }
 }

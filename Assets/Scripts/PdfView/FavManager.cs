@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using System.Security.Policy;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using static HistoryManager;
 
 public class FavManager : MonoBehaviour
 {
@@ -44,18 +42,12 @@ public class FavManager : MonoBehaviour
         starIconFilled.SetActive(value);
         starIconOutline.SetActive(!value);
         selected = value;
-        if ( sendRequest)
-        {
-            if (value)
-            {
-                text.GetComponent<TextMeshPro>().text = "Remove from Favourites";
-            }
-            else
-            {
-                text.GetComponent<TextMeshPro>().text = "Add to Favourites";
-            }
+        if (value)
+            text.GetComponent<TextMeshPro>().text = "Remove from Favourites";
+        else
+            text.GetComponent<TextMeshPro>().text = "Add to Favourites";
+        if (sendRequest)
             StartCoroutine(PostFav(selected));
-        }
     }
 
     public IEnumerator PostFav(bool selected)
