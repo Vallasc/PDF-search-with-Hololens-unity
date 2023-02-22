@@ -10,7 +10,6 @@ public class HideManager : MonoBehaviour
     private GameObject menu;
 
     private bool scrollNew = true;
-    private bool scrollFav = true;
     private bool scrollPdfs = true;
 
     private Vector3 size;
@@ -26,11 +25,9 @@ public class HideManager : MonoBehaviour
         menu.GetComponent<BoundsControl>().enabled = false;
 
         scrollNew = menu.transform.Find("MenuHistory").gameObject.activeSelf;
-        scrollFav = menu.transform.Find("MenuFavorites").gameObject.activeSelf;
         scrollPdfs = menu.transform.Find("MenuKeywords").gameObject.activeSelf;
 
         menu.transform.Find("MenuHistory").gameObject.SetActive(false);
-        menu.transform.Find("MenuFavorites").gameObject.SetActive(false);
         menu.transform.Find("MenuKeywords").gameObject.SetActive(false);
 
         StartCoroutine(UpdateAppBarVerticalHide());
@@ -76,7 +73,6 @@ public class HideManager : MonoBehaviour
        
 
         menu.transform.Find("MenuHistory").gameObject.SetActive(scrollNew);
-        menu.transform.Find("MenuFavorites").gameObject.SetActive(scrollFav);
         menu.transform.Find("MenuKeywords").gameObject.SetActive(scrollPdfs);
 
         StartCoroutine(UpdateAppBarVerticalShow());
