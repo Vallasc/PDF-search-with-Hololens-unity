@@ -35,6 +35,13 @@ public class TogglesManager : MonoBehaviour
         UpdateFlags();
     }
 
+    public void OnFavClickSpeech()
+    {
+        bool value = favouritesToggle.IsToggled;
+        favouritesToggle.IsToggled = !value;
+        UpdateFlags();
+    }
+
     public void OnMoreClick()
     {
         bool value = moreOccToggle.IsToggled;
