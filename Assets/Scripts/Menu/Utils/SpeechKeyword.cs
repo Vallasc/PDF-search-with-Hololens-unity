@@ -15,7 +15,7 @@ public class SpeechKeyword : MonoBehaviour
 
     void Start()
     {
-        List<string> keywords = new List<string>();
+        keywords = new List<string>();
     }
 
     public void UpdateKeywordRecognizer(int num)
@@ -59,7 +59,6 @@ public class SpeechKeyword : MonoBehaviour
     {
         int index = keywords.IndexOf(args.text) + 1;
         
-        Debug.Log(index);
         this.gameObject.GetComponent<KeywordsManager>().OnKeywordRecognized(index);
     }
 
