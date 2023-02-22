@@ -54,6 +54,7 @@ public class KeywordsManager : MonoBehaviour
     private string baseSISI = "Say ";
     private string escape = "\"";
 
+
     void Start()
     {
         //this.gameObject.GetComponent<SpeechKeyword>().UpdateKeywordRecognizer(0);
