@@ -20,6 +20,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void CloseLastFocused()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.SetActive(false);
         if (last.name.Equals("PdfSearch"))
@@ -29,6 +31,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void FollowMeLastFocused()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)") || last.name.Equals("PdfSearch"))
             last.GetComponent<FollowMeButton>().SetFollowMe();
 
@@ -42,6 +46,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void PinLastFocused()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)") || last.name.Equals("PdfSearch"))
             last.GetComponent<FollowMeButton>().SetPin();
 
@@ -55,6 +61,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void NextPage()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<PdfManager>().GoNextPage();
     }
@@ -62,6 +70,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void PrevPage()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<PdfManager>().GoPreviousPage();
     }
@@ -69,6 +79,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void AddToFavourites()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<FavManager>().SetFav(true);
     }
@@ -76,6 +88,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void RemoveFromFavourites()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<FavManager>().SetFav(false);
     }
@@ -83,6 +97,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void ShowKeyword()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<KeyManager>().ShowKeyword();
     }
@@ -90,6 +106,8 @@ public class SpeechCommandsHandler : MonoBehaviour
     public void HideKeyword()
     {
         GameObject last = headGaze.GetLastFocusedObject();
+        if (last == null)
+            return;
         if (last.name.Equals("PdfView(Clone)"))
             last.GetComponent<KeyManager>().HideKeyword();
     }
